@@ -9,11 +9,6 @@ App.use(BodyParser.json());
 App.use(Express.static("public"));
 
 // Sample GET route
-App.get("/api/data", (req, res) =>
-  res.json({
-    message: "We have a REALLY COOL backend!",
-  })
-);
 
 App.listen(PORT, () => {
   // eslint-disable-next-line no-console
