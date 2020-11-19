@@ -7,14 +7,16 @@ const PORT = 8080;
 App.use(BodyParser.urlencoded({ extended: false }));
 App.use(BodyParser.json());
 App.use(Express.static("public"));
+// Import Routers
+const gigs = require('./src/routes/gigs')
+const users = require('./src/routes/users')
 
-// Sample GET route
-App.get("/api/data", (req, res) =>
-  res.json({
-    message: "Now I changed it back!",
-  })
-);
+// API Router
+App.use("/api", gigs);
+App.use("/api", users);
 
+
+// Port Listening
 App.listen(PORT, () => {
   // eslint-disable-next-line no-console
   console.log(
