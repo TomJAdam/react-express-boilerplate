@@ -1,7 +1,5 @@
 const router = require("express").Router();
 
-
-
 router.put("/signup", (req, res) =>
   res.json({
     message: "Routes to register!",

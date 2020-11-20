@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "./App.css";
+import Navbar from "./Navbar/Navbar";
 
 class App extends Component {
   constructor(props) {
@@ -97,6 +98,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <Navbar />
         <h1>{this.state.message}</h1>
         <button onClick={this.fetchGigs}>Fetch Gigs</button>
         <button onClick={this.createGigs}>Create Gigs</button>

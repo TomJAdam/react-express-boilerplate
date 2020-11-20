@@ -9,10 +9,10 @@ const dbParams = require("./knexfile.js");
 const db = new Pool(dbParams.development.connection);
 db.connect();
 
-db.query("SELECT * FROM users;", (error, response) => {
-  console.log("error :", error);
-  console.log("response :", response);
-});
+// db.query("SELECT * FROM users;", (error, response) => {
+//   console.log("error :", error);
+//   console.log("response :", response);
+// });
 
 // Express Configuration
 App.use(BodyParser.urlencoded({ extended: false }));
