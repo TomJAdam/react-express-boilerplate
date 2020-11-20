@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./App.css";
-import Navbar from "./Navbar/Navbar";
+import Navbar from "./components/Navbar";
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core/styles';
+import SignIn from "./components/SignIn";
+import SignUp from "./components/SignUp";
+
+
 
 export default function App() {
 
@@ -10,10 +15,9 @@ export default function App() {
 
   const fetchGigs = () => {
     axios
-      .get("/api/gigs") // You can simply make your requests to "/api/whatever you want"
+      .get("/api/gigs")
       .then((response) => {
-        // handle success
-        console.log(response.data); // The entire response from the Rails API
+        console.log(response.data);
 
         console.log(response.data.message);
         setMessage(response.data.message);
@@ -22,60 +26,55 @@ export default function App() {
 
   const createGigs = () => {
     axios
-      .put("/api/gigs") // You can simply make your requests to "/api/whatever you want"
+      .put("/api/gigs")
       .then((response) => {
-        // handle success
-        console.log(response.data); // The entire response from the Rails API
+        console.log(response.data);
 
-        console.log(response.data.message); // Just the message
+        console.log(response.data.message);
         setMessage(response.data.message);
       });
   };
 
   const deleteGigs = () => {
     axios
-      .delete("/api/gigs/1") // You can simply make your requests to "/api/whatever you want"
+      .delete("/api/gigs/1")
       .then((response) => {
-        // handle success
-        console.log(response.data); // The entire response from the Rails API
+        console.log(response.data);
 
-        console.log(response.data.message); // Just the message
+        console.log(response.data.message);
         setMessage(response.data.message);
       });
   };
 
   const fetchUsers = () => {
     axios
-      .get("/api/users") // You can simply make your requests to "/api/whatever you want"
+      .get("/api/users")
       .then((response) => {
-        // handle success
-        console.log(response.data); // The entire response from the Rails API
+        console.log(response.data);
 
-        console.log(response.data.message); // Just the message
+        console.log(response.data.message);
         setMessage(response.data.message);
       });
   };
 
   const signUp = () => {
     axios
-      .put("/signup") // You can simply make your requests to "/api/whatever you want"
+      .put("/signup")
       .then((response) => {
-        // handle success
-        console.log(response.data); // The entire response from the Rails API
+        console.log(response.data);
 
-        console.log(response.data.message); // Just the message
+        console.log(response.data.message);
         setMessage(response.data.message);
       });
   };
 
   const logIn = () => {
     axios
-      .post("/login") // You can simply make your requests to "/api/whatever you want"
+      .post("/login")
       .then((response) => {
-        // handle success
-        console.log(response.data); // The entire response from the Rails API
+        console.log(response.data);
 
-        console.log(response.data.message); // Just the message
+        console.log(response.data.message);
         setMessage(response.data.message);
       });
   };
@@ -84,13 +83,8 @@ export default function App() {
     <div className="App">
       <Router>
         <Navbar />
-        <h1>{message}</h1>
-        <button onClick={fetchGigs}>Fetch Gigs</button>
-        <button onClick={createGigs}>Create Gigs</button>
-        <button onClick={deleteGigs}>Delete Gigs</button>
-        <button onClick={fetchUsers}>Fetch Users</button>
-        <button onClick={signUp}>Sign Up</button>
-        <button onClick={logIn}>Log In</button>
+        <Route path="/signin" component={SignIn}/>
+        <Route path="/signup" component={SignUp}/>
       </Router>
     </div>
   );
