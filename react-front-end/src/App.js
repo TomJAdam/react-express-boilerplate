@@ -1,31 +1,25 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import "./App.css";
 import Navbar from "./Navbar/Navbar";
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      message: "Click the button to load data!",
-    };
-  }
+export default function App() {
 
-  fetchGigs = () => {
+  const [message, setMessage] = useState('Welcome to the app')
+
+  const fetchGigs = () => {
     axios
       .get("/api/gigs") // You can simply make your requests to "/api/whatever you want"
       .then((response) => {
         // handle success
         console.log(response.data); // The entire response from the Rails API
 
-        console.log(response.data.message); // Just the message
-        this.setState({
-          message: response.data.message,
-        });
+        console.log(response.data.message);
+        setMessage(response.data.message);
       });
   };
 
-  createGigs = () => {
+  const createGigs = () => {
     axios
       .put("/api/gigs") // You can simply make your requests to "/api/whatever you want"
       .then((response) => {
@@ -33,13 +27,11 @@ class App extends Component {
         console.log(response.data); // The entire response from the Rails API
 
         console.log(response.data.message); // Just the message
-        this.setState({
-          message: response.data.message,
-        });
+        setMessage(response.data.message);
       });
   };
 
-  deleteGigs = () => {
+  const deleteGigs = () => {
     axios
       .delete("/api/gigs/1") // You can simply make your requests to "/api/whatever you want"
       .then((response) => {
@@ -47,13 +39,11 @@ class App extends Component {
         console.log(response.data); // The entire response from the Rails API
 
         console.log(response.data.message); // Just the message
-        this.setState({
-          message: response.data.message,
-        });
+        setMessage(response.data.message);
       });
   };
 
-  fetchUsers = () => {
+  const fetchUsers = () => {
     axios
       .get("/api/users") // You can simply make your requests to "/api/whatever you want"
       .then((response) => {
@@ -61,13 +51,11 @@ class App extends Component {
         console.log(response.data); // The entire response from the Rails API
 
         console.log(response.data.message); // Just the message
-        this.setState({
-          message: response.data.message,
-        });
+        setMessage(response.data.message);
       });
   };
 
-  signUp = () => {
+  const signUp = () => {
     axios
       .put("/signup") // You can simply make your requests to "/api/whatever you want"
       .then((response) => {
@@ -75,13 +63,11 @@ class App extends Component {
         console.log(response.data); // The entire response from the Rails API
 
         console.log(response.data.message); // Just the message
-        this.setState({
-          message: response.data.message,
-        });
+        setMessage(response.data.message);
       });
   };
 
-  logIn = () => {
+  const logIn = () => {
     axios
       .post("/login") // You can simply make your requests to "/api/whatever you want"
       .then((response) => {
@@ -89,26 +75,20 @@ class App extends Component {
         console.log(response.data); // The entire response from the Rails API
 
         console.log(response.data.message); // Just the message
-        this.setState({
-          message: response.data.message,
-        });
+        setMessage(response.data.message);
       });
   };
 
-  render() {
-    return (
-      <div className="App">
-        <Navbar />
-        <h1>{this.state.message}</h1>
-        <button onClick={this.fetchGigs}>Fetch Gigs</button>
-        <button onClick={this.createGigs}>Create Gigs</button>
-        <button onClick={this.deleteGigs}>Delete Gigs</button>
-        <button onClick={this.fetchUsers}>Fetch Users</button>
-        <button onClick={this.signUp}>Sign Up</button>
-        <button onClick={this.logIn}>Log In</button>
-      </div>
-    );
-  }
+  return (
+    <div className="App">
+      <Navbar />
+      <h1>{message}</h1>
+      <button onClick={fetchGigs}>Fetch Gigs</button>
+      <button onClick={createGigs}>Create Gigs</button>
+      <button onClick={deleteGigs}>Delete Gigs</button>
+      <button onClick={fetchUsers}>Fetch Users</button>
+      <button onClick={signUp}>Sign Up</button>
+      <button onClick={logIn}>Log In</button>
+    </div>
+  );
 }
-
-export default App;
