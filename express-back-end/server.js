@@ -21,10 +21,12 @@ App.use(Express.static("public"));
 // Import Routers
 const gigs = require("./src/routes/gigs");
 const users = require("./src/routes/users");
+const validation = require("./src/routes/validation");
 
 // API Router
 App.use("/api", gigs);
 App.use("/api", users);
+App.use("/", validation);
 
 // Port Listening
 App.listen(PORT, () => {

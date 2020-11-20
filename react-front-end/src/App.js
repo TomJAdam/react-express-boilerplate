@@ -10,9 +10,79 @@ class App extends Component {
     };
   }
 
-  fetchData = () => {
+  fetchGigs = () => {
+    axios
+      .get("/api/gigs") // You can simply make your requests to "/api/whatever you want"
+      .then((response) => {
+        // handle success
+        console.log(response.data); // The entire response from the Rails API
+
+        console.log(response.data.message); // Just the message
+        this.setState({
+          message: response.data.message,
+        });
+      });
+  };
+
+  createGigs = () => {
+    axios
+      .put("/api/gigs") // You can simply make your requests to "/api/whatever you want"
+      .then((response) => {
+        // handle success
+        console.log(response.data); // The entire response from the Rails API
+
+        console.log(response.data.message); // Just the message
+        this.setState({
+          message: response.data.message,
+        });
+      });
+  };
+
+  deleteGigs = () => {
+    axios
+      .delete("/api/gigs/1") // You can simply make your requests to "/api/whatever you want"
+      .then((response) => {
+        // handle success
+        console.log(response.data); // The entire response from the Rails API
+
+        console.log(response.data.message); // Just the message
+        this.setState({
+          message: response.data.message,
+        });
+      });
+  };
+
+  fetchUsers = () => {
     axios
       .get("/api/users") // You can simply make your requests to "/api/whatever you want"
+      .then((response) => {
+        // handle success
+        console.log(response.data); // The entire response from the Rails API
+
+        console.log(response.data.message); // Just the message
+        this.setState({
+          message: response.data.message,
+        });
+      });
+  };
+
+  signUp = () => {
+    axios
+      .put("/signup") // You can simply make your requests to "/api/whatever you want"
+      .then((response) => {
+        // handle success
+        console.log(response.data); // The entire response from the Rails API
+
+        console.log(response.data.message); // Just the message
+        this.setState({
+          message: response.data.message,
+        });
+      });
+  };
+
+  logIn = () => {
+    axios
+      .post("/login") // You can simply make your requests to "/api/whatever you want"
       .then((response) => {
         // handle success
         console.log(response.data); // The entire response from the Rails API
@@ -28,7 +98,12 @@ class App extends Component {
     return (
       <div className="App">
         <h1>{this.state.message}</h1>
-        <button onClick={this.fetchData}>Fetch Data</button>
+        <button onClick={this.fetchGigs}>Fetch Gigs</button>
+        <button onClick={this.createGigs}>Create Gigs</button>
+        <button onClick={this.deleteGigs}>Delete Gigs</button>
+        <button onClick={this.fetchUsers}>Fetch Users</button>
+        <button onClick={this.signUp}>Sign Up</button>
+        <button onClick={this.logIn}>Log In</button>
       </div>
     );
   }
