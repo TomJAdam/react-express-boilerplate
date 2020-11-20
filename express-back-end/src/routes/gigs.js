@@ -9,7 +9,7 @@ router.get("/gigs", (req, res) =>
 );
 
 
-router.put("/gigs/:id", (req, res) => {
+router.put("/gigs/", (req, res) => {
   res.json({
     message: "New gig has been created!"
   })
