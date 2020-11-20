@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import "./App.css";
 import Navbar from "./Navbar/Navbar";
+import GigGrid from "./Gigs/GigGrid";
 
 class App extends Component {
   constructor(props) {
@@ -106,6 +107,7 @@ class App extends Component {
         <button onClick={this.fetchUsers}>Fetch Users</button>
         <button onClick={this.signUp}>Sign Up</button>
         <button onClick={this.logIn}>Log In</button>
+        <GigGrid />
       </div>
     );
   }

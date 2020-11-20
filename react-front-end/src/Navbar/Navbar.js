@@ -14,13 +14,15 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import MailIcon from "@material-ui/icons/Mail";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
+import Button from "@material-ui/core/Button";
+import { green } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
+    background: "white",
     border: 0,
-    boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
-    color: "white",
+    boxShadow: "0 3px 5px 2px grey",
+    color: "black",
     padding: "0 30px",
   },
   grow: {
@@ -37,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
   search: {
     position: "relative",
+    border: "1px solid lightgrey",
     borderRadius: theme.shape.borderRadius,
     backgroundColor: fade(theme.palette.common.white, 0.15),
     "&:hover": {
@@ -58,6 +61,12 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+  },
+  searchButton: {
+    backgroundColor: green[400],
+    "&:hover": {
+      backgroundColor: green[600],
+    },
   },
   inputRoot: {
     color: "inherit",
@@ -181,7 +190,7 @@ export default function Navbar(props) {
             <MenuIcon />
           </IconButton>
           <Typography className={classes.title} variant="h4" noWrap>
-            QuickFix
+            Simplifix
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
@@ -195,6 +204,9 @@ export default function Navbar(props) {
               }}
               inputProps={{ "aria-label": "search" }}
             />
+            <Button variant="contained" className={classes.searchButton}>
+              Search
+            </Button>
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
