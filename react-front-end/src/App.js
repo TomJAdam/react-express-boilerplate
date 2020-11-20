@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./App.css";
 import Navbar from "./Navbar/Navbar";
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 export default function App() {
 
@@ -81,14 +82,16 @@ export default function App() {
 
   return (
     <div className="App">
-      <Navbar />
-      <h1>{message}</h1>
-      <button onClick={fetchGigs}>Fetch Gigs</button>
-      <button onClick={createGigs}>Create Gigs</button>
-      <button onClick={deleteGigs}>Delete Gigs</button>
-      <button onClick={fetchUsers}>Fetch Users</button>
-      <button onClick={signUp}>Sign Up</button>
-      <button onClick={logIn}>Log In</button>
+      <Router>
+        <Navbar />
+        <h1>{message}</h1>
+        <button onClick={fetchGigs}>Fetch Gigs</button>
+        <button onClick={createGigs}>Create Gigs</button>
+        <button onClick={deleteGigs}>Delete Gigs</button>
+        <button onClick={fetchUsers}>Fetch Users</button>
+        <button onClick={signUp}>Sign Up</button>
+        <button onClick={logIn}>Log In</button>
+      </Router>
     </div>
   );
 }
