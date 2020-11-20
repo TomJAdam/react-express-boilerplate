@@ -1,114 +1,38 @@
-import React, { Component } from "react";
-import axios from "axios";
+import React from "react";
 import "./App.css";
 import Navbar from "./Navbar/Navbar";
+import UseMessage from './hooks/axios-example'
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      message: "Click the button to load data!",
-    };
-  }
-
-  fetchGigs = () => {
-    axios
-      .get("/api/gigs") // You can simply make your requests to "/api/whatever you want"
-      .then((response) => {
-        // handle success
-        console.log(response.data); // The entire response from the Rails API
-
-        console.log(response.data.message); // Just the message
-        this.setState({
-          message: response.data.message,
-        });
-      });
-  };
-
-  createGigs = () => {
-    axios
-      .put("/api/gigs") // You can simply make your requests to "/api/whatever you want"
-      .then((response) => {
-        // handle success
-        console.log(response.data); // The entire response from the Rails API
-
-        console.log(response.data.message); // Just the message
-        this.setState({
-          message: response.data.message,
-        });
-      });
-  };
-
-  deleteGigs = () => {
-    axios
-      .delete("/api/gigs/1") // You can simply make your requests to "/api/whatever you want"
-      .then((response) => {
-        // handle success
-        console.log(response.data); // The entire response from the Rails API
-
-        console.log(response.data.message); // Just the message
-        this.setState({
-          message: response.data.message,
-        });
-      });
-  };
-
-  fetchUsers = () => {
-    axios
-      .get("/api/users") // You can simply make your requests to "/api/whatever you want"
-      .then((response) => {
-        // handle success
-        console.log(response.data); // The entire response from the Rails API
-
-        console.log(response.data.message); // Just the message
-        this.setState({
-          message: response.data.message,
-        });
-      });
-  };
-
-  signUp = () => {
-    axios
-      .put("/signup") // You can simply make your requests to "/api/whatever you want"
-      .then((response) => {
-        // handle success
-        console.log(response.data); // The entire response from the Rails API
-
-        console.log(response.data.message); // Just the message
-        this.setState({
-          message: response.data.message,
-        });
-      });
-  };
-
-  logIn = () => {
-    axios
-      .post("/login") // You can simply make your requests to "/api/whatever you want"
-      .then((response) => {
-        // handle success
-        console.log(response.data); // The entire response from the Rails API
-
-        console.log(response.data.message); // Just the message
-        this.setState({
-          message: response.data.message,
-        });
-      });
-  };
-
-  render() {
-    return (
-      <div className="App">
-        <Navbar />
-        <h1>{this.state.message}</h1>
-        <button onClick={this.fetchGigs}>Fetch Gigs</button>
-        <button onClick={this.createGigs}>Create Gigs</button>
-        <button onClick={this.deleteGigs}>Delete Gigs</button>
-        <button onClick={this.fetchUsers}>Fetch Users</button>
-        <button onClick={this.signUp}>Sign Up</button>
-        <button onClick={this.logIn}>Log In</button>
-      </div>
-    );
-  }
+const dummyData = {
+  categories: ['plumbing', 'ceiling', 'HVAC']
 }
-
-export default App;
+export default function App() {
+  
+  const {fetchGigs, 
+    createGigs, 
+    deleteGigs, 
+    fetchUsers, 
+    signUp, 
+    logIn,
+    message,
+  } = UseMessage();
+  
+  return (
+  <Router>
+    <div className="App">
+      <Navbar />
+      <h1>{message}</h1>
+      {dummyData.categories.map(each => {
+        return <Link to={'/' + each}>{each}</Link>
+      })}
+      <button onClick={fetchGigs}>Fetch Gigs</button>
+      <button onClick={createGigs}>Create Gigs</button>
+      <button onClick={deleteGigs}>Delete Gigs</button>
+      <button onClick={fetchUsers}>Fetch Users</button>
+      <button onClick={signUp}>Sign Up</button>
+      <button onClick={logIn}>Log In</button>
+    </div>
+  </Router>
+  );
+}
