@@ -1,38 +1,92 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import "./App.css";
-import Navbar from "./Navbar/Navbar";
-import UseMessage from './hooks/axios-example'
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import GigGrid from "./Gigs/GigGrid";
+import Navbar from "./components/Navbar";
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core/styles';
+import SignIn from "./components/SignIn";
+import SignUp from "./components/SignUp";
 
-const dummyData = {
-  categories: ['plumbing', 'ceiling', 'HVAC']
-}
+
+
 export default function App() {
-  
-  const {fetchGigs, 
-    createGigs, 
-    deleteGigs, 
-    fetchUsers, 
-    signUp, 
-    logIn,
-    message,
-  } = UseMessage();
-  
+
+  const [message, setMessage] = useState('Welcome to the app')
+
+  const fetchGigs = () => {
+    axios
+      .get("/api/gigs")
+      .then((response) => {
+        console.log(response.data);
+
+        console.log(response.data.message);
+        setMessage(response.data.message);
+      });
+  };
+
+  const createGigs = () => {
+    axios
+      .put("/api/gigs")
+      .then((response) => {
+        console.log(response.data);
+
+        console.log(response.data.message);
+        setMessage(response.data.message);
+      });
+  };
+
+  const deleteGigs = () => {
+    axios
+      .delete("/api/gigs/1")
+      .then((response) => {
+        console.log(response.data);
+
+        console.log(response.data.message);
+        setMessage(response.data.message);
+      });
+  };
+
+  const fetchUsers = () => {
+    axios
+      .get("/api/users")
+      .then((response) => {
+        console.log(response.data);
+
+        console.log(response.data.message);
+        setMessage(response.data.message);
+      });
+  };
+
+  const signUp = () => {
+    axios
+      .put("/signup")
+      .then((response) => {
+        console.log(response.data);
+
+        console.log(response.data.message);
+        setMessage(response.data.message);
+      });
+  };
+
+  const logIn = () => {
+    axios
+      .post("/login")
+      .then((response) => {
+        console.log(response.data);
+
+        console.log(response.data.message);
+        setMessage(response.data.message);
+      });
+  };
+
   return (
-  <Router>
     <div className="App">
-      <Navbar />
-      <h1>{message}</h1>
-      {dummyData.categories.map(each => {
-        return <Link to={'/' + each}>{each}</Link>
-      })}
-      <button onClick={fetchGigs}>Fetch Gigs</button>
-      <button onClick={createGigs}>Create Gigs</button>
-      <button onClick={deleteGigs}>Delete Gigs</button>
-      <button onClick={fetchUsers}>Fetch Users</button>
-      <button onClick={signUp}>Sign Up</button>
-      <button onClick={logIn}>Log In</button>
+      <Router>
+        <Navbar />
+        <Route path="/signin" component={SignIn}/>
+        <Route path="/signup" component={SignUp}/>
+      </Router>
     </div>
-  </Router>
   );
 }
