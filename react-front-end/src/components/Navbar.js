@@ -16,7 +16,7 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import Button from "@material-ui/core/Button";
 import { green } from "@material-ui/core/colors";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     display: "none",
-    textDecoration: 'none',
+    textDecoration: "none",
     [theme.breakpoints.up("sm")]: {
       display: "block",
     },
@@ -213,14 +213,10 @@ export default function Navbar(props) {
             </Button>
           </div>
           <Link to="/signin" className={classes.title}>
-              <Typography >
-                Sign In
-              </Typography>
+            Sign In
           </Link>
           <Link to="/signup" className={classes.title}>
-              <Typography >
-                Sign Up
-              </Typography>
+            Sign Up
           </Link>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
