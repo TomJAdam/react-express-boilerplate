@@ -85,7 +85,9 @@ export default function GigForm(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [selectedIndex, setSelectedIndex] = React.useState(0);
   const [values, setValues] = useState({
-    amount: ''
+    title: '',
+    amount: '',
+    description: ''
   })
 
   const handleChange = (prop) => (event) => {
