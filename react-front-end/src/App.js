@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
+import GigForm from "./components/Gigs/GigForm";
 import UserProfile from './components/user_profile';
 import SearchCard from "./components/Search_card";
 
@@ -18,7 +19,8 @@ export default function App() {
         <Navbar />
         <Route path="/signin" component={SignIn} />
         <Route path="/signup" component={SignUp} />
-        <Route path="/profile" component={UserProfile} />
+        <Route path="/new" component={GigForm} />
+        <Route path='/profile' component={UserProfile} />
       </Router>
       <SearchCard />
       <GigGrid />
