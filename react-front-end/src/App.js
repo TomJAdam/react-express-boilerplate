@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
-import Gig from './components/gig';
+import UserProfile from './components/user_profile';
 import SearchCard from "./components/Search_card";
 
 
@@ -21,6 +21,8 @@ export default function App() {
       </Router>
       <SearchCard />
       <GigGrid />
+      {/* uncomment to see the page */}
+      {/* <UserProfile/> */}
     </div>
   );
 }
