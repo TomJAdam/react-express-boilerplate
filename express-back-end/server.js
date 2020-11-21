@@ -1,3 +1,4 @@
+require('dotenv').config();
 const Express = require("express");
 const App = Express();
 const BodyParser = require("body-parser");
@@ -7,12 +8,8 @@ const PORT = 8080;
 const { Pool } = require("pg");
 const dbParams = require("./knexfile.js");
 const db = new Pool(dbParams.development.connection);
-db.connect();
+db.connect(() => console.log('connected to the db'));
 
-// db.query("SELECT * FROM users;", (error, response) => {
-//   console.log("error :", error);
-//   console.log("response :", response);
-// });
 
 // Express Configuration
 App.use(BodyParser.urlencoded({ extended: false }));
@@ -27,7 +24,7 @@ const validation = require("./src/routes/validation");
 // API Router
 App.use("/api", gigs);
 App.use("/api", users(db));
-App.use("/api", categories);
+App.use("/api", categories(db));
 App.use("/", validation);
 
 // Port Listening

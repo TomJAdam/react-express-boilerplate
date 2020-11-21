@@ -11,11 +11,18 @@ import GigForm from "./components/Gigs/GigForm";
 import UserProfile from './components/user_profile';
 import Home from "./components/Home";
 import Gigs from "./components/Gigs";
+import { useApplicationData } from "./hooks/useApplicationData";
 
 
 
 
 export default function App() {
+
+  const {
+    state
+  } = useApplicationData();
+
+
   return (
     <div className="App">
       <Router>
