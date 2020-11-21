@@ -42,5 +42,6 @@ module.exports = (db) => {
       })
       .catch(console.log);
   });
+
   return router;
 };
