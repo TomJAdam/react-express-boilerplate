@@ -33,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
   title: {
+    color: '#000000',
     display: "none",
     textDecoration: "none",
     [theme.breakpoints.up("sm")]: {
@@ -133,7 +134,12 @@ export default function Navbar(props) {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+        <Link to="/profile" className={classes.title}>
+          Profile
+        </Link>
+      </MenuItem>
+
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
     </Menu>
   );

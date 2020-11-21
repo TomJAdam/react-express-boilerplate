@@ -18,11 +18,10 @@ export default function App() {
         <Navbar />
         <Route path="/signin" component={SignIn} />
         <Route path="/signup" component={SignUp} />
+        <Route path="/profile" component={UserProfile} />
       </Router>
       <SearchCard />
       <GigGrid />
-      {/* uncomment to see the page */}
-      {/* <UserProfile/> */}
     </div>
   );
 }
