@@ -25,7 +25,7 @@ const validation = require("./src/routes/validation");
 
 // API Router
 App.use("/api", gigs);
-App.use("/api", users);
+App.use("/api", users(db));
 App.use("/", validation);
 
 // Port Listening

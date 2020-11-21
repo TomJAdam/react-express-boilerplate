@@ -65,6 +65,7 @@ export default function SignUp() {
     address: "",
     bio: "",
     education: "",
+    avatar: "",
   });
 
   const classes = useStyles();
@@ -281,6 +282,12 @@ export default function SignUp() {
               component="label"
               className={classes.photoBtn}
               variant="outlined"
+              onInput={(e) =>
+                setUser({
+                  ...user,
+                  avatar: e.target.value,
+                })
+              }
             >
               Upload Photo
               <input type="file" hidden />

@@ -9,7 +9,6 @@ CREATE TABLE users (
   address VARCHAR(255) NOT NULL,
   city VARCHAR(255) NOT NULL,
   province VARCHAR(255) NOT NULL,
-  phone_number VARCHAR(255) NOT NULL,
   avatar_img TEXT NOT NULL,
   bio TEXT NOT NULL,
   education TEXT NOT NULL
