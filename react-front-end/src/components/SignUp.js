@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const createUser = (user) => {
-  axios.put(`/api/signup`, user).then((res) => {
+  return axios.put(`/api/users`, user).then((res) => {
     console.log("res:", res);
   });
 };

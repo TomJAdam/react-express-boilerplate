@@ -6,4 +6,10 @@ router.get("/users", (req, res) =>
   })
 );
 
+router.put("/users", (req, res) =>
+  res.json({
+    message: "Route to create a new user!",
+  })
+);
+
 module.exports = router;
