@@ -1,8 +1,8 @@
 const router = require("express").Router();
 
 router.get("/gigs", (req, res) =>
-  res.json({
-    message: "Gigs to come!",
+  db.query(`SELECT * FROM gigs;`).then(({ rows: gigs }) => {
+    res.json(gigs);
   })
 );
 
