@@ -10,7 +10,10 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
 
 const useStyles = makeStyles((theme) => ({
 
@@ -56,7 +59,13 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: green[400],
     color: 'white',
     marginTop: '2rem'
+  },
+
+  moneyInput: {
+    marginTop: '2rem',
+    width: '40%'
   }
+
 
 }));
 
@@ -75,7 +84,13 @@ export default function GigForm(props) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [selectedIndex, setSelectedIndex] = React.useState(0);
-  // console.log(options[selectedIndex]);
+  const [values, setValues] = useState({
+    amount: ''
+  })
+
+  const handleChange = (prop) => (event) => {
+    setValues({ ...values, [prop]: event.target.value });
+  };
 
   const handleClickListItem = (event) => {
     setAnchorEl(event.currentTarget);
@@ -142,50 +157,16 @@ export default function GigForm(props) {
               </Menu>
             </div>
           </div>
-          <TextField
-            className={classes.field}
-            required 
-            label="Last Name" 
-            type="text"
-            placeholder="Last Name"
-            variant="outlined"
-            InputLabelProps={{
-              shrink: true,
-            }}  
-          />
-          <TextField
-            className={classes.field}
-            required 
-            label="Province" 
-            type="text"
-            placeholder="Province"
-            variant="outlined"
-            InputLabelProps={{
-              shrink: true,
-            }}  
-          />
-          <TextField
-            className={classes.field}
-            required 
-            label="City" 
-            type="text"
-            placeholder="City"
-            variant="outlined"
-            InputLabelProps={{
-              shrink: true,
-            }}  
-          />
-          <TextField
-            className={classes.field}
-            required 
-            label="Address" 
-            type="text"
-            placeholder="Address"
-            variant="outlined"
-            InputLabelProps={{
-              shrink: true,
-            }}  
-          />
+          <FormControl className={classes.moneyInput} variant="outlined">
+            <InputLabel htmlFor="outlined-adornment-amount">Hourly Rate</InputLabel>
+            <OutlinedInput
+              id="outlined-adornment-amount"
+              value={values.amount}
+              onChange={handleChange('amount')}
+              startAdornment={<InputAdornment position="start">$</InputAdornment>}
+              labelWidth={85}
+            />
+          </FormControl>
           <br/>
           <br/>
           <div className={classes.title}>
@@ -201,20 +182,17 @@ export default function GigForm(props) {
           />
           <br/>
           <br/>
-          <div className={classes.title}>
-          <h3>Education and Certifications</h3>
-          </div>
-          <br/>
-          <br/>
           <div>
-            <h3>Profile Photo</h3>
-            <Button component="label" className={classes.photoBtn} variant="outlined">
-                Upload Photo
-                <input
-                  type="file"
-                  hidden
-                />
-            </Button>
+            <h3>Portfolio Photos</h3>
+              <Button component="label" className={classes.photoBtn} variant="outlined">
+                  Upload
+                  <input
+                    type="file"
+                    multiple
+                    accept="image/*"
+                    style={{display: 'none'}}
+                  />
+              </Button>
           </div>
           <Button className={classes.submitBtn} size="large" variant="contained">Submit</Button>
         </form>
