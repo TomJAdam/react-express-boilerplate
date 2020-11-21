@@ -68,7 +68,9 @@ const options = [
   'Electrical/Electrician',
 ];
 
-export default function SignUp() {
+export default function GigForm(props) {
+
+  props.setShow(false);
 
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
