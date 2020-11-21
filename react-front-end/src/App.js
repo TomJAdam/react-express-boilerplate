@@ -8,6 +8,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 import GigForm from "./components/Gigs/GigForm";
+import SearchCard from "./components/Search_card";
 
 export default function App() {
   return (
@@ -18,6 +19,8 @@ export default function App() {
         <Route path="/signup" component={SignUp} />
         <Route path="/new" component={GigForm} />
       </Router>
+      <SearchCard />
+      <GigGrid />
     </div>
   );
 }
