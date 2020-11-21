@@ -8,7 +8,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 import GigForm from "./components/Gigs/GigForm";
+import UserProfile from './components/user_profile';
 import SearchCard from "./components/Search_card";
+
 
 export default function App() {
   return (
@@ -21,6 +23,8 @@ export default function App() {
       </Router>
       <SearchCard />
       <GigGrid />
+      {/* uncomment to see the page */}
+      {/* <UserProfile/> */}
     </div>
   );
 }
