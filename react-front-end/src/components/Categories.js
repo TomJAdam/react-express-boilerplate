@@ -63,7 +63,7 @@ const tileData = [
   },
 ];
 
-export default function SearchCard() {
+export default function Categories() {
   const classes = useStyles();
 
   return (
