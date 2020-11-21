@@ -176,6 +176,16 @@ export default function Navbar(props) {
         </IconButton>
         <p>Profile</p>
       </MenuItem>
+      <MenuItem>
+        <Link to="/signin" className={classes.title}>
+          <Button variant="contained">Sign In</Button>
+        </Link>
+      </MenuItem>
+      <MenuItem>
+        <Link to="/signup" className={classes.title}>
+          <Button variant="contained">Join</Button>
+        </Link>
+      </MenuItem>
     </Menu>
   );
 
@@ -212,14 +222,14 @@ export default function Navbar(props) {
               Search
             </Button>
           </div>
-          <Link to="/signin" className={classes.title}>
-            Sign In
-          </Link>
-          <Link to="/signup" className={classes.title}>
-            Sign Up
-          </Link>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
+            <Link to="/signin" className={classes.title}>
+              <Button variant="contained">Sign In</Button>
+            </Link>
+            <Link to="/signup" className={classes.title}>
+              <Button variant="contained">Join</Button>
+            </Link>
             <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <MailIcon />

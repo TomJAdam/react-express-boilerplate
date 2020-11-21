@@ -26,7 +26,13 @@ export default function GigGrid(props) {
         <Grid container justify="center">
           {gigs.map((gig) => {
             return (
-              <GigCard key={gig.id} name={gig.title} avatar={gig.photo_one} />
+              <GigCard
+                key={gig.id}
+                name={gig.title}
+                avatar={gig.photo_one}
+                description={gig.description}
+                rating={4}
+              />
             );
           })}
         </Grid>
