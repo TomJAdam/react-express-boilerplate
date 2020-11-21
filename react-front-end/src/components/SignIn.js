@@ -52,6 +52,9 @@ export default function SignIn() {
 
   const loginUser = (user) => {
     console.log(user);
+    return axios.post('/login', user).then(res => {
+      console.log(res);
+    })
   }
 
   return (
