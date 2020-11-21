@@ -7,6 +7,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import Rating from "@material-ui/lab/Rating";
 
 const useStyles = makeStyles({
   root: {
@@ -38,6 +39,7 @@ export default function GigCard(props) {
         </CardContent>
       </CardActionArea>
       <CardActions>
+        <Rating name="size-medium" defaultValue={props.rating} />
         <Button size="small" color="primary">
           Share
         </Button>

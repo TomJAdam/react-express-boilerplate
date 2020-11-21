@@ -16,7 +16,7 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import Button from "@material-ui/core/Button";
 import { green } from "@material-ui/core/colors";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     display: "none",
-    textDecoration: 'none',
+    textDecoration: "none",
     [theme.breakpoints.up("sm")]: {
       display: "block",
     },
@@ -176,6 +176,16 @@ export default function Navbar(props) {
         </IconButton>
         <p>Profile</p>
       </MenuItem>
+      <MenuItem>
+        <Link to="/signin" className={classes.title}>
+          <Button variant="contained">Sign In</Button>
+        </Link>
+      </MenuItem>
+      <MenuItem>
+        <Link to="/signup" className={classes.title}>
+          <Button variant="contained">Join</Button>
+        </Link>
+      </MenuItem>
     </Menu>
   );
 
@@ -212,18 +222,14 @@ export default function Navbar(props) {
               Search
             </Button>
           </div>
-          <Link to="/signin" className={classes.title}>
-              <Typography >
-                Sign In
-              </Typography>
-          </Link>
-          <Link to="/signup" className={classes.title}>
-              <Typography >
-                Sign Up
-              </Typography>
-          </Link>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
+            <Link to="/signin" className={classes.title}>
+              <Button variant="contained">Sign In</Button>
+            </Link>
+            <Link to="/signup" className={classes.title}>
+              <Button variant="contained">Join</Button>
+            </Link>
             <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <MailIcon />

@@ -9,6 +9,7 @@
     "go": "nodemon server.js"
   },
   "dependencies": {
+    "@material-ui/lab": "^4.0.0-alpha.56",
     "body-parser": "^1.18.3",
     "dotenv": "^8.2.0",
     "express": "^4.16.4",

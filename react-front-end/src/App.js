@@ -1,26 +1,26 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./App.css";
-import GigGrid from "./Gigs/GigGrid";
+import GigGrid from "./components/Gigs/GigGrid";
 import Navbar from "./components/Navbar";
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
-import Gig from './components/gig'
+import Gig from './components/gig';
+import SearchCard from "./components/Search_card";
 
 
 export default function App() {
-
-
   return (
     <div className="App">
       <Router>
         <Navbar />
-        <Route path="/signin" component={SignIn}/>
-        <Route path="/signup" component={SignUp}/>
+        <Route path="/signin" component={SignIn} />
+        <Route path="/signup" component={SignUp} />
       </Router>
-      <Gig />
+      <SearchCard />
+      <GigGrid />
     </div>
   );
 }
