@@ -30,6 +30,10 @@ const useStyles = makeStyles((theme) => ({
     background:
       "linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)",
   },
+  categoriesTitle: {
+    width: "100%",
+    borderBottom: "8px solid #66bb6a",
+  },
 }));
 
 const tileData = [
@@ -64,7 +68,12 @@ export default function SearchCard() {
 
   return (
     <div className={classes.root}>
-      <Typography gutterBottom variant="h5" component="h2">
+      <Typography
+        gutterBottom
+        variant="h5"
+        component="h2"
+        className={classes.categoriesTitle}
+      >
         Categories
       </Typography>
       <GridList className={classes.gridList} cols={2.5}>
