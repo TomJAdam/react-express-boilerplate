@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
+import GigForm from "./components/Gigs/GigForm";
 
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
         <Navbar />
         <Route path="/signin" component={SignIn} />
         <Route path="/signup" component={SignUp} />
+        <Route path="/new" component={GigForm} />
       </Router>
     </div>
   );
