@@ -8,7 +8,7 @@ export const useApplicationData = function() {
   useEffect(() => {
     axios.get('/api/categories')
     .then(response => {
-      console.log(response.data);
+      console.log(response);
       setCategories(response.data);
     })
   },[]);

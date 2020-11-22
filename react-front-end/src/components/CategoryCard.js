@@ -30,7 +30,6 @@ const useStyles = makeStyles({
 
 export default function CategoryCard(props) {
   const classes = useStyles();
-  console.log(props);
   const link = `/gigs/${props.name}`
 
   return (

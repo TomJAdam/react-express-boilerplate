@@ -17,29 +17,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function GigGrid(props) {
-  const classes = useStyles();
-
-  return (
-    <Grid container className={classes.root}>
-      <Grid item xs={12}>
-        <Grid container justify="center">
-          {gigs.map((gig) => {
-            return (
-              <GigCard
-                key={gig.id}
-                name={gig.title}
-                avatar={gig.photo_one}
-                description={gig.description}
-                rating={4}
-              />
-            );
-          })}
-        </Grid>
-      </Grid>
-    </Grid>
-  );
-}
 
 const gigs = [
   {
@@ -99,3 +76,28 @@ const gigs = [
       "https://images.unsplash.com/photo-1505798577917-a65157d3320a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80",
   },
 ];
+
+export default function GigGrid(props) {
+  const classes = useStyles();
+
+
+  return (
+    <Grid container className={classes.root}>
+      <Grid item xs={12}>
+        <Grid container justify="center">
+          {gigs.map((gig) => {
+            return (
+              <GigCard
+                key={gig.id}
+                name={gig.title}
+                avatar={gig.photo_one}
+                description={gig.description}
+                rating={4}
+              />
+            );
+          })}
+        </Grid>
+      </Grid>
+    </Grid>
+  );
+}
