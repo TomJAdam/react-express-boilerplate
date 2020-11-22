@@ -18,6 +18,7 @@ export default function GigsHome() {
   return(
     <div>
       <Categories />
+      <h1>Browse Gigs</h1>
       <GigGrid gigs={gigs}/>
     </div>
   )
