@@ -13,6 +13,6 @@ export const useApplicationData = function() {
     })
   },[]);
 
-  return categories;
+  return {categories};
 
 }

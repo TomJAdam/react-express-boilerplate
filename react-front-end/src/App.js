@@ -19,8 +19,10 @@ import { useApplicationData } from "./hooks/useApplicationData";
 export default function App() {
 
   const {
-    state
+    categories
   } = useApplicationData();
+
+  console.log(categories);
 
 
   return (
@@ -30,7 +32,7 @@ export default function App() {
         <Switch>
           <Route path="/signin" component={SignIn} />
           <Route path="/signup" component={SignUp} />
-          <Route path="/gigs" component={Gigs} />
+          <Route path='/gigs' component={() => <Gigs categories={categories}/>}/>
           <Route path='/profile' component={UserProfile} />
           <Route path="/" component={Home} />
         </Switch>
