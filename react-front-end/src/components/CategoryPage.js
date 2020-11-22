@@ -12,6 +12,10 @@ export default function CategoryPage() {
   useEffect(() => {
     axios.get(`/api/categories/${category}`)
     .then(response => {
+      console.log(response.data);
+      return axios.get(`/api/gigs/${response.data}`)
+    })
+    .then(response => {
       console.log(response);
     })
   },[])

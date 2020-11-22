@@ -54,7 +54,6 @@ export default function Categories() {
 
   const classes = useStyles();
   const { categories } = useApplicationData();
-  console.log(categories);
 
   return (
     <div>

@@ -5,9 +5,8 @@ const router = require("express").Router();
 
 module.exports = (db) => {
   router.get('/categories', (req, res) => {
-    db.query(`SELECT * FROM categories`)
+    return db.query(`SELECT * FROM categories`)
     .then(data => {
-      console.log(data);
       res.json(data.rows)
     })
   });
