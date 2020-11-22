@@ -79,7 +79,6 @@ export default function SignUp() {
           autoComplete="off"
           onSubmit={(event) => {
             event.preventDefault();
-            console.log("user:", user);
             createUser(user);
           }}
         >
