@@ -1,10 +1,12 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { useApplicationData } from "../hooks/useApplicationData";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
 import Typography from "@material-ui/core/Typography";
-import { useApplicationData } from "../hooks/useApplicationData";
+import Grid from '@material-ui/core/Grid';
+import CategoryCard from './CategoryCard';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,6 +37,15 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     borderBottom: "8px solid #66bb6a",
   },
+
+  container: {
+    display: 'flex',
+    flexDirection: 'column'
+  },
+
+  title: {
+    margin: '2rem 0rem 2rem 0rem'
+  }
 }));
 
 export default function Categories() {
@@ -43,29 +54,23 @@ export default function Categories() {
   const { categories } = useApplicationData();
 
   return (
-    <div className={classes.root}>
-      <Typography
-        gutterBottom
-        variant="h5"
-        component="h2"
-        className={classes.categoriesTitle}
-      >
-        Categories
-      </Typography>
-      <GridList className={classes.gridList} cols={2.5}>
-        {categories.map((tile) => (
-          <GridListTile key={tile.img}>
-            <img src={tile.img} alt={tile.title} />
-            <GridListTileBar
-              title={tile.name}
-              classes={{
-                root: classes.titleBar,
-                title: classes.title,
-              }}
-            />
-          </GridListTile>
-        ))}
-      </GridList>
-    </div>
+    <div className={classes.container}>
+      <h1 className={classes.title}>Popular Categories</h1>
+      <Grid container className={classes.root}>
+        <Grid item xs={12}>
+        <Grid container justify="center">
+          {categories.map((category) => {
+            return (
+              <CategoryCard
+                key={category.id}
+                name={category.name}
+                avatar={category.img}
+              />
+            );
+          })}
+        </Grid>
+      </Grid>
+    </Grid>
+  </div>
   );
 }
