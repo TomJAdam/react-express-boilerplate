@@ -10,6 +10,10 @@ export default function CategoryPage() {
   const category = params.category;
   const [gigs, setGigs] = useState([]);
 
+
+  // The first axios request gets the id of the current category page we are on
+  // The second axios request gets the gigs in that category using the id from the first axios request
+  // I am pretty sure there is a better way to do this, was stuck here so decided to try this - SM
   useEffect(() => {
     axios.get(`/api/categories/${category}`)
     .then(response => {
@@ -21,8 +25,6 @@ export default function CategoryPage() {
       setGigs(response.data);
     })
   },[])
-
-  // Need all gigs in category from API here - pass these to GigGrid
 
   return (
     <div>
