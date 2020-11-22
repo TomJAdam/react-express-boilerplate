@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
 
   formContainer: {
     borderRadius: "8px",
-    width: "45%",
+    width: "70%",
     paddingTop: "1rem",
     paddingBottom: "1rem",
     boxShadow: "1px 2px 2px 2px lightgrey",
