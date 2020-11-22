@@ -30,10 +30,12 @@ export default function GigGrid(props) {
             return (
               <GigCard
                 key={gig.id}
+                id={gig.id}
                 name={gig.title}
                 avatar={gig.photo_one}
                 description={gig.description}
                 rating={4}
+                category={props.category}
               />
             );
           })}

@@ -22,7 +22,7 @@ export default function GigCard(props) {
 
   return (
     <Card className={classes.root}>
-      <Link to='/gigs'>
+      <Link to={`/gigs/${props.category}/${props.id}`}>
         <CardActionArea>
           <CardMedia
             component="img"

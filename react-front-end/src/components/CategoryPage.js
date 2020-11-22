@@ -18,7 +18,7 @@ export default function CategoryPage() {
     axios.get(`/api/categories/${category}`)
     .then(response => {
       console.log(response);
-      return axios.get(`/api/gigs/${response.data}`)
+      return axios.get(`/api/gigs/category/${response.data}`)
     })
     .then(response => {
       console.log(response);
@@ -33,9 +33,12 @@ export default function CategoryPage() {
         
         <Switch>
           <Route path={`/gigs/${category}/:gig_id`} component={GigPage}/>
-          <Route path={`/gigs/${category}`} component={() => <GigGrid gigs={gigs}/>}/>
+          <Route 
+            path={`/gigs/${category}`} 
+            component={() => <GigGrid gigs={gigs} category={category}/>}
+          />
         </Switch>
-        
+
       </Router>
     </div>
   )

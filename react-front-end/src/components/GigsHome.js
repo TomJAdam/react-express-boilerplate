@@ -10,7 +10,6 @@ export default function GigsHome() {
   useEffect(() => {
     axios.get('/api/gigs')
     .then(response => {
-      console.log(response.data);
       setGigs(response.data)
     })
   },[])
