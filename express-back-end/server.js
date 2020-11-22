@@ -1,4 +1,4 @@
-require('dotenv').config();
+require("dotenv").config();
 const Express = require("express");
 const App = Express();
 const BodyParser = require("body-parser");
@@ -8,8 +8,7 @@ const PORT = 8080;
 const { Pool } = require("pg");
 const dbParams = require("./knexfile.js");
 const db = new Pool(dbParams.development.connection);
-db.connect(() => console.log('connected to the db'));
-
+db.connect(() => console.log("connected to the db"));
 
 // Express Configuration
 App.use(BodyParser.urlencoded({ extended: false }));

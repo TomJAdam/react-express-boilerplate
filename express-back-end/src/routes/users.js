@@ -11,7 +11,6 @@ module.exports = (db) => {
 
   router.put("/users", (req, res) => {
     const user = req.body;
-    console.log("user :", user);
 
     const queryParams = [
       user.first_name,
@@ -30,15 +29,15 @@ module.exports = (db) => {
     return db
       .query(
         `
-      INSERT INTO users (first_name, last_name, email, password, phone, address, city, province, avatar_img, bio, education)
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+      INSERT INTO users (first_name, last_name, email, password, phone_number, address, city, province, avatar_img, bio, education)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
       RETURNING *;
       `,
         queryParams
       )
       .then((res) => {
-        console.log("res :", res);
-        return res;
+        console.log("res :", res.rows[0]);
+        return res.rows[0];
       })
       .catch(console.log);
   });
