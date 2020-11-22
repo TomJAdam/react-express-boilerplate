@@ -7,9 +7,16 @@ import GridListTileBar from "@material-ui/core/GridListTileBar";
 import Typography from "@material-ui/core/Typography";
 import Grid from '@material-ui/core/Grid';
 import CategoryCard from './CategoryCard';
+import PopularHeading from "./PopularHeading";
 
 const useStyles = makeStyles((theme) => ({
+
   root: {
+    display: 'flex',
+    flexDirection: 'column'
+  },
+
+  card: {
     marginTop: 20,
     marginBottom: 20,
     display: "flex",
@@ -38,11 +45,6 @@ const useStyles = makeStyles((theme) => ({
     borderBottom: "8px solid #66bb6a",
   },
 
-  container: {
-    display: 'flex',
-    flexDirection: 'column'
-  },
-
   title: {
     margin: '2rem 0rem 2rem 0rem'
   }
@@ -54,23 +56,23 @@ export default function Categories() {
   const { categories } = useApplicationData();
 
   return (
-    <div className={classes.container}>
-      <h1 className={classes.title}>Popular Categories</h1>
-      <Grid container className={classes.root}>
+    <div>
+      <PopularHeading />
+      <Grid container className={classes.card}>
         <Grid item xs={12}>
-        <Grid container justify="center">
-          {categories.map((category) => {
-            return (
-              <CategoryCard
-                key={category.id}
-                name={category.name}
-                avatar={category.img}
-              />
-            );
-          })}
+          <Grid container justify="center">
+            {categories.map((category) => {
+              return (
+                <CategoryCard
+                  key={category.id}
+                  name={category.name}
+                  avatar={category.img}
+                />
+              );
+            })}
+          </Grid>
         </Grid>
       </Grid>
-    </Grid>
-  </div>
+    </div>
   );
 }
