@@ -30,12 +30,12 @@ export default function CategoryPage() {
     <div>
       <h1>We are on the {category} page!</h1>
       <Router>
-        <GigGrid gigs={gigs}/>
-
+        
         <Switch>
           <Route path={`/gigs/${category}/:gig_id`} component={GigPage}/>
+          <Route path={`/gigs/${category}`} component={() => <GigGrid gigs={gigs}/>}/>
         </Switch>
-    
+        
       </Router>
     </div>
   )
