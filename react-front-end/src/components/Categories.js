@@ -4,6 +4,7 @@ import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
 import Typography from "@material-ui/core/Typography";
+import { useApplicationData } from "../hooks/useApplicationData";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,11 +37,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Categories(props) {
+export default function Categories() {
+
   const classes = useStyles();
-
-  console.log('inside of categories', props.categories);
-
+  const { categories } = useApplicationData();
 
   return (
     <div className={classes.root}>
@@ -53,7 +53,7 @@ export default function Categories(props) {
         Categories
       </Typography>
       <GridList className={classes.gridList} cols={2.5}>
-        {props.categories.map((tile) => (
+        {categories.map((tile) => (
           <GridListTile key={tile.img}>
             <img src={tile.img} alt={tile.title} />
             <GridListTileBar
