@@ -14,7 +14,7 @@ export default function Gigs(props) {
         <Switch>
           <Route exact path="/gigs" component={GigsHome} />
           <Route path='/gigs/new' component={GigForm}/>
-          <Route path='/gigs/:category_id' component={CategoryPage}/>
+          <Route path='/gigs/:category' component={CategoryPage}/>
         </Switch>
       </Router>
 
