@@ -36,6 +36,7 @@ export default function GigGrid(props) {
                 description={gig.description}
                 rating={4}
                 category={props.category}
+                getGig={props.getGig}
               />
             );
           })}

@@ -9,6 +9,7 @@ export default function CategoryPage() {
   const params = useParams();
   const category = params.category;
   const [gigs, setGigs] = useState([]);
+  const [gig, setGig] = useState({});
 
 
   // The first axios request gets the id of the current category page we are on
@@ -17,14 +18,17 @@ export default function CategoryPage() {
   useEffect(() => {
     axios.get(`/api/categories/${category}`)
     .then(response => {
-      console.log(response);
       return axios.get(`/api/gigs/category/${response.data}`)
     })
     .then(response => {
-      console.log(response);
       setGigs(response.data);
     })
-  },[])
+  },[]);
+
+  const getGig = (id) => {
+    const gig = gigs.find(gig => gig.id == id);
+    setGig(gig);
+  }
 
   return (
     <div>
@@ -32,10 +36,13 @@ export default function CategoryPage() {
       <Router>
         
         <Switch>
-          <Route path={`/gigs/${category}/:gig_id`} component={GigPage}/>
+          <Route 
+            path={`/gigs/${category}/:gig_id`}
+            component={() => <GigPage gig={gig}/>}
+          />
           <Route 
             path={`/gigs/${category}`} 
-            component={() => <GigGrid gigs={gigs} category={category}/>}
+            component={() => <GigGrid getGig={getGig} gigs={gigs} category={category}/>}
           />
         </Switch>
 

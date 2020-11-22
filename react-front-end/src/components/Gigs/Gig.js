@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -30,6 +30,7 @@ export default function GigCard(props) {
             height="140"
             image={props.avatar}
             title={props.name}
+            onClick={() => props.getGig(props.id)}
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
