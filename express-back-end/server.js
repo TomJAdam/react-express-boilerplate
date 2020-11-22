@@ -21,7 +21,7 @@ const categories = require("./src/routes/categories");
 const validation = require("./src/routes/validation");
 
 // API Router
-App.use("/api", gigs);
+App.use("/api", gigs(db));
 App.use("/api", users(db));
 App.use("/api", categories(db));
 App.use("/", validation);

@@ -1,8 +1,6 @@
 const router = require("express").Router();
 
 module.exports = (db) => {
-
-
   router.get('/gigs/:category_id', (req, res) => {
     const query = 
     `
@@ -43,4 +41,11 @@ module.exports = (db) => {
   });
 
   return router;
+
 }
+
+
+
+
+
+

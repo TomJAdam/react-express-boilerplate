@@ -13,12 +13,7 @@ export default function CategoryPage() {
     axios.get(`/api/categories/${category}`)
     .then(response => {
       console.log(response);
-      axios.get(`/api/gigs/${response.data}`)
-      .then(response => {
-        console.log(response);
-      })
     })
-    .catch(error => console.log(error))
   },[])
 
   // Need all gigs in category from API here - pass these to GigGrid
