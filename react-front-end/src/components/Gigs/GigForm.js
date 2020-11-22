@@ -79,7 +79,7 @@ const options = [
 
 export default function GigForm(props) {
 
-  props.setShow(false);
+  // props.setShow(false);
 
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);

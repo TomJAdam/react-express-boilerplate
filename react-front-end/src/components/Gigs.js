@@ -2,18 +2,22 @@ import React,{ useState } from 'react';
 import Categories from "./Categories";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import GigForm from "./Gigs/GigForm";
-import GigGrid from "./Gigs/GigGrid";
+import GigsHome from './GigsHome';
+import CategoryPage from './CategoryPage';
 
 
 export default function Gigs(props) {
 
-  const [show, setShow] = useState(true);
-
   return (
     <div>
-      {show && <Categories />}
-      <Route path='/gigs/new' component={() => <GigForm setShow={setShow}/>}/>
-      {show && <GigGrid />}
+      <Router>
+        <Switch>
+          <Route exact path="/gigs" component={GigsHome} />
+          <Route path='/gigs/new' component={GigForm}/>
+          <Route path='/gigs/:category_id' component={CategoryPage}/>
+        </Switch>
+      </Router>
+
     </div>
   )
 }
