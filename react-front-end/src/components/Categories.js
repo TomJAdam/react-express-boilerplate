@@ -65,6 +65,7 @@ export default function Categories() {
               return (
                 <CategoryCard
                   key={category.id}
+                  id={category.id}
                   name={category.name}
                   avatar={category.img}
                 />

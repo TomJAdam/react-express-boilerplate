@@ -37,6 +37,7 @@ export default function CategoryCard(props) {
       <Card className={classes.root}>
         <CardActionArea>
           <CardMedia
+            id={props.id}
             component="img"
             alt={props.name}
             height="300"
