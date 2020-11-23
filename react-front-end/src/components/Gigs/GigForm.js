@@ -16,6 +16,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
 import axios from "axios";
 import { UserCookie } from "../../hooks/UserCookie";
+import { Redirect } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -75,6 +76,7 @@ export default function GigForm(props) {
   const [categoriesNames, setCategoriesNames] = useState([]);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [selectedIndex, setSelectedIndex] = React.useState(0);
+  const [postSuccessful, setPostSuccessful] = useState(false);
   const [gig, setGig] = useState({
     userId: 0,
     title: "",
@@ -94,11 +96,14 @@ export default function GigForm(props) {
   };
 
   const postGig = () => {
-    return axios.put("/api/gigs/", gig).then((res) => {
-      console.log("res :", res);
+    return axios.put("/api/gigs/", gig).then(() => {
+      setPostSuccessful(true);
     });
   };
 
+  if (postSuccessful) {
+    return <Redirect to={`/gigs/${gig.category}/`} />;
+  }
   // props.setShow(false);
 
   const handleClickListItem = (event) => {
