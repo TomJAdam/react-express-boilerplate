@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import { green } from "@material-ui/core/colors";
@@ -6,6 +6,8 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import {UserCookie} from "../hooks/UserCookie"
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,13 +49,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const createUser = (user) => {
-  return axios.put(`/api/users`, user).then((res) => {
-    console.log("res:", res);
-  });
-};
 
 export default function SignUp() {
+  const {setCookie} = useContext(UserCookie);
   const [user, setUser] = useState({
     first_name: "",
     last_name: "",
@@ -67,6 +65,12 @@ export default function SignUp() {
     education: "",
     avatar: "",
   });
+  
+  const createUser = (user) => {
+    return axios.put(`/api/users`, user).then((res) => {
+      setCookie(prev => ({...prev, ...res.data}))
+    });
+  };
 
   const classes = useStyles();
   return (

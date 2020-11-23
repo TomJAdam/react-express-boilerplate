@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -17,6 +17,8 @@ import MoreIcon from "@material-ui/icons/MoreVert";
 import Button from "@material-ui/core/Button";
 import { green } from "@material-ui/core/colors";
 import { Link } from "react-router-dom";
+import { UserCookie } from "../hooks/UserCookie";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,8 +35,10 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
   title: {
+    alignSelf: "center",
     color: "#000000",
     display: "none",
+    margin: "0 1em",
     textDecoration: "none",
     [theme.breakpoints.up("sm")]: {
       display: "block",
@@ -99,6 +103,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Navbar(props) {
+  const { cookie, setCookie } = useContext(UserCookie);
+  const logout = () => {
+    return axios.post("/logout")
+    .then(res => setCookie(res.data)
+    );
+  };
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -153,43 +163,55 @@ export default function Navbar(props) {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <IconButton aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="secondary">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit">
-          <Badge badgeContent={11} color="secondary">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem>
-      <MenuItem>
-        <Link to="/signin" className={classes.title}>
-          <Button variant="contained">Sign In</Button>
-        </Link>
-      </MenuItem>
-      <MenuItem>
-        <Link to="/signup" className={classes.title}>
-          <Button variant="contained">Join</Button>
-        </Link>
-      </MenuItem>
+      {cookie.userEmail ? (
+        <>
+          <MenuItem>
+            <IconButton aria-label="show 4 new mails" color="inherit">
+              <Badge badgeContent={4} color="secondary">
+                <MailIcon />
+              </Badge>
+            </IconButton>
+            <p>Messages</p>
+          </MenuItem>
+          <MenuItem>
+            <IconButton aria-label="show 11 new notifications" color="inherit">
+              <Badge badgeContent={11} color="secondary">
+                <NotificationsIcon />
+              </Badge>
+            </IconButton>
+            <p>Notifications</p>
+          </MenuItem>
+          <MenuItem onClick={handleProfileMenuOpen}>
+            <IconButton
+              aria-label="account of current user"
+              aria-controls="primary-search-account-menu"
+              aria-haspopup="true"
+              color="inherit"
+            >
+              <AccountCircle />
+            </IconButton>
+            <p>Profile</p>
+          </MenuItem>
+          <MenuItem>
+            <Link to="/logout" className={classes.title} onClick={logout}>
+              <Button variant="contained">Logout</Button>
+            </Link>
+          </MenuItem>
+        </>
+      ) : (
+        <>
+          <MenuItem>
+            <Link to="/signin" className={classes.title}>
+              <Button variant="contained">Sign In</Button>
+            </Link>
+          </MenuItem>
+          <MenuItem>
+            <Link to="/signup" className={classes.title}>
+              <Button variant="contained">Join</Button>
+            </Link>
+          </MenuItem>
+        </>
+      )}
     </Menu>
   );
 
@@ -227,34 +249,52 @@ export default function Navbar(props) {
             </Button>
           </div>
           <div className={classes.grow} />
+          {/* Below it is the desktop view */}
           <div className={classes.sectionDesktop}>
-            <Link to="/signin" className={classes.title}>
-              <Button variant="contained">Sign In</Button>
-            </Link>
-            <Link to="/signup" className={classes.title}>
-              <Button variant="contained">Join</Button>
-            </Link>
-            <IconButton aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={17} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
+            {cookie.userEmail ? (
+              <>
+                <Typography variant="body1" component="span">
+                  <p>Welcome, {cookie.userEmail}</p>
+                </Typography>
+                <IconButton aria-label="show 4 new mails" color="inherit">
+                  <Badge badgeContent={4} color="secondary">
+                    <MailIcon />
+                  </Badge>
+                </IconButton>
+                <IconButton
+                  aria-label="show 17 new notifications"
+                  color="inherit"
+                >
+                  <Badge badgeContent={17} color="secondary">
+                    <NotificationsIcon />
+                  </Badge>
+                </IconButton>
+                <IconButton
+                  edge="end"
+                  aria-label="account of current user"
+                  aria-controls={menuId}
+                  aria-haspopup="true"
+                  onClick={handleProfileMenuOpen}
+                  color="inherit"
+                >
+                  <AccountCircle />
+                </IconButton>
+                <Link to="/logout" className={classes.title} onClick={logout}>
+                  <Button variant="contained">Log Out</Button>
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link to="/signin" className={classes.title}>
+                  <Button variant="contained">Sign In</Button>
+                </Link>
+                <Link to="/signup" className={classes.title}>
+                  <Button variant="contained">Join</Button>
+                </Link>
+              </>
+            )}
           </div>
+          {/* Below it is the mobile view */}
           <div className={classes.sectionMobile}>
             <IconButton
               aria-label="show more"
