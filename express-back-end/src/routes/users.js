@@ -9,12 +9,11 @@ module.exports = (db) => {
     })
   );
 
-  router.get('/users/:id', (req, res) => {
-    db.query(`SELECT * FROM users WHERE id = ${req.params.id}`)
-    .then(data => {
+  router.get("/users/:id", (req, res) => {
+    db.query(`SELECT * FROM users WHERE id = ${req.params.id}`).then((data) => {
       res.json(data.rows);
-    })
-  })
+    });
+  });
 
   router.put("/users", (req, res) => {
     const user = req.body;
@@ -42,12 +41,12 @@ module.exports = (db) => {
       `,
         queryParams
       )
-      .then(data => {
+      .then((data) => {
         const user = data.rows[0];
         req.session.userEmail = user.email;
-        res.send({ userEmail: user.email });
+        res.send({ user: user });
       })
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
   });
 
   return router;

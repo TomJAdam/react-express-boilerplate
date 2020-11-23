@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import { green } from "@material-ui/core/colors";
@@ -14,6 +14,8 @@ import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
+import axios from "axios";
+import { UserCookie } from "../../hooks/UserCookie";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -66,35 +68,49 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const options = [
-  "Select an item",
-  "Plumbing",
-  "Hardwood Flooring",
-  "Landscaping",
-  "Electrical/Electrician",
-];
-
 export default function GigForm(props) {
-  // props.setShow(false);
-
   const classes = useStyles();
+  const { cookie, setCookie } = useContext(UserCookie);
+  console.log("cookie :", cookie);
+  const [categories, setCategories] = useState([]);
+  const [categoriesNames, setCategoriesNames] = useState([]);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [selectedIndex, setSelectedIndex] = React.useState(0);
-  const [values, setValues] = useState({
+  const [gig, setGig] = useState({
+    userId: 0,
     title: "",
-    amount: "",
+    category: 0,
+    rate: 0,
     description: "",
+    photo1: "",
   });
+  console.log("gig :", gig);
 
-  const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
+  const getCategories = () => {
+    axios.get("/api/categories").then((res) => {
+      const categoryNameArray = res.data.map((cat) => cat.name);
+      categoryNameArray.unshift("Select a category");
+      setCategories(res.data);
+      setCategoriesNames(categoryNameArray);
+    });
   };
 
+  const postGig = () => {
+    setGig({ ...gig, userId: cookie.user.id });
+    return axios.put("/api/gigs/", gig).then((res) => {
+      console.log("res :", res);
+    });
+  };
+
+  // props.setShow(false);
+
   const handleClickListItem = (event) => {
+    getCategories();
     setAnchorEl(event.currentTarget);
   };
 
   const handleMenuItemClick = (event, index) => {
+    setGig({ ...gig, category: categories[index - 1].id });
     setSelectedIndex(index);
     setAnchorEl(null);
   };
@@ -121,7 +137,13 @@ export default function GigForm(props) {
         Create a New Gig
       </h1>
       <Grid item xs={12} className={classes.formContainer}>
-        <form autoComplete="off" onSubmit={(event) => event.preventDefault()}>
+        <form
+          autoComplete="off"
+          onSubmit={(event) => {
+            event.preventDefault();
+            postGig();
+          }}
+        >
           <TextField
             required
             label="Title"
@@ -129,6 +151,12 @@ export default function GigForm(props) {
             placeholder="Title"
             variant="outlined"
             fullWidth
+            onInput={(e) =>
+              setGig({
+                ...gig,
+                title: e.target.value,
+              })
+            }
             InputLabelProps={{
               shrink: true,
             }}
@@ -145,7 +173,7 @@ export default function GigForm(props) {
                 >
                   <ListItemText
                     primary="Select category"
-                    secondary={options[selectedIndex]}
+                    secondary={categoriesNames[selectedIndex]}
                   />
                 </ListItem>
               </List>
@@ -156,7 +184,7 @@ export default function GigForm(props) {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                {options.map((option, index) => (
+                {categoriesNames.map((option, index) => (
                   <MenuItem
                     key={option}
                     disabled={index === 0}
@@ -174,9 +202,16 @@ export default function GigForm(props) {
               Hourly Rate
             </InputLabel>
             <OutlinedInput
+              required
               id="outlined-adornment-amount"
-              value={values.amount}
-              onChange={handleChange("amount")}
+              type="number"
+              value={gig.amount}
+              onInput={(e) =>
+                setGig({
+                  ...gig,
+                  rate: e.target.value,
+                })
+              }
               startAdornment={
                 <InputAdornment position="start">$</InputAdornment>
               }
@@ -194,6 +229,12 @@ export default function GigForm(props) {
             multiline
             rows={4}
             variant="outlined"
+            onInput={(e) =>
+              setGig({
+                ...gig,
+                description: e.target.value,
+              })
+            }
             fullWidth
           />
           <br />
@@ -204,6 +245,12 @@ export default function GigForm(props) {
               component="label"
               className={classes.photoBtn}
               variant="outlined"
+              onInput={(e) =>
+                setGig({
+                  ...gig,
+                  photo1: e.target.value,
+                })
+              }
             >
               Upload
               <input
@@ -215,6 +262,7 @@ export default function GigForm(props) {
             </Button>
           </div>
           <Button
+            type="submit"
             className={classes.submitBtn}
             size="large"
             variant="contained"

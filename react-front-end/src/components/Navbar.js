@@ -172,7 +172,7 @@ export default function Navbar(props) {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      {cookie.userEmail ? (
+      {cookie.user ? (
         <>
           <MenuItem>
             <IconButton aria-label="show 4 new mails" color="inherit">
@@ -276,10 +276,10 @@ export default function Navbar(props) {
           <div className={classes.grow} />
           {/* Below it is the desktop view */}
           <div className={classes.sectionDesktop}>
-            {cookie.userEmail ? (
+            {cookie.user ? (
               <>
                 <Typography variant="body1" component="span">
-                  <p>Welcome, {cookie.userEmail}</p>
+                  <p>Welcome, {cookie.user.first_name}</p>
                 </Typography>
                 <IconButton aria-label="show 4 new mails" color="inherit">
                   <Badge badgeContent={4} color="secondary">

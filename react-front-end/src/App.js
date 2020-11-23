@@ -37,10 +37,10 @@ export default function App() {
           <Navbar />
           <Switch>
             <Route path="/signin">
-              {cookie.userEmail ? <Redirect to="/" /> : <SignIn />}
+              {cookie.user ? <Redirect to="/" /> : <SignIn />}
             </Route>
             <Route path="/signup">
-              {cookie.userEmail ? <Redirect to="/" /> : <SignUp />}
+              {cookie.user ? <Redirect to="/" /> : <SignUp />}
             </Route>
             <Route path="/logout">
               <Redirect to="/" />
