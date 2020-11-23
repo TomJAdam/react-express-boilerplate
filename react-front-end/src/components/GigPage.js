@@ -17,8 +17,6 @@ const useStyles = makeStyles((theme) => ({
   },
 
   card: {
-    maxWidth: 700,
-    margin: '2rem',
     borderRadius: '8px',
     boxShadow: '0px 2px 5px 0.5px #E3E3E3'
   }
@@ -59,13 +57,13 @@ export default function GigPage() {
       />
       <div className={classes.root}>
         <Grid container spacing={3} justify="center" className={classes.root}>
-          <Grid item sm={8} className={classes.card}>
+          <Grid item sm={8}>
             <GigDetails
               bio={user.bio}
               education={user.education}
             />
           </Grid>
-          <Grid item sm={3} className={classes.card}>
+          <Grid item sm={3}>
             <ContactCard />
           </Grid>
         </Grid>
