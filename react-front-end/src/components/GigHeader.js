@@ -45,7 +45,7 @@ export default function GigHeader(props) {
         </p>
         <div className={classes.infoBottom}>
           <Rating name="read-only" value={45} readOnly />
-          <p>${props.price}</p>
+          <p>${props.price}/hr</p>
         </div>
       </div>
     </div>
