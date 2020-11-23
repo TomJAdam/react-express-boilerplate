@@ -18,6 +18,7 @@ import MailIcon from "@material-ui/icons/Mail";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import Button from "@material-ui/core/Button";
+import AddCircleIcon from "@material-ui/icons/AddCircle";
 import { green } from "@material-ui/core/colors";
 import { Link } from "react-router-dom";
 import { UserCookie } from "../hooks/UserCookie";
@@ -202,6 +203,12 @@ export default function Navbar(props) {
             <p>Profile</p>
           </MenuItem>
 
+          <Link to="/gigs/new" className={classes.title}>
+            <MenuItem className={classes.iconButton}>
+              <AddCircleIcon className={classes.fontIcon} />
+              <p>Gig</p>
+            </MenuItem>
+          </Link>
           <Link
             to="/logout"
             className={classes.title}
@@ -306,6 +313,9 @@ export default function Navbar(props) {
                 </IconButton>
                 <Link to="/logout" className={classes.title} onClick={logout}>
                   <Button variant="contained">Log Out</Button>
+                </Link>
+                <Link to="/gigs/new" className={classes.title}>
+                  <Button variant="contained">+ Gig</Button>
                 </Link>
               </>
             ) : (
