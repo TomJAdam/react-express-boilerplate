@@ -71,7 +71,6 @@ const useStyles = makeStyles((theme) => ({
 export default function GigForm(props) {
   const classes = useStyles();
   const { cookie, setCookie } = useContext(UserCookie);
-  console.log("cookie :", cookie);
   const [categories, setCategories] = useState([]);
   const [categoriesNames, setCategoriesNames] = useState([]);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -240,7 +239,21 @@ export default function GigForm(props) {
           <br />
           <div>
             <h3>Portfolio Photos</h3>
-            <Button
+            <TextField
+              id="outlined-multiline-static"
+              label="Image URL"
+              multiline
+              rows={1}
+              variant="outlined"
+              onInput={(e) =>
+                setGig({
+                  ...gig,
+                  photo1: e.target.value,
+                })
+              }
+              fullWidth
+            />
+            {/* <Button
               component="label"
               className={classes.photoBtn}
               variant="outlined"
@@ -258,7 +271,7 @@ export default function GigForm(props) {
                 accept="image/*"
                 style={{ display: "none" }}
               />
-            </Button>
+            </Button> */}
           </div>
           <Button
             type="submit"
