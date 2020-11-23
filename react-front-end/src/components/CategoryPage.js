@@ -25,10 +25,10 @@ export default function CategoryPage() {
     })
   },[]);
 
-  const getGig = (id) => {
-    const gig = gigs.find(gig => gig.id == id);
-    setGig(gig);
-  }
+  // const getGig = (id) => {
+  //   const gig = gigs.find(gig => gig.id == id);
+  //   setGig(gig);
+  // }
 
   return (
     <div>
@@ -37,11 +37,11 @@ export default function CategoryPage() {
         <Switch>
           <Route 
             path={`/gigs/${category}/:gig_id`}
-            component={() => <GigPage gig={gig}/>}
+            component={() => <GigPage />}
           />
           <Route 
             path={`/gigs/${category}`} 
-            component={() => <GigGrid getGig={getGig} gigs={gigs} category={category}/>}
+            component={() => <GigGrid gigs={gigs} category={category}/>}
           />
         </Switch>
 

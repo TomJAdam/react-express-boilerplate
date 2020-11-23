@@ -15,7 +15,10 @@ module.exports = (db) => {
   });
 
   router.get('/gigs/:gig_id', (req, res) => {
-    db.query(`SELECT * from`)
+    db.query(`SELECT * FROM gigs WHERE id = ${req.params.gig_id}`)
+    .then(data => {
+      res.send(data.rows);
+    })
   })
   
   router.get("/gigs", (req, res) =>

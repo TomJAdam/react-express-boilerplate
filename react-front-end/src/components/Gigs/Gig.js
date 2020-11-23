@@ -30,7 +30,6 @@ export default function GigCard(props) {
             height="140"
             image={props.avatar}
             title={props.name}
-            onClick={() => props.getGig(props.id)}
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
