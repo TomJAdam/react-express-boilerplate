@@ -2,6 +2,7 @@ require("dotenv").config();
 const Express = require("express");
 const App = Express();
 const BodyParser = require("body-parser");
+const cookieSession = require('cookie-session');
 const PORT = 8080;
 
 // PG database client / connection setup
@@ -9,6 +10,15 @@ const { Pool } = require("pg");
 const dbParams = require("./knexfile.js");
 const db = new Pool(dbParams.development.connection);
 db.connect(() => console.log("connected to the db"));
+const helpers = require('./src/helpers/dbhelper')(db);
+
+//Cookie-session
+App.use(cookieSession({
+  name: 'session',
+  keys: ['key1'],
+  maxAge: 12 * 60 * 60 * 1000 // 12 hours
+}))
+
 
 // Express Configuration
 App.use(BodyParser.urlencoded({ extended: false }));
@@ -24,7 +34,7 @@ const validation = require("./src/routes/validation");
 App.use("/api", gigs(db));
 App.use("/api", users(db));
 App.use("/api", categories(db));
-App.use("/", validation);
+App.use("/", validation(helpers));
 
 // Port Listening
 App.listen(PORT, () => {
