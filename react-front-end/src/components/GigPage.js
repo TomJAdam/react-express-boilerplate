@@ -64,7 +64,11 @@ export default function GigPage() {
             />
           </Grid>
           <Grid item sm={3}>
-            <ContactCard />
+            <ContactCard
+              city={user.city}
+              phone={user.phone_number}
+              email={user.email}
+            />
           </Grid>
         </Grid>
       </div>

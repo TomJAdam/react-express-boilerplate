@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
 
   card: {
     textAlign: 'left',
+    margin: '0.5rem 0rem 0.5rem 0rem'
   },
 
   education: {
@@ -46,6 +47,11 @@ export default function GigDetails(props) {
           <SchoolIcon className={classes.eduItem}/>
           <p className={classes.eduItem}>University of Amazing University</p>
         </div>
+      </div>
+      <div className={classes.card}>
+        <h4>Recent Jobs</h4>
+        <p>This is going to be some other text. I am just writing this to see how it looks on the page.
+        </p>
       </div>
     </div>
   )
