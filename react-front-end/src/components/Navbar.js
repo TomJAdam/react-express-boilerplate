@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
     alignSelf: "center",
     color: "#000000",
     display: "none",
-    margin: "0 1em",
+    margin: "0 .5em",
     textDecoration: "none",
     [theme.breakpoints.up("sm")]: {
       display: "block",
