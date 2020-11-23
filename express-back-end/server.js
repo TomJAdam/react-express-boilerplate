@@ -9,7 +9,7 @@ const PORT = 8080;
 const { Pool } = require("pg");
 const dbParams = require("./knexfile.js");
 const db = new Pool(dbParams.development.connection);
-db.connect(() => console.log("connected to the db"));
+db.connect();
 const helpers = require('./src/helpers/dbhelper')(db);
 
 //Cookie-session

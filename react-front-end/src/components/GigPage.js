@@ -38,11 +38,9 @@ export default function GigPage() {
     .then(response => {
       setGig(response.data[0])
       const id = response.data[0].contractor_id;
-      console.log(id);
       return axios(`/api/users/${id}`)
     })
     .then(response => {
-      console.log(response.data);
       setUser(response.data[0])
     })
   },[])
