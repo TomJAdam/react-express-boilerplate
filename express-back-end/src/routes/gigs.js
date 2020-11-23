@@ -31,7 +31,6 @@ module.exports = (db) => {
 
   router.put("/gigs/", (req, res) => {
     const gig = req.body;
-    console.log("gig :", gig);
     const queryParams = [
       gig.userId,
       gig.category,
@@ -53,7 +52,8 @@ module.exports = (db) => {
         queryParams
       )
       .then((data) => {
-        res.send(data);
+        const gig = data.rows[0];
+        res.send(gig);
       });
   });
 
