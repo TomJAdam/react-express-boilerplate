@@ -41,6 +41,10 @@ export default function GigDetails(props) {
         Gig Details
       </h1>
       <div className={classes.card}>
+        <h4>Job description</h4>
+        <p>{props.description}</p>
+      </div>
+      <div className={classes.card}>
         <h4>About Me</h4>
         <p>{props.bio}</p>
       </div>

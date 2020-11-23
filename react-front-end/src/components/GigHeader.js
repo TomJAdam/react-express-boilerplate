@@ -39,10 +39,10 @@ export default function GigHeader(props) {
       }}
     >
       <div className={classes.infoContainer}>
-        <h1>
+        <h1>{props.title}</h1>
+        <p>
           {props.first} {props.last}
-        </h1>
-        <p>{props.title}</p>
+        </p>
         <div className={classes.infoBottom}>
           <Rating name="read-only" value={45} readOnly />
           <p>${props.price}</p>

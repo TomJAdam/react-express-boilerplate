@@ -54,7 +54,11 @@ export default function GigPage() {
       <div className={classes.root}>
         <Grid container spacing={3} justify="center" className={classes.root}>
           <Grid item sm={8}>
-            <GigDetails bio={user.bio} education={user.education} />
+            <GigDetails
+              bio={user.bio}
+              education={user.education}
+              description={gig.description}
+            />
           </Grid>
           <Grid item sm={3}>
             <ContactCard
