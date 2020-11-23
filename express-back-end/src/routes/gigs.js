@@ -31,6 +31,7 @@ module.exports = (db) => {
 
   router.put("/gigs/", (req, res) => {
     const gig = req.body;
+    console.log("gig :", gig);
     const queryParams = [
       gig.userId,
       gig.category,
@@ -38,11 +39,22 @@ module.exports = (db) => {
       gig.rate,
       gig.description,
       gig.photo1,
+      gig.photo1,
+      gig.photo1,
     ];
 
-    return db.query(`
+    return db
+      .query(
+        `
     INSERT INTO gigs (contractor_id, category_id, title, price, description, photo_one, photo_two, photo_three)
-    `);
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+    RETURNING *;
+    `,
+        queryParams
+      )
+      .then((data) => {
+        res.send(data);
+      });
   });
 
   router.delete("/gigs/:id", (req, res) => {

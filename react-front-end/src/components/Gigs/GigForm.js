@@ -84,7 +84,6 @@ export default function GigForm(props) {
     description: "",
     photo1: "",
   });
-  console.log("gig :", gig);
 
   const getCategories = () => {
     axios.get("/api/categories").then((res) => {
@@ -96,7 +95,6 @@ export default function GigForm(props) {
   };
 
   const postGig = () => {
-    setGig({ ...gig, userId: cookie.user.id });
     return axios.put("/api/gigs/", gig).then((res) => {
       console.log("res :", res);
     });
@@ -155,6 +153,7 @@ export default function GigForm(props) {
               setGig({
                 ...gig,
                 title: e.target.value,
+                userId: cookie.user.id,
               })
             }
             InputLabelProps={{
