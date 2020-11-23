@@ -1,15 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Categories from './Categories';
 import GigGrid from "./Gigs/GigGrid";
+import axios from 'axios';
 
 export default function GigsHome() {
 
-  // Need all gigs from API here - pass these to GigGrid
+  const [gigs, setGigs] = useState([]);
+
+  useEffect(() => {
+    axios.get('/api/gigs')
+    .then(response => {
+      setGigs(response.data)
+    })
+  },[])
 
   return(
     <div>
       <Categories />
-      <GigGrid />
+      <h1>Browse Gigs</h1>
+      <GigGrid gigs={gigs}/>
     </div>
   )
 }
