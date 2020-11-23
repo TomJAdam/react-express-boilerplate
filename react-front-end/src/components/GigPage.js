@@ -3,8 +3,32 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import GigHeader from './GigHeader';
+import GigDetails from './GigDetails';
+import Grid from '@material-ui/core/Grid';
+import ContactCard from './ContactCard';
+import { makeStyles } from '@material-ui/core/styles';
 
-export default function GigPage(props) {
+
+const useStyles = makeStyles((theme) => ({
+
+  root: {
+    flexGrow: 1,
+    paddingTop: '1rem'
+  },
+
+  card: {
+    maxWidth: 700,
+    margin: '2rem',
+    borderRadius: '8px',
+    boxShadow: '0px 2px 5px 0.5px #E3E3E3'
+  }
+
+
+}));
+
+export default function GigPage() {
+
+  const classes = useStyles();
 
   const [gig, setGig] = useState({});
   const [user, setUser] = useState({});
@@ -33,9 +57,19 @@ export default function GigPage(props) {
         title={gig.title}
         price={gig.price}
       />
-      <h1>This is the page for gig {gig.id} owned by user id {user.first_name}</h1>
-      <p>About {user.first_name}: {user.bio}</p>
-      <p>This is the price of the gig: {gig.price}</p>
+      <div className={classes.root}>
+        <Grid container spacing={3} justify="center" className={classes.root}>
+          <Grid item sm={8} className={classes.card}>
+            <GigDetails
+              bio={user.bio}
+              education={user.education}
+            />
+          </Grid>
+          <Grid item sm={3} className={classes.card}>
+            <ContactCard />
+          </Grid>
+        </Grid>
+      </div>
     </div>
   )
 }
