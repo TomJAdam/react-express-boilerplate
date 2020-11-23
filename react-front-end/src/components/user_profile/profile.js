@@ -9,6 +9,13 @@ const useStyles = makeStyles((theme) => ({
     margin: "0 auto",
     backgroundColor: theme.palette.background.paper,
   },
+  avatar: {
+    objectFit: "cover",
+    width: 200,
+    height: 200,
+    borderRadius: "50%",
+    border: "2px solid black",
+  },
 }));
 
 export default function Profile(props) {
@@ -29,7 +36,7 @@ export default function Profile(props) {
   return (
     <List className={classes.root}>
       <h1>{`${first_name} ${last_name}`}</h1>
-      <img alt='avatar' src={avatar_img}/>
+      <img className={classes.avatar} alt="avatar" src={avatar_img} />
       <Divider />
       <li>
         <h2>Location</h2>
@@ -43,9 +50,7 @@ export default function Profile(props) {
       </li>
       <li>
         <h2>Description</h2>
-        <p>
-         {bio}
-        </p>
+        <p>{bio}</p>
       </li>
       <li>
         <h2>Education</h2>
