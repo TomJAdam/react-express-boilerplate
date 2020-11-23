@@ -2,6 +2,7 @@ import Axios from 'axios';
 import React, { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import GigHeader from './GigHeader';
 
 export default function GigPage(props) {
 
@@ -21,6 +22,12 @@ export default function GigPage(props) {
 
   return (
     <div>
+      <GigHeader
+        first={user.first_name}
+        last={user.last_name}
+        title={gig.title}
+        price={gig.price}
+      />
       <h1>This is the page for gig {gig.id} owned by user id {user.first_name}</h1>
       <p>About {user.first_name}: {user.bio}</p>
       <p>This is the price of the gig: {gig.price}</p>

@@ -32,7 +32,6 @@ export default function CategoryPage() {
 
   return (
     <div>
-      <h1>We are on the {category} page!</h1>
       <Router>
         
         <Switch>
