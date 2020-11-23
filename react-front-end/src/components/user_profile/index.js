@@ -20,9 +20,9 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function Gig() {
+export default function Gig(props) {
 
-  
+  const {user, gigs} = props;
 
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('md'));
@@ -37,10 +37,10 @@ export default function Gig() {
           <div style={{ width: "100%" }}>
             <Box display="flex" flexWrap="wrap" justifyContent="space-evenly" p={1}>
               <Card style={matches ? { width: "30%" } : { width: "100%" }}>
-              <Profile />
+              <Profile user={user}/>
               </Card>
               <Box style={matches ? { width: "50%" } : { width: "100%" }}>
-              <GigItem />
+              <GigItem gigs={gigs}/>
               </Box>
             </Box>
           </div>

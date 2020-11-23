@@ -13,15 +13,16 @@ const useStyles = makeStyles({
   },
 });
 
-const gigs = ["gig1", "gig2", "gig3", "gig4", "gig5", "gig6"];
-export default function GigItem() {
+
+export default function GigItem(props) {
+
   const classes = useStyles();
   return (
     <>
       <h1>My Gigs</h1>
       <Divider style={{ width: "90%", margin: "0 auto" }} />
-      {gigs.map((gig) => {
-        return <GigItemList />;
+      {props.gigs.map(gig => {
+        return <GigItemList gig={gig}/>;
       })}
       <Link to="/gigs/new">
         <Fab aria-label="add" className={classes.new}>

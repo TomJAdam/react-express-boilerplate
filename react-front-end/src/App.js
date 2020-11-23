@@ -1,5 +1,4 @@
-import React, { useState, useContext } from "react";
-import axios from "axios";
+import React from "react";
 import "./App.css";
 import GigGrid from "./components/Gigs/GigGrid";
 import Navbar from "./components/Navbar";
@@ -7,29 +6,23 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
-  useHistory,
   Redirect,
 } from "react-router-dom";
-import { makeStyles } from "@material-ui/core/styles";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
-import GigForm from "./components/Gigs/GigForm";
 import UserProfile from "./components/user_profile";
 import Home from "./components/Home";
 import Gigs from "./components/Gigs";
 import { useApplicationData } from "./hooks/useApplicationData";
 import { UserCookie } from "./hooks/UserCookie";
-import { useEffect } from "react";
+import useAppData from "./hooks/useAppData";
+import {getGigbyUserId} from "./helpers/dataHelpers";
 
 export default function App() {
-  const history = useHistory();
-  const [cookie, setCookie] = useState({ userId: null });
-  useEffect(() => {
-    axios.get("/login").then((res) => {
-      setCookie({ ...res.data });
-    });
-  }, []);
+  const { cookie, state, setCookie, setState } = useAppData();
+  const gigsByUser = getGigbyUserId(state);
 
+  console.log(state);
   return (
     <div className="App">
       <UserCookie.Provider value={{ cookie, setCookie }}>
@@ -46,7 +39,9 @@ export default function App() {
               <Redirect to="/" />
             </Route>
             <Route path="/gigs" component={Gigs} />
-            <Route path="/profile" component={UserProfile} />
+            <Route path="/profile">
+              <UserProfile user={state.user} gigs={gigsByUser}/>
+            </Route>
             <Route path="/" component={Home} />
           </Switch>
         </Router>

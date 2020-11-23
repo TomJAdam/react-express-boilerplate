@@ -29,20 +29,31 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function GigItemList() {
+export default function GigItemList(props) {
+  const {
+    id,
+    contractor_id,
+    category_id,
+    title,
+    description,
+    photo_one,
+    phone_two,
+    photo_three
+  } = props.gig
+
   const classes = useStyles();
   return (
     <Paper className={classes.root}>
       <Box className={classes.left}>
         <div className={classes.desc}>
           <h5>
-          I will create SEO optimized content for your plumbing website!
+          {description}
           </h5>
           <Box color="text.secondary">
-            Plumbing
+            {title}
           </Box>
         </div>
-        <p>Novemver 16, 2020</p>
+        <p>Novemver 23, 2020</p>
       </Box>
       <Box className={classes.right}>
         Active
