@@ -22,7 +22,6 @@ export default function App() {
   const { cookie, state, setCookie, setState } = useAppData();
   const gigsByUser = getGigbyUserId(cookie, state);
 
-  console.log(state);
   return (
     <div className="App">
       <UserCookie.Provider value={{ cookie, setCookie }}>
