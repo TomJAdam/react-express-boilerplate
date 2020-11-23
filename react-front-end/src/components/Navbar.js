@@ -33,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
   title: {
+    fontFamily: "'Days One', sans-serif",
     color: "#000000",
     display: "none",
     textDecoration: "none",
@@ -207,7 +208,7 @@ export default function Navbar(props) {
           </IconButton>
           <Link to="/" className={classes.title}>
             <Typography className={classes.title} variant="h4" noWrap>
-              QuickFix
+              SimpliFix
             </Typography>
           </Link>
           <div className={classes.search}>

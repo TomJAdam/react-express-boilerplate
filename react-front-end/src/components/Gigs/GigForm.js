@@ -1,94 +1,90 @@
-import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import { green } from '@material-ui/core/colors';
-import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-import { Link } from 'react-router-dom';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
+import React, { useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
+import { green } from "@material-ui/core/colors";
+import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
+import { Link } from "react-router-dom";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import MenuItem from "@material-ui/core/MenuItem";
+import Menu from "@material-ui/core/Menu";
+import FormControl from "@material-ui/core/FormControl";
+import InputLabel from "@material-ui/core/InputLabel";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import OutlinedInput from "@material-ui/core/OutlinedInput";
 
 const useStyles = makeStyles((theme) => ({
-
   root: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
 
   categoryList: {
-    marginTop: '2rem',
-    backgroundColor: '#EFEFEF',
-    width: '40%',
+    marginTop: "2rem",
+    backgroundColor: "#EFEFEF",
+    width: "40%",
   },
 
   listContainer: {
-    display: 'flex',
-    justifyContent: 'center'
+    display: "flex",
+    justifyContent: "center",
   },
 
   formContainer: {
-    borderRadius: '8px',
-    width: '45%',
-    paddingTop: '3rem',
-    paddingBottom: '1rem',
-    padding: '2rem',
-    boxShadow: '1px 2px 2px 2px lightgrey'
+    borderRadius: "8px",
+    width: "70%",
+    paddingTop: "3rem",
+    paddingBottom: "1rem",
+    padding: "2rem",
+    boxShadow: "1px 2px 2px 2px lightgrey",
   },
 
   field: {
-    margin: '1.5rem',
+    margin: "1.5rem",
   },
 
   title: {
-    display: 'flex',
+    display: "flex",
   },
 
   photoBtn: {
-    color: green[400]
+    color: green[400],
   },
 
   submitBtn: {
     backgroundColor: green[400],
-    color: 'white',
-    marginTop: '2rem'
+    color: "white",
+    marginTop: "2rem",
   },
 
   moneyInput: {
-    marginTop: '2rem',
-    width: '40%'
-  }
-
-
+    marginTop: "2rem",
+    width: "40%",
+  },
 }));
 
 const options = [
-  'Select an item',
-  'Plumbing',
-  'Hardwood Flooring',
-  'Landscaping',
-  'Electrical/Electrician',
+  "Select an item",
+  "Plumbing",
+  "Hardwood Flooring",
+  "Landscaping",
+  "Electrical/Electrician",
 ];
 
 export default function GigForm(props) {
-
   // props.setShow(false);
 
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [selectedIndex, setSelectedIndex] = React.useState(0);
   const [values, setValues] = useState({
-    title: '',
-    amount: '',
-    description: ''
-  })
+    title: "",
+    amount: "",
+    description: "",
+  });
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
@@ -109,14 +105,25 @@ export default function GigForm(props) {
 
   return (
     <Grid container className={classes.root}>
-      <div style={{backgroundColor: '#EFEFEF', width: '100vw', height: '10rem', display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
+      <div
+        style={{
+          backgroundColor: "#EFEFEF",
+          width: "100vw",
+          height: "10rem",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+        }}
+      >
         <h2>Get paid for your valuable skills</h2>
       </div>
-      <h1 style={{borderBottom: '2px solid #43a047', width: '40%'}}>Create a New Gig</h1>
+      <h1 style={{ borderBottom: "2px solid #43a047", width: "40%" }}>
+        Create a New Gig
+      </h1>
       <Grid item xs={12} className={classes.formContainer}>
         <form autoComplete="off" onSubmit={(event) => event.preventDefault()}>
           <TextField
-            required 
+            required
             label="Title"
             type="text"
             placeholder="Title"
@@ -124,7 +131,7 @@ export default function GigForm(props) {
             fullWidth
             InputLabelProps={{
               shrink: true,
-            }}  
+            }}
           />
           <div className={classes.listContainer}>
             <div className={classes.categoryList}>
@@ -136,7 +143,10 @@ export default function GigForm(props) {
                   aria-label="Choose a Category"
                   onClick={handleClickListItem}
                 >
-                  <ListItemText primary="Select category" secondary={options[selectedIndex]} />
+                  <ListItemText
+                    primary="Select category"
+                    secondary={options[selectedIndex]}
+                  />
                 </ListItem>
               </List>
               <Menu
@@ -160,17 +170,21 @@ export default function GigForm(props) {
             </div>
           </div>
           <FormControl className={classes.moneyInput} variant="outlined">
-            <InputLabel htmlFor="outlined-adornment-amount">Hourly Rate</InputLabel>
+            <InputLabel htmlFor="outlined-adornment-amount">
+              Hourly Rate
+            </InputLabel>
             <OutlinedInput
               id="outlined-adornment-amount"
               value={values.amount}
-              onChange={handleChange('amount')}
-              startAdornment={<InputAdornment position="start">$</InputAdornment>}
+              onChange={handleChange("amount")}
+              startAdornment={
+                <InputAdornment position="start">$</InputAdornment>
+              }
               labelWidth={85}
             />
           </FormControl>
-          <br/>
-          <br/>
+          <br />
+          <br />
           <div className={classes.title}>
             <h3>Description</h3>
           </div>
@@ -182,24 +196,33 @@ export default function GigForm(props) {
             variant="outlined"
             fullWidth
           />
-          <br/>
-          <br/>
+          <br />
+          <br />
           <div>
             <h3>Portfolio Photos</h3>
-              <Button component="label" className={classes.photoBtn} variant="outlined">
-                  Upload
-                  <input
-                    type="file"
-                    multiple
-                    accept="image/*"
-                    style={{display: 'none'}}
-                  />
-              </Button>
+            <Button
+              component="label"
+              className={classes.photoBtn}
+              variant="outlined"
+            >
+              Upload
+              <input
+                type="file"
+                multiple
+                accept="image/*"
+                style={{ display: "none" }}
+              />
+            </Button>
           </div>
-          <Button className={classes.submitBtn} size="large" variant="contained">Submit</Button>
+          <Button
+            className={classes.submitBtn}
+            size="large"
+            variant="contained"
+          >
+            Submit
+          </Button>
         </form>
       </Grid>
     </Grid>
-    
-  )
+  );
 }
