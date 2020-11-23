@@ -77,6 +77,7 @@ export default function GigForm(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [selectedIndex, setSelectedIndex] = React.useState(0);
   const [postSuccessful, setPostSuccessful] = useState(false);
+  const [gigId, setGigId] = useState(0);
   const [gig, setGig] = useState({
     userId: 0,
     title: "",
@@ -84,6 +85,7 @@ export default function GigForm(props) {
     rate: 0,
     description: "",
     photo1: "",
+    categoryName: "",
   });
 
   const getCategories = () => {
@@ -96,14 +98,15 @@ export default function GigForm(props) {
   };
 
   const postGig = () => {
-    return axios.put("/api/gigs/", gig).then(() => {
+    return axios.put("/api/gigs/", gig).then((res) => {
+      setGigId(res.data.id);
       setPostSuccessful(true);
     });
   };
-
   if (postSuccessful) {
-    return <Redirect to={`/gigs/${gig.category}/`} />;
+    return <Redirect to={`/gigs/${gig.categoryName}/${gigId}`} />;
   }
+
   // props.setShow(false);
 
   const handleClickListItem = (event) => {
@@ -112,7 +115,11 @@ export default function GigForm(props) {
   };
 
   const handleMenuItemClick = (event, index) => {
-    setGig({ ...gig, category: categories[index - 1].id });
+    setGig({
+      ...gig,
+      category: categories[index - 1].id,
+      categoryName: categories[index - 1].name,
+    });
     setSelectedIndex(index);
     setAnchorEl(null);
   };
