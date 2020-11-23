@@ -35,11 +35,12 @@ module.exports = (db) => {
       `,
         queryParams
       )
-      .then((res) => {
-        console.log("res :", res.rows[0]);
-        return res.rows[0];
+      .then(data => {
+        const user = data.rows[0];
+        req.session.userEmail = user.email;
+        res.send({ userEmail: user.email });
       })
-      .catch(console.log);
+      .catch(err => console.log(err));
   });
 
   return router;

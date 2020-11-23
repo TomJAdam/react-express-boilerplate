@@ -54,7 +54,7 @@ export default function SignIn() {
   const loginUser = (user) => {
     return axios.post('/login', user).then(res => {
       setCookie(prev => ({...prev, ...res.data}))
-    }).catch(data => console.log(data))
+    }).catch(err => console.log(err))
   }
 
   return (

@@ -19,7 +19,7 @@ module.exports = (helpers) => {
         res.status(400).send({ msg: "Password is incorrect!" });
       } else {
         req.session.userEmail = data.email;
-        res.send({ userEmail: data.email });
+        res.send({ userEmail: data.email});
       }
     });
   });
