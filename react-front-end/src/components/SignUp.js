@@ -6,8 +6,7 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import {UserCookie} from "../hooks/UserCookie"
-
+import { UserCookie } from "../hooks/UserCookie";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -49,9 +48,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 export default function SignUp() {
-  const {setCookie} = useContext(UserCookie);
+  const { setCookie } = useContext(UserCookie);
   const [user, setUser] = useState({
     first_name: "",
     last_name: "",
@@ -65,10 +63,10 @@ export default function SignUp() {
     education: "",
     avatar: "",
   });
-  
+
   const createUser = (user) => {
     return axios.put(`/api/users`, user).then((res) => {
-      setCookie(prev => ({...prev, ...res.data}))
+      setCookie((prev) => ({ ...prev, ...res.data }));
     });
   };
 
@@ -279,23 +277,24 @@ export default function SignUp() {
           />
           <br />
           <br />
-          <div>
+          <div className={classes.title}>
             <h3>Profile Photo</h3>
-            <Button
-              component="label"
-              className={classes.photoBtn}
-              variant="outlined"
-              onInput={(e) =>
-                setUser({
-                  ...user,
-                  avatar: e.target.value,
-                })
-              }
-            >
-              Upload Photo
-              <input type="file" hidden />
-            </Button>
           </div>
+          <TextField
+            className={classes.bioField}
+            id="outlined-multiline-static"
+            label="Image URL"
+            multiline
+            rows={1}
+            fullWidth
+            variant="outlined"
+            onInput={(e) =>
+              setUser({
+                ...user,
+                avatar: e.target.value,
+              })
+            }
+          />
           <Button
             type="submit"
             className={classes.submitBtn}
