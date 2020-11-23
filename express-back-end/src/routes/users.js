@@ -9,6 +9,14 @@ module.exports = (db) => {
     })
   );
 
+  router.get('/users/:id', (req, res) => {
+    db.query(`SELECT * FROM users WHERE id = ${req.params.id}`)
+    .then(data => {
+      console.log(data.rows);
+      res.json(data.rows);
+    })
+  })
+
   router.put("/users", (req, res) => {
     const user = req.body;
 

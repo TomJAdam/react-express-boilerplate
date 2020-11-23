@@ -1,7 +1,7 @@
 const router = require("express").Router();
 
 module.exports = (db) => {
-  router.get('/gigs/:category_id', (req, res) => {
+  router.get('/gigs/category/:category_id', (req, res) => {
     console.log('at the api')
     const query = 
     `
@@ -13,6 +13,10 @@ module.exports = (db) => {
       res.json(data.rows);
     })
   });
+
+  router.get('/gigs/:gig_id', (req, res) => {
+    db.query(`SELECT * from`)
+  })
   
   router.get("/gigs", (req, res) =>
     db.query(`SELECT * FROM gigs;`).then(({ rows: gigs }) => {
