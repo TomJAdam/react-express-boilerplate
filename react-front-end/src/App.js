@@ -16,11 +16,11 @@ import Gigs from "./components/Gigs";
 import { useApplicationData } from "./hooks/useApplicationData";
 import { UserCookie } from "./hooks/UserCookie";
 import useAppData from "./hooks/useAppData";
-import {getGigbyUserId} from "./helpers/dataHelpers";
+import { getGigbyUserId } from "./helpers/dataHelpers";
 
 export default function App() {
   const { cookie, state, setCookie, setState } = useAppData();
-  const gigsByUser = getGigbyUserId(state);
+  const gigsByUser = getGigbyUserId(cookie, state);
 
   console.log(state);
   return (
@@ -40,7 +40,11 @@ export default function App() {
             </Route>
             <Route path="/gigs" component={Gigs} />
             <Route path="/profile">
-              <UserProfile user={state.user} gigs={gigsByUser}/>
+              {cookie.user ? (
+                <UserProfile user={cookie.user} gigs={gigsByUser} />
+              ) : (
+                <Redirect to="/signin" />
+              )}
             </Route>
             <Route path="/" component={Home} />
           </Switch>
