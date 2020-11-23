@@ -24,7 +24,6 @@ export default function GigPage() {
   const classes = useStyles();
 
   const [gig, setGig] = useState({});
-  console.log("gig :", gig);
   const [user, setUser] = useState({});
 
   const params = useParams();
