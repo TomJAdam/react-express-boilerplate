@@ -9,6 +9,9 @@ import Badge from "@material-ui/core/Badge";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import MenuIcon from "@material-ui/icons/Menu";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import PersonAddIcon from "@material-ui/icons/PersonAdd";
+import LockOpenIcon from "@material-ui/icons/LockOpen";
 import SearchIcon from "@material-ui/icons/Search";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MailIcon from "@material-ui/icons/Mail";
@@ -100,14 +103,19 @@ const useStyles = makeStyles((theme) => ({
       display: "none",
     },
   },
+  iconButton: {
+    display: "flex",
+    alignItems: "center",
+  },
+  fontIcon: {
+    padding: "12px",
+  },
 }));
 
 export default function Navbar(props) {
   const { cookie, setCookie } = useContext(UserCookie);
   const logout = () => {
-    return axios.post("/logout")
-    .then(res => setCookie(res.data)
-    );
+    return axios.post("/logout").then((res) => setCookie(res.data));
   };
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -192,24 +200,44 @@ export default function Navbar(props) {
             </IconButton>
             <p>Profile</p>
           </MenuItem>
-          <MenuItem>
-            <Link to="/logout" className={classes.title} onClick={logout}>
-              <Button variant="contained">Logout</Button>
-            </Link>
-          </MenuItem>
+
+          <Link
+            to="/logout"
+            className={classes.title}
+            onClick={logout}
+            style={{ margin: "0" }}
+          >
+            <MenuItem className={classes.iconButton}>
+              <ExitToAppIcon className={classes.fontIcon} />
+              <p>Logout</p>
+            </MenuItem>
+          </Link>
         </>
       ) : (
         <>
-          <MenuItem>
-            <Link to="/signin" className={classes.title}>
-              <Button variant="contained">Sign In</Button>
-            </Link>
-          </MenuItem>
-          <MenuItem>
-            <Link to="/signup" className={classes.title}>
-              <Button variant="contained">Join</Button>
-            </Link>
-          </MenuItem>
+          <Link to="/signin" className={classes.title} style={{ margin: "0" }}>
+            <MenuItem
+              className={classes.iconButton}
+              style={{ paddingRight: "32px" }}
+            >
+              <LockOpenIcon className={classes.fontIcon} />
+              <p>Login</p>
+            </MenuItem>
+          </Link>
+
+          <Link
+            to="/signup"
+            className={classes.title}
+            style={{ margin: "0" }}
+          >
+            <MenuItem
+              className={classes.iconButton}
+              style={{ paddingRight: "32px" }}
+            >
+              <PersonAddIcon className={classes.fontIcon} />
+              <p>Join</p>
+            </MenuItem>
+          </Link>
         </>
       )}
     </Menu>
