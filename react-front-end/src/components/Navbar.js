@@ -203,7 +203,11 @@ export default function Navbar(props) {
             <p>Profile</p>
           </MenuItem>
 
-          <Link to="/gigs/new" className={classes.title}>
+          <Link
+            to="/gigs/new"
+            className={classes.title}
+            style={{ margin: "0" }}
+          >
             <MenuItem className={classes.iconButton}>
               <AddCircleIcon className={classes.fontIcon} />
               <p>Gig</p>
