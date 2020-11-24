@@ -13,6 +13,7 @@ import SignUp from "./components/SignUp";
 import UserProfile from "./components/user_profile";
 import Home from "./components/Home";
 import Gigs from "./components/Gigs";
+import Chat from './components/Chat';
 import { useApplicationData } from "./hooks/useApplicationData";
 import { UserCookie } from "./hooks/UserCookie";
 import useAppData from "./hooks/useAppData";
@@ -28,6 +29,8 @@ export default function App() {
         <Router>
           <Navbar />
           <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/chat" component={Chat}/>
             <Route path="/signin">
               {cookie.user ? <Redirect to="/" /> : <SignIn />}
             </Route>
@@ -45,7 +48,6 @@ export default function App() {
                 <Redirect to="/signin" />
               )}
             </Route>
-            <Route path="/" component={Home} />
           </Switch>
         </Router>
       </UserCookie.Provider>

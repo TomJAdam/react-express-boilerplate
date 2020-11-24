@@ -1,6 +1,6 @@
 import Axios from "axios";
 import React, { useEffect, useState, useCallback } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import GigHeader from "./GigHeader";
 import GigDetails from "./GigDetails";
@@ -64,6 +64,8 @@ export default function GigPage() {
               city={contractor.city}
               phone={contractor.phone_number}
               email={contractor.email}
+              contractor_id={contractor.id}
+              gig_id={gig.id}
             />
           </Grid>
         </Grid>

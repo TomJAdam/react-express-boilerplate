@@ -7,11 +7,13 @@
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.56",
     "axios": "^0.18.1",
+    "query-string": "^6.13.7",
     "react": "^17.0.1",
     "react-cookie": "^4.0.3",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "2.1.8"
+    "react-scripts": "2.1.8",
+    "react-scroll-to-bottom": "^4.0.0"
   },
   "scripts": {
     "start": "react-scripts start",

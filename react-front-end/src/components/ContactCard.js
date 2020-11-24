@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import CallIcon from '@material-ui/icons/Call';
@@ -80,13 +81,15 @@ export default function ContactCard(props) {
           </div>
         </div>
      </div>
-      <Button
-        type="submit"
-        className={classes.submitBtn}
-        size="large"
-        variant="contained">
-        Message
-      </Button>
+        <Button
+          type="submit"
+          className={classes.submitBtn}
+          size="large"
+          variant="contained"
+          href={`/chat?contractor_id=${props.contractor_id}&gig_id=${props.gig_id}`}
+          >
+          Message
+        </Button>
     </div>
   )
 }
