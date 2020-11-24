@@ -21,6 +21,7 @@ import { Redirect } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
+    marginBottom: 20,
     flexDirection: "column",
     alignItems: "center",
   },
@@ -53,12 +54,8 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
   },
 
-  photoBtn: {
-    color: green[400],
-  },
-
   submitBtn: {
-    backgroundColor: green[400],
+    backgroundColor: "#0EE290",
     color: "white",
     marginTop: "2rem",
   },
@@ -66,6 +63,13 @@ const useStyles = makeStyles((theme) => ({
   moneyInput: {
     marginTop: "2rem",
     width: "40%",
+  },
+  headerTitle: {
+    color: "white",
+    padding: "1em 5em",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    width: "50%",
+    alignSelf: "center",
   },
 }));
 
@@ -132,17 +136,22 @@ export default function GigForm(props) {
     <Grid container className={classes.root}>
       <div
         style={{
-          backgroundColor: "#EFEFEF",
+          backgroundImage:
+            "url(https://images.unsplash.com/photo-1532511332889-6db654bf6529?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2253&q=80)",
           width: "100vw",
-          height: "10rem",
+          height: "13rem",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
         }}
       >
-        <h2>Get paid for your valuable skills</h2>
+        <h1 className={classes.headerTitle}>
+          Get paid for your valuable skills
+        </h1>
       </div>
-      <h1 style={{ borderBottom: "2px solid #43a047", width: "40%" }}>
+      <h1 style={{ borderBottom: "2px solid #0EE290", width: "40%" }}>
         Create a New Gig
       </h1>
       <Grid item xs={12} className={classes.formContainer}>
