@@ -74,6 +74,7 @@ export default function ContactCard(props) {
       conversation = check(cookie.user.id, contractor_id, response.data)
       console.log('from function', conversation);
       if (conversation) {
+        // This redirect is not working
         return <Redirect to={`/chat/${conversation.id}`} />
       }
       axios.put('/api/conversations', { client_id: cookie.user.id, contractor_id })
