@@ -59,6 +59,8 @@ export default function ContactCard(props) {
 
   const classes = useStyles();
   const { cookie, setCookie } = useContext(UserCookie);
+  const [conversationID, setConversationID] = useState(null);
+  const [redirect, setRedirect] = useState(false);
 
   const { contractor_id } = props;
 
@@ -74,15 +76,25 @@ export default function ContactCard(props) {
       conversation = check(cookie.user.id, contractor_id, response.data)
       console.log('from function', conversation);
       if (conversation) {
-        // This redirect is not working
-        return <Redirect to={`/chat/${conversation.id}`} />
+        setConversationID(conversation.id)
+        setRedirect(true);
+        console.log(conversation.id);
+      } else {
+        axios.put('/api/conversations', { client_id: cookie.user.id, contractor_id })
+        .then(response => {
+          console.log('after post', response.data.id)
+          setConversationID(response.data.id);
+          setRedirect(true);
+        })
       }
-      axios.put('/api/conversations', { client_id: cookie.user.id, contractor_id })
-      .then(response => {
-        console.log('after post', response.data)
-      })
+      
     })
+    // console.log(redirect);
 
+  }
+
+  if (redirect) {
+    return <Redirect to={`/chat/?conv_id=${conversationID}`} />
   }
 
 
