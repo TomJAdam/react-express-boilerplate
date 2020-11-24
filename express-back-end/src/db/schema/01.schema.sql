@@ -37,7 +37,6 @@ CREATE TABLE gigs (
   photo_three TEXT NOT NULL
 );
 
-DROP TABLE IF EXISTS orders CASCADE;
 CREATE TABLE orders (
   id SERIAL PRIMARY KEY NOT NULL,
   gig_id INTEGER REFERENCES gigs(id) ON DELETE CASCADE,
@@ -50,3 +49,16 @@ CREATE TABLE orders (
   finished_date DATE NOT NULL
 );
 
+CREATE TABLE conversations (
+  id SERIAL PRIMARY KEY NOT NULL
+  client_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  contractor_id INTEGER REFERENCES users(id) ON DELETE CASCADE
+)
+
+CREATE TABLE messages (
+  id SERIAL PRIMARY KEY NOT NULL
+  conversation_id INTEGER REFERENCES conversations(id) ON DELETE CASCADE
+  sender_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  text VARCHAR(255) NOT NULL,
+  TIMESTAMP
+)
