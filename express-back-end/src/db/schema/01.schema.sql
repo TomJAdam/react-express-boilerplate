@@ -57,9 +57,9 @@ CREATE TABLE conversations (
   contractor_id INTEGER REFERENCES users(id) ON DELETE CASCADE
 );
 
--- CREATE TABLE messages (
---   id SERIAL PRIMARY KEY NOT NULL,
---   conversation_id INTEGER REFERENCES conversations(id) ON DELETE CASCADE,
---   sender_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
---   text VARCHAR(255) NOT NULL,
--- )
+CREATE TABLE messages (
+  id SERIAL PRIMARY KEY NOT NULL,
+  conversation_id INTEGER REFERENCES conversations(id) ON DELETE CASCADE,
+  sender_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  text VARCHAR(255) NOT NULL
+);
