@@ -6,6 +6,7 @@ import GigCard from "./Gig";
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    marginTop: 30,
     flexGrow: 1,
   },
   paper: {
@@ -17,10 +18,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 export default function GigGrid(props) {
   const classes = useStyles();
-
 
   return (
     <Grid container className={classes.root}>
