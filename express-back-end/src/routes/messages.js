@@ -11,6 +11,7 @@ module.exports = (db) => {
     `;
     db.query(query).then(data => {
       console.log('messages', data.rows);
+      res.json(data.rows);
     })
   })
 

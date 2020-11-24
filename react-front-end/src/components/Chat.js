@@ -2,6 +2,8 @@ import React, { useEffect, useContext, useState } from 'react';
 import queryString from 'query-string';
 import { UserCookie } from "../hooks/UserCookie";
 import io from 'socket.io-client';
+import Feed from './Feed';
+import Input from './Input';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 
@@ -35,6 +37,8 @@ export default function Chat({ location }) {
   useEffect(() => {
     axios.get(`/api/messages/${conv_id}`).then(response => {
       console.log(response.data);
+      setMessages(response.data);
+      console.log('messages', messages);
     })
   },[])
 
