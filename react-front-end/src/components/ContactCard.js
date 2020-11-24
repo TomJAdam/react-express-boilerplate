@@ -66,7 +66,10 @@ export default function ContactCard(props) {
     // redirect to /chat ==> <Chat conv_id={conv_id}/>
     console.log('client_id', cookie.user.id);
     console.log('contractor_id', props.contractor_id);
-    const test = check();
+    axios.get('/api/conversations').then(response => {
+      console.log('from the api', response.data);
+      console.log('from the check function', check(cookie.user.id, props.contractor_id, response.data))
+    })
 
   }
 

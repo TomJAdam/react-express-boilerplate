@@ -5,6 +5,7 @@ module.exports = (db) => {
   router.get('/conversations', (req, res) => {
     db.query(`SELECT * FROM conversations`).then((data) => {
       console.log(data.rows);
+      res.json(data.rows);
     })
   })
 
