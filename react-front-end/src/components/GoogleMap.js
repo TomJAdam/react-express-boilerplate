@@ -1,13 +1,18 @@
 import React, { Component } from "react";
-import { readEnv } from "read-env";
 import { Map, GoogleApiWrapper, InfoWindow, Marker } from "google-maps-react";
-import axios from "axios";
 
 const mapStyles = {
-  width: 250,
+  width: 275,
   height: 300,
   borderRadius: "8px",
+  marginLeft: 14,
+  marginBottom: 20,
   boxShadow: "0px 2px 5px 0.5px #E3E3E3",
+};
+
+const containerStyles = {
+  maxWidth: 0,
+  maxHeight: 0,
 };
 
 export class GoogleMap extends Component {
@@ -34,15 +39,16 @@ export class GoogleMap extends Component {
   };
 
   render() {
+    if (Object.keys(this.props.coords).length === 0) {
+      return null;
+    }
     return (
       <Map
         google={this.props.google}
-        zoom={14}
+        zoom={12}
         style={mapStyles}
-        initialCenter={{
-          lat: 48.43699935,
-          lng: -123.36036146782024,
-        }}
+        initialCenter={this.props.coords}
+        containerStyle={containerStyles}
       >
         <Marker onClick={this.onMarkerClick} name={"Toms house"} />
         <InfoWindow
@@ -60,5 +66,5 @@ export class GoogleMap extends Component {
 }
 
 export default GoogleApiWrapper({
-  apiKey: "AIzaSyCyMLV15CqMzB846p53qsoJP6g7d471hpo",
+  apiKey: process.env.REACT_APP_GOOGLE_API,
 })(GoogleMap);

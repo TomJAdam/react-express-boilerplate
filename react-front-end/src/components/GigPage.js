@@ -1,6 +1,5 @@
-import Axios from "axios";
 import React, { useEffect, useState, useCallback } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import GigHeader from "./GigHeader";
 import GigDetails from "./GigDetails";
@@ -19,6 +18,11 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "8px",
     boxShadow: "0px 2px 5px 0.5px #E3E3E3",
   },
+  map: {
+    maxWidth: 250,
+    maxHeight: 300,
+    backgroundColor: "blue",
+  },
 }));
 
 export default function GigPage() {
@@ -26,22 +30,21 @@ export default function GigPage() {
 
   const [gig, setGig] = useState({});
   const [contractor, setContractor] = useState({});
-  const [user, setUser] = useState({});
   const [coords, setCoords] = useState({});
   console.log("coords :", coords);
 
   const params = useParams();
-
-  const userAddy = `${user.address}, ${user.city}, ${user.province}`;
 
   const getCoords = (address) => {
     const splitAddy = address.split(" ");
     let searchString = splitAddy.join("+");
     axios
       .get(
-        `https://maps.googleapis.com/maps/api/geocode/json?address=${searchString}&key=AIzaSyCyMLV15CqMzB846p53qsoJP6g7d471hpo`
+        `https://maps.googleapis.com/maps/api/geocode/json?address=${searchString}&key=${process.env.REACT_APP_GOOGLE_API}`
       )
-      .then((res) => setCoords(res.data.results[0].geometry.location));
+      .then((res) => {
+        return setCoords(res.data.results[0].geometry.location);
+      });
   };
 
   useEffect(() => {
@@ -50,11 +53,12 @@ export default function GigPage() {
       .then((response) => {
         setGig(response.data[0]);
         const id = response.data[0].contractor_id;
-        getCoords(userAddy);
         return axios(`/api/users/${id}`);
       })
       .then((response) => {
         setContractor(response.data[0]);
+        const userAddy = `${response.data[0].address}, ${response.data[0].city}, ${response.data[0].province}`;
+        getCoords(userAddy);
       });
   }, []);
 
@@ -84,7 +88,9 @@ export default function GigPage() {
               contractor_id={contractor.id}
               gig_id={gig.id}
             />
-            <GoogleMap coords={coords} />
+            <Grid item sm={3}>
+              <GoogleMap coords={coords} />
+            </Grid>
           </Grid>
         </Grid>
       </div>
