@@ -31,7 +31,6 @@ export default function GigPage() {
   const [gig, setGig] = useState({});
   const [contractor, setContractor] = useState({});
   const [coords, setCoords] = useState({});
-  console.log("coords :", coords);
 
   const params = useParams();
 
@@ -89,7 +88,7 @@ export default function GigPage() {
               gig_id={gig.id}
             />
             <Grid item sm={3}>
-              <GoogleMap coords={coords} />
+              <GoogleMap coords={coords} title={gig.title} />
             </Grid>
           </Grid>
         </Grid>

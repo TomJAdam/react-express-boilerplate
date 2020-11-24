@@ -50,7 +50,7 @@ export class GoogleMap extends Component {
         initialCenter={this.props.coords}
         containerStyle={containerStyles}
       >
-        <Marker onClick={this.onMarkerClick} name={"Toms house"} />
+        <Marker onClick={this.onMarkerClick} name={this.props.title} />
         <InfoWindow
           marker={this.state.activeMarker}
           visible={this.state.showingInfoWindow}
