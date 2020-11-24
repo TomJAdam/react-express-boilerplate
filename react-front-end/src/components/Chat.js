@@ -4,12 +4,35 @@ import { UserCookie } from "../hooks/UserCookie";
 import io from 'socket.io-client';
 import Feed from './Feed';
 import Input from './Input';
+import Conversations from './Conversations';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
 
+  root: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    border: '1px solid red'
+  },
+
+  main: {
+    width: '70%',
+    display: 'flex',
+
+  },
+  
+  conv: {
+    width: '40%',
+    border: '1px solid grey'
+  },
+
+  chat: {
+    width: '60%',
+    display: 'flex',
+    flexDirection: 'column',
+    border: '1px solid blue'
   }
 }));
 
@@ -57,9 +80,23 @@ export default function Chat({ location }) {
     }
   },[ENDPOINT, location.search])
 
+  console.log('messages', messages);
+
   return (
     <div className={classes.root}>
      <h1>We are on the chat page currently in room {room}</h1>
+     <div className={classes.main}>
+        <div className={classes.conv}>
+          <Conversations />
+        </div>
+        <div className={classes.chat}>
+          <Feed messages={messages}/>
+          <Input />
+        </div>
+     </div>
+     {/* {messages.map(message => {
+       return <p>{message.text}</p>
+     })} */}
     </div>
   )
 }

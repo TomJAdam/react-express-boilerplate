@@ -2,22 +2,18 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
-
   root: {
+    display: 'flex',
+    flexDirection: 'column'
   }
-
 }));
 
 
-export default function Feed(props) {
-
-  const { messages } = props;
+export default function Conversations() {
 
   return (
     <div>
-      {messages.map(message => {
-        return <p>{message.text}</p>
-      })}
+      <h3>Conversations</h3>
     </div>
   )
 }
