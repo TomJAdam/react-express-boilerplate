@@ -10,9 +10,8 @@ export default function Chat({ location }) {
   // API call to get all messages for particular conversation using conversation_id from url
 
   useEffect(() => {
-    const { contractor_id, client_id } = queryString.parse(location.search);
-    console.log('c id', contractor_id);
-    console.log('client id', client_id);
+    const { conv_id } = queryString.parse(location.search);
+    console.log('inside of chat', conv_id);
   })
 
   return (
