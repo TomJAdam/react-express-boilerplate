@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -116,6 +116,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Navbar(props) {
   const { cookie, setCookie } = useContext(UserCookie);
+
   const logout = () => {
     return axios.post("/logout").then((res) => setCookie(res.data));
   };
@@ -125,6 +126,8 @@ export default function Navbar(props) {
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+  const [searchInput, setSearchInput] = useState("");
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -278,6 +281,7 @@ export default function Navbar(props) {
                 root: classes.inputRoot,
                 input: classes.inputInput,
               }}
+              onInput={(e) => setSearchInput(e.target.value)}
               inputProps={{ "aria-label": "search" }}
             />
             <Button variant="contained" className={classes.searchButton}>
