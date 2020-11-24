@@ -5,6 +5,7 @@ import axios from "axios";
 import GigHeader from "./GigHeader";
 import GigDetails from "./GigDetails";
 import Grid from "@material-ui/core/Grid";
+import GoogleMap from "./GoogleMap";
 import ContactCard from "./ContactCard";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -25,8 +26,21 @@ export default function GigPage() {
 
   const [gig, setGig] = useState({});
   const [user, setUser] = useState({});
+  const [coords, setCoords] = useState(null);
 
   const params = useParams();
+
+  const userAddy = `${user.address}, ${user.city}, ${user.province}`;
+
+  const getCoords = (address) => {
+    const splitAddy = address.split(" ");
+    let searchString = splitAddy.join("+");
+    axios
+      .get(
+        `https://maps.googleapis.com/maps/api/geocode/json?address=${searchString}&key=AIzaSyCyMLV15CqMzB846p53qsoJP6g7d471hpo`
+      )
+      .then((res) => setCoords(res.data.results[0].geometry.location));
+  };
 
   useEffect(() => {
     axios
@@ -34,6 +48,7 @@ export default function GigPage() {
       .then((response) => {
         setGig(response.data[0]);
         const id = response.data[0].contractor_id;
+        getCoords(userAddy);
         return axios(`/api/users/${id}`);
       })
       .then((response) => {
@@ -64,6 +79,12 @@ export default function GigPage() {
               city={user.city}
               phone={user.phone_number}
               email={user.email}
+            />
+            <GoogleMap
+              address={user.address}
+              city={user.city}
+              province={user.province}
+              coords={coords}
             />
           </Grid>
         </Grid>
