@@ -23,6 +23,7 @@ import { green } from "@material-ui/core/colors";
 import { Link } from "react-router-dom";
 import { UserCookie } from "../hooks/UserCookie";
 import axios from "axios";
+import { Redirect } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -145,6 +146,10 @@ export default function Navbar(props) {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+
+  if (searchInput.length > 0) {
+    return <Redirect to={`/gigs`} />;
+  }
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
