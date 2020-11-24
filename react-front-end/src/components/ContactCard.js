@@ -62,6 +62,8 @@ export default function ContactCard(props) {
   const findConversation = () => {
     // calls API to check if conversation exists, get it or creates one - returns conv_id
     // redirect to /chat ==> <Chat conv_id={conv_id}/>
+    console.log('client_id', cookie.user.id);
+    console.log('contractor_id', props.contractor_id);
   }
 
 
