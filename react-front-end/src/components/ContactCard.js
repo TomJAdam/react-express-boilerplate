@@ -60,15 +60,26 @@ export default function ContactCard(props) {
   const classes = useStyles();
   const { cookie, setCookie } = useContext(UserCookie);
 
+  const { contractor_id } = props;
+
 
   const findConversation = () => {
-    // calls API to check if conversation exists, get it or creates one - returns conv_id
-    // redirect to /chat ==> <Chat conv_id={conv_id}/>
+
+    let conversation;
     console.log('client_id', cookie.user.id);
-    console.log('contractor_id', props.contractor_id);
-    axios.get('/api/conversations').then(response => {
+    console.log('contractor_id', contractor_id);
+    axios.get('/api/conversations')
+    .then(response => {
       console.log('from the api', response.data);
-      console.log('from the check function', check(cookie.user.id, props.contractor_id, response.data))
+      conversation = check(cookie.user.id, contractor_id, response.data)
+      console.log('from function', conversation);
+      if (conversation) {
+        return <Redirect to={`/chat/${conversation.id}`} />
+      }
+      axios.put('/api/conversations', { client_id: cookie.user.id, contractor_id })
+      .then(response => {
+        console.log('after post', response.data)
+      })
     })
 
   }

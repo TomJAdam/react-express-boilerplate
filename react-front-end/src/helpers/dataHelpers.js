@@ -6,9 +6,9 @@ const getGigbyUserId = (cookie, state) => {
 
 const check = (personA, personB, conversations) => {
   return conversations.filter(conversation => 
-    (personA.id === conversation.client_id && personB.id === conversation.contractor_id) ||
-    (personB.id === conversation.client_id && personA.id === conversation.contractor_id)
-  );
+    (personA === conversation.client_id && personB === conversation.contractor_id) ||
+    (personB === conversation.client_id && personA === conversation.contractor_id)
+  )[0];
 }
 
 export { getGigbyUserId, check };
