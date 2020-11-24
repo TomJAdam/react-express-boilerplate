@@ -94,7 +94,8 @@ export default function ContactCard(props) {
         className={classes.submitBtn}
         size="large"
         variant="contained"
-        href={`/chat?contractor_id=${props.contractor_id}&client_id=${cookie.user.id}`}
+        onClick={() => findConversation()}
+        // href={`/chat?contractor_id=${props.contractor_id}&client_id=${cookie.user.id}`}
         >
         Message
       </Button>
