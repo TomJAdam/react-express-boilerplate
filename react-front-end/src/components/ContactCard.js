@@ -1,5 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useContext } from 'react';
+import { Link, Redirect } from 'react-router-dom';
+import { UserCookie } from "../hooks/UserCookie";
 import { makeStyles } from '@material-ui/core/styles';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import CallIcon from '@material-ui/icons/Call';
@@ -50,13 +51,20 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-const formatPhone = (number) => {
 
-}
 
 export default function ContactCard(props) {
 
   const classes = useStyles();
+  const { cookie, setCookie } = useContext(UserCookie);
+
+
+  const findConversation = () => {
+    // calls API to check if conversation exists, get it or creates one - returns conv_id
+    // redirect to /chat ==> <Chat conv_id={conv_id}/>
+  }
+
+
   return (
     <div className={classes.root}>
      <h1 style={{margin: '0.5rem', borderBottom: '2px solid #0EE290', padding: '0.5rem'}}>Contact</h1>
@@ -81,15 +89,15 @@ export default function ContactCard(props) {
           </div>
         </div>
      </div>
-        <Button
-          type="submit"
-          className={classes.submitBtn}
-          size="large"
-          variant="contained"
-          href={`/chat?contractor_id=${props.contractor_id}&gig_id=${props.gig_id}`}
-          >
-          Message
-        </Button>
+      <Button
+        type="submit"
+        className={classes.submitBtn}
+        size="large"
+        variant="contained"
+        href={`/chat?contractor_id=${props.contractor_id}&client_id=${cookie.user.id}`}
+        >
+        Message
+      </Button>
     </div>
   )
 }

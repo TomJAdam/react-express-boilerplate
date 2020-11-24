@@ -1,19 +1,19 @@
-import React from 'react';
+import React, { useEffect, useContext } from 'react';
+import queryString from 'query-string';
+// import { UserCookie } from "../../hooks/UserCookie";
+// const { cookie, setCookie } = useContext(UserCookie);
 
 
-export default function Chat() {
 
+export default function Chat({ location }) {
 
-  //useEffect
-    // Grab the parameters from the URL using query string thing
-    // API call
-      // Query for conversation that matches query string id's
-      // If does not exist, create a new one - there will be no messages
-      // If it does exist, query for all messages with that conversation id
-      // 3 states - loading (shiow placeholder)
-                  // - error (show back button and message)
-                  // data -       // Socket connection
-  // render
+  // API call to get all messages for particular conversation using conversation_id from url
+
+  useEffect(() => {
+    const { contractor_id, client_id } = queryString.parse(location.search);
+    console.log('c id', contractor_id);
+    console.log('client id', client_id);
+  })
 
   return (
     <h1>Here is the messaging page</h1>
