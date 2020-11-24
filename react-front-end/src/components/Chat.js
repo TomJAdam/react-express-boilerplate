@@ -2,11 +2,20 @@ import React, { useEffect, useContext, useState } from 'react';
 import queryString from 'query-string';
 import { UserCookie } from "../hooks/UserCookie";
 import io from 'socket.io-client';
+import { makeStyles } from '@material-ui/core/styles';
+import axios from 'axios';
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+
+  }
+}));
 
 let socket;
 
 export default function Chat({ location }) {
+
+  const classes = useStyles();
 
   // API call to get all messages for particular conversation using conversation_id from url
   // API call to get id's for conversation
@@ -18,14 +27,20 @@ export default function Chat({ location }) {
   const [messages, setMessages] = useState([]);
   const ENDPOINT = 'localhost:8080';
 
-  console.log('current user', cookie.user.id);
+  // console.log('current user', cookie.user.id);
+
+  // This used to be inside of useEffect() - not sure if it should be outside - is working but revise later
+  const { conv_id } = queryString.parse(location.search);
 
   useEffect(() => {
+    axios.get(`/api/messages/${conv_id}`).then(response => {
+      console.log(response.data);
+    })
   },[])
 
 
   useEffect(() => {
-    const { conv_id } = queryString.parse(location.search);
+    // const { conv_id } = queryString.parse(location.search);
     console.log(conv_id);
     setRoom(conv_id);
     console.log('room', room);
@@ -39,7 +54,7 @@ export default function Chat({ location }) {
   },[ENDPOINT, location.search])
 
   return (
-    <div>
+    <div className={classes.root}>
      <h1>We are on the chat page currently in room {room}</h1>
     </div>
   )
