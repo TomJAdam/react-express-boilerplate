@@ -46,7 +46,11 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
     marginTop: "2rem",
   },
-
+  bookBtn: {
+    backgroundColor: '#ffa400a6',
+    color: "white",
+    marginTop: "2rem",
+  }
 }));
 
 const formatPhone = (number) => {
@@ -80,6 +84,15 @@ export default function ContactCard(props) {
           </div>
         </div>
      </div>
+     <Button
+        type="submit"
+        className={classes.bookBtn}
+        size="large"
+        variant="contained"
+        onClick={props.onBooking}
+        >
+        Reservation
+      </Button>
       <Button
         type="submit"
         className={classes.submitBtn}
