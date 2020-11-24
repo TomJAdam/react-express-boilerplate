@@ -24,7 +24,12 @@ export default function Chat({ location }) {
     const { conv_id } = queryString.parse(location.search);
     setRoom(conv_id);
     socket = io(ENDPOINT);
+    console.log(socket);
     console.log('the room we are in', room)
+    return () => {
+      // socket.emit('disconnect')
+      socket.off();
+    }
   },[ENDPOINT, location.search])
 
   return (

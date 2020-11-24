@@ -4,6 +4,7 @@ const App = Express();
 const BodyParser = require("body-parser");
 const socketio = require('socket.io');
 const http = require('http');
+const cors = require('cors');
 const cookieSession = require('cookie-session');
 const PORT = 8080;
 
@@ -13,6 +14,8 @@ const dbParams = require("./knexfile.js");
 const db = new Pool(dbParams.development.connection);
 db.connect();
 const helpers = require('./src/helpers/dbhelper')(db);
+App.use(cors({ origin: true, credentials: true }));
+
 
 //Cookie-session
 App.use(cookieSession({
@@ -57,7 +60,7 @@ App.use("/api", conversations(db));
 App.use("/", validation(helpers));
 
 // Port Listening
-App.listen(PORT, () => {
+server.listen(PORT, () => {
   // eslint-disable-next-line no-console
   console.log(
     `Express seems to be listening on port ${PORT} so that's pretty good 👍`
