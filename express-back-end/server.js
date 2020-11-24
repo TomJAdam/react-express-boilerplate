@@ -28,12 +28,17 @@ App.use(Express.static("public"));
 const gigs = require("./src/routes/gigs");
 const users = require("./src/routes/users");
 const categories = require("./src/routes/categories");
+const conversations = require("./src/routes/conversations");
+// const messages = require("./src/routes/messages");
 const validation = require("./src/routes/validation");
+
 
 // API Router
 App.use("/api", gigs(db));
 App.use("/api", users(db));
 App.use("/api", categories(db));
+App.use("/api", conversations(db));
+// App.use("/api", messages(db));
 App.use("/", validation(helpers));
 
 // Port Listening

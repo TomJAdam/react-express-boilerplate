@@ -7,6 +7,8 @@ import CallIcon from '@material-ui/icons/Call';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import Button from '@material-ui/core/Button';
 import { green } from '@material-ui/core/colors';
+import { check } from '../helpers/dataHelpers';
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
 
@@ -64,6 +66,8 @@ export default function ContactCard(props) {
     // redirect to /chat ==> <Chat conv_id={conv_id}/>
     console.log('client_id', cookie.user.id);
     console.log('contractor_id', props.contractor_id);
+    const test = check();
+
   }
 
 
