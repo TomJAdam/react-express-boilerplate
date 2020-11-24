@@ -24,7 +24,7 @@ export default function GigPage() {
   const classes = useStyles();
 
   const [gig, setGig] = useState({});
-  const [user, setUser] = useState({});
+  const [contractor, setContractor] = useState({});
 
   const params = useParams();
 
@@ -37,15 +37,15 @@ export default function GigPage() {
         return axios(`/api/users/${id}`);
       })
       .then((response) => {
-        setUser(response.data[0]);
+        setContractor(response.data[0]);
       });
   }, []);
 
   return (
     <div>
       <GigHeader
-        first={user.first_name}
-        last={user.last_name}
+        first={contractor.first_name}
+        last={contractor.last_name}
         title={gig.title}
         price={gig.price}
         image={gig.photo_one}
@@ -54,16 +54,16 @@ export default function GigPage() {
         <Grid container spacing={3} justify="center" className={classes.root}>
           <Grid item sm={8}>
             <GigDetails
-              bio={user.bio}
-              education={user.education}
+              bio={contractor.bio}
+              education={contractor.education}
               description={gig.description}
             />
           </Grid>
           <Grid item sm={3}>
             <ContactCard
-              city={user.city}
-              phone={user.phone_number}
-              email={user.email}
+              city={contractor.city}
+              phone={contractor.phone_number}
+              email={contractor.email}
             />
           </Grid>
         </Grid>
