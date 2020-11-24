@@ -2,6 +2,8 @@ require("dotenv").config();
 const Express = require("express");
 const App = Express();
 const BodyParser = require("body-parser");
+const socketio = require('socket.io');
+const http = require('http');
 const cookieSession = require('cookie-session');
 const PORT = 8080;
 
@@ -18,6 +20,19 @@ App.use(cookieSession({
   keys: ['key1'],
   maxAge: 12 * 60 * 60 * 1000 // 12 hours
 }))
+
+// Socket IO
+const server = http.createServer(App);
+const io = socketio(server);
+
+io.on('connection', (socket) => {
+  console.log('We have a new connection!');
+
+  socket.on('disconnect', () => {
+    console.log('Disconnected')
+  })
+})
+
 
 
 // Express Configuration

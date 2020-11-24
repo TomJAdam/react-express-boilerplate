@@ -1,10 +1,11 @@
 import React, { useEffect, useContext, useState } from 'react';
 import queryString from 'query-string';
 import { UserCookie } from "../hooks/UserCookie";
+import io from 'socket.io-client';
 // import { UserCookie } from "../../hooks/UserCookie";
 // const { cookie, setCookie } = useContext(UserCookie);
 
-
+let socket;
 
 export default function Chat({ location }) {
 
@@ -22,8 +23,9 @@ export default function Chat({ location }) {
   useEffect(() => {
     const { conv_id } = queryString.parse(location.search);
     setRoom(conv_id);
+    socket = io(ENDPOINT);
     console.log('the room we are in', room)
-  })
+  },[ENDPOINT, location.search])
 
   return (
     <h1>We are on the chat page currently in room {room}</h1>
