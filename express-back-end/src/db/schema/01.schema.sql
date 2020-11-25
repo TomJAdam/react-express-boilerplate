@@ -48,7 +48,7 @@ CREATE TABLE orders (
   review TEXT NOT NULL,
   status VARCHAR(255) NOT NULL,
   order_date TIMESTAMP,
-  finished_date DATE NOT NULL
+  finished_date DATE NOT NULL,
 );
 
 CREATE TABLE conversations (

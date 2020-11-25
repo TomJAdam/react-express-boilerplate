@@ -21,7 +21,6 @@ module.exports = (helpers) => {
       } else {
         req.session.userEmail = data.email;
         res.send({ user: data });
-        console.log("data :", data);
       }
     });
   });

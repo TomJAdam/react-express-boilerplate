@@ -1,6 +1,5 @@
 import React from "react";
 import "./App.css";
-import GigGrid from "./components/Gigs/GigGrid";
 import Navbar from "./components/Navbar";
 import {
   BrowserRouter as Router,
@@ -14,20 +13,21 @@ import UserProfile from "./components/user_profile";
 import Home from "./components/Home";
 import Gigs from "./components/Gigs";
 import Chat from './components/Chat';
-import { useApplicationData } from "./hooks/useApplicationData";
 import { UserCookie } from "./hooks/UserCookie";
 import useAppData from "./hooks/useAppData";
-import { getGigbyUserId } from "./helpers/dataHelpers";
+import { getGigbyUserId, getAllOrdersbyId } from "./helpers/dataHelpers";
 
 export default function App() {
   const { cookie, state, setCookie, setState } = useAppData();
   const gigsByUser = getGigbyUserId(cookie, state);
+  const ordersByUser = getAllOrdersbyId(cookie, state);
+ 
 
   return (
     <div className="App">
-      <UserCookie.Provider value={{ cookie, setCookie }}>
+      <UserCookie.Provider value={{ cookie, setCookie, state, setState }}>
         <Router>
-          <Navbar />
+          <Navbar ordersByUser={ordersByUser}/>
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/chat" component={Chat}/>
@@ -51,8 +51,6 @@ export default function App() {
           </Switch>
         </Router>
       </UserCookie.Provider>
-      {/* uncomment to see the page */}
-      {/* <UserProfile/> */}
     </div>
   );
 }

@@ -192,8 +192,8 @@ export default function Navbar(props) {
             <p>Messages</p>
           </MenuItem>
           <MenuItem>
-            <IconButton aria-label="show 11 new notifications" color="inherit">
-              <Badge badgeContent={11} color="secondary">
+            <IconButton aria-label="show new notifications" color="inherit">
+              <Badge badgeContent={props.ordersByUser.length} color="secondary">
                 <NotificationsIcon />
               </Badge>
             </IconButton>
@@ -311,10 +311,10 @@ export default function Navbar(props) {
                   </Badge>
                 </IconButton>
                 <IconButton
-                  aria-label="show 17 new notifications"
+                  aria-label="show new notifications"
                   color="inherit"
                 >
-                  <Badge badgeContent={17} color="secondary">
+                  <Badge badgeContent={props.ordersByUser.length} color="secondary">
                     <NotificationsIcon />
                   </Badge>
                 </IconButton>

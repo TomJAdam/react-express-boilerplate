@@ -16,6 +16,42 @@ module.exports = (db) => {
       .then((res) => res.rows[0])
       .catch((error) => console.log("Error catched: ", error));
   };
+  const getOrders = () => {
+    const queryStr = `SELECT * FROM orders;`;
+    return db
+      .query(queryStr)
+      .then((res) => res.rows)
+      .catch((error) => console.log("Error catched: ", error));
+  };
 
-  return { getUserByEmail, getUserById };
+  const createOrder = (order) => {
+    const {
+      gig_id,
+      client_id,
+      rating,
+      review,
+      status,
+      order_date,
+      finished_date,
+    } = order;
+    const queryStr = `
+    INSERT INTO orders (gig_id, client_id, rating, review, status, order_date, finished_date)
+    VALUES ($1, $2, $3, $4, $5, $6, $7)
+    RETURNING *;
+    `;
+    const queryParams = [
+      gig_id,
+      client_id,
+      rating,
+      review,
+      status,
+      order_date,
+      finished_date,
+    ];
+    return db
+      .query(queryStr, queryParams)
+      .then((res) => res.rows[0])
+      .catch((err) => console.log("database has an error: ", err));
+  };
+  return { getUserByEmail, getUserById, createOrder, getOrders };
 };

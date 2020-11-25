@@ -5,7 +5,8 @@ export default function useAppData() {
   const [cookie, setCookie] = useState({ user: null });
   const [state, setState] = useState({
     gigs: [],
-    categories: []
+    categories: [],
+    orders: []
   });
 
   useEffect(() => {
@@ -13,9 +14,10 @@ export default function useAppData() {
       setCookie({ ...res.data });
     });
     const promise1 = axios.get("/api/gigs").then(res => res.data);
-    const promise2 = axios.get('/api/categories').then(res => res.data);
-    Promise.all([promise1, promise2]).then(res => {
-      setState(prev => ({...prev, gigs: res[0], categories: res[1]}));
+    const promise2 = axios.get("/api/categories").then(res => res.data);
+    const promise3 = axios.get("/api/orders").then(res => res.data);
+    Promise.all([promise1, promise2, promise3]).then(res => {
+      setState(prev => ({...prev, gigs: res[0], categories: res[1], orders: res[2]}));
     });
 
     

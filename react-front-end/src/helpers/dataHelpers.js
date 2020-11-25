@@ -11,4 +11,19 @@ const check = (personA, personB, conversations) => {
   )[0];
 }
 
-export { getGigbyUserId, check };
+const getAllOrdersbyId = (cookie, state) => {
+  const user = cookie.user;
+  const {orders, gigs} = state;
+  const ordersWithGigs = [];
+  orders.forEach(order => {
+    for (let gig of gigs) {
+      if (gig.id === order.gig_id){
+       ordersWithGigs.push({...order, gig});
+      }
+    }
+  });
+
+  return user && ordersWithGigs.filter(order => order.gig.contractor_id === user.id);
+}
+
+export { getGigbyUserId, check, getAllOrdersbyId };

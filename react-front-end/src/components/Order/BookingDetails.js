@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function BookingDetails(props) {
-  const {transition,back} = props;
+  
   const classes = useStyles();
   const getDateFormat = (date) => {
     const options = {
@@ -112,7 +112,7 @@ export default function BookingDetails(props) {
           <Button size="small" onClick={() => props.setSelectedDate(null)}>
             Reset
           </Button>
-          <Button size="small" color="primary" onClick={() => transition("PENDING")}>
+          <Button size="small" color="primary" onClick={props.onclick} disabled={!props.selectedDate}>
             Confirm
           </Button>
         </AccordionActions>

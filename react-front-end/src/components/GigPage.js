@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import GigHeader from "./GigHeader";
@@ -38,8 +38,8 @@ export default function GigPage() {
   const [coords, setCoords] = useState({});
 
   const params = useParams();
-
   const {mode, transition, back} = UseBookingMode(START);
+  
   const getCoords = (address) => {
     const splitAddy = address.split(" ");
     let searchString = splitAddy.join("+");
@@ -101,8 +101,8 @@ export default function GigPage() {
           </Grid>
         </Grid>
       </div>}
-      {mode === "SELECT" && <Booking transition={transition} back={back} gig={gig}/>}
-      {mode === "PENDING" && <PlaceHolder gig={gig} contractor={contractor} mode={mode}/>} 
+      {mode === "SELECT" && <Booking transition={transition} back={back} gig={gig} contractor={contractor}/>}
+      {(mode === "PENDING" || mode === "SUCCESS") && <PlaceHolder gig={gig} contractor={contractor} mode={mode}/>} 
     </div>
   );
 }

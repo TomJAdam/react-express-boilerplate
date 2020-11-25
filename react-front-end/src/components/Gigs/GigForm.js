@@ -75,7 +75,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function GigForm(props) {
   const classes = useStyles();
-  const { cookie, setCookie } = useContext(UserCookie);
+  const { cookie, setCookie, state, setState } = useContext(UserCookie);
   const [categories, setCategories] = useState([]);
   const [categoriesNames, setCategoriesNames] = useState([]);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -105,6 +105,8 @@ export default function GigForm(props) {
     return axios.put("/api/gigs/", gig).then((res) => {
       setGigId(res.data.id);
       setPostSuccessful(true);
+      const gigs = [...state.gigs, res.data];
+      setState({...state, gigs});
     });
   };
   if (postSuccessful) {
