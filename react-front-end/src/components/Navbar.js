@@ -114,6 +114,13 @@ const useStyles = makeStyles((theme) => ({
   fontIcon: {
     padding: "12px",
   },
+  link: {
+    textDecoration: 'none',
+    color: 'black'
+    // '&:visited':{
+    //   color: 'green'
+    // }
+  }
 }));
 
 export default function Navbar(props) {
@@ -190,7 +197,9 @@ export default function Navbar(props) {
           <MenuItem>
             <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="secondary">
-                <MailIcon />
+                {/* <Link to='/chat' > */}
+                  <MailIcon />
+                {/* </Link> */}
               </Badge>
             </IconButton>
             <p>Messages</p>
@@ -315,7 +324,9 @@ export default function Navbar(props) {
                 </Typography>
                 <IconButton aria-label="show 4 new mails" color="inherit">
                   <Badge badgeContent={4} color="secondary">
-                    <MailIcon />
+                    {/* <Link to="/chat" className={classes.link}> */}
+                      <MailIcon />
+                    {/* </Link> */}
                   </Badge>
                 </IconButton>
                 <IconButton aria-label="show new notifications" color="inherit">
