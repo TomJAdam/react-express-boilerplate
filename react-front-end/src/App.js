@@ -12,23 +12,23 @@ import SignUp from "./components/SignUp";
 import UserProfile from "./components/user_profile";
 import Home from "./components/Home";
 import Gigs from "./components/Gigs";
-import Chat from './components/Chat';
+import Chat from "./components/Chat";
 import { UserCookie } from "./hooks/UserCookie";
 import useAppData from "./hooks/useAppData";
 import { getGigbyUserId, getAllOrdersbyId } from "./helpers/dataHelpers";
 import SearchResults from "./components/SearchResults";
+import IndexBottom from "./components/IndexBottom";
 
 export default function App() {
   const { cookie, state, setCookie, setState } = useAppData();
   const gigsByUser = getGigbyUserId(cookie, state);
   const ordersByUser = getAllOrdersbyId(cookie, state);
- 
 
   return (
     <div className="App">
       <UserCookie.Provider value={{ cookie, setCookie, state, setState }}>
         <Router>
-          <Navbar ordersByUser={ordersByUser}/>
+          <Navbar ordersByUser={ordersByUser} />
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/chat" component={Chat} />
@@ -53,6 +53,7 @@ export default function App() {
               <SearchResults />
             </Route>
           </Switch>
+          <IndexBottom />
         </Router>
       </UserCookie.Provider>
     </div>
