@@ -7,12 +7,19 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
+    alignItems: 'center'
+  },
+
+  title: {
+    borderBottom: '2px solid #0EE290',
+    width: '60%'
   }
 }));
 
 
 export default function Conversations(props) {
 
+  const classes = useStyles();
   const { userID } = props;
   const [conversations, setConversations] = useState([]);
 
@@ -24,11 +31,9 @@ export default function Conversations(props) {
     })
   },[])
 
-
-  const classes = useStyles();
-
   return (
     <div className={classes.root}>
+      <h3 className={classes.title}>Conversations</h3>
       {conversations.map(conversation => {
         // console.log(conversation);
         return (
