@@ -151,6 +151,10 @@ export default function Navbar(props) {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const resetField = () => {
+    document.getElementById("search-field").reset();
+  };
+
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
@@ -286,13 +290,17 @@ export default function Navbar(props) {
                 root: classes.inputRoot,
                 input: classes.inputInput,
               }}
+              value={searchInput}
               onInput={(e) => setSearchInput(e.target.value)}
               inputProps={{ "aria-label": "search" }}
             />
             <Button
               variant="contained"
               className={classes.searchButton}
-              onClick={() => history.push(`/search/${searchInput}`)}
+              onClick={() => {
+                history.push(`/search/${searchInput}`);
+                setSearchInput("");
+              }}
             >
               Search
             </Button>
@@ -310,11 +318,11 @@ export default function Navbar(props) {
                     <MailIcon />
                   </Badge>
                 </IconButton>
-                <IconButton
-                  aria-label="show new notifications"
-                  color="inherit"
-                >
-                  <Badge badgeContent={props.ordersByUser.length} color="secondary">
+                <IconButton aria-label="show new notifications" color="inherit">
+                  <Badge
+                    badgeContent={props.ordersByUser.length}
+                    color="secondary"
+                  >
                     <NotificationsIcon />
                   </Badge>
                 </IconButton>
