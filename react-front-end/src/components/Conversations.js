@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
+import Conversation from './Conversation';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -13,11 +14,13 @@ const useStyles = makeStyles((theme) => ({
 export default function Conversations(props) {
 
   const { userID } = props;
+  const [conversations, setConversations] = useState([]);
 
   useEffect(() => {
     axios.get(`/api/conversations/${userID}`)
     .then(response => {
-      console.log(response.data);
+      console.log('ovea here', response.data);
+      setConversations(response.data);
     })
   },[])
 
@@ -26,7 +29,11 @@ export default function Conversations(props) {
 
   return (
     <div className={classes.root}>
-      <h3>Conversations for user {userID}</h3>
+      {conversations.map(conversation => {
+        return (
+          <Conversation />
+        )
+      })}
     </div>
   )
 }

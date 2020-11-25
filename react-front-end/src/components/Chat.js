@@ -97,7 +97,7 @@ export default function Chat({ location }) {
 
     cookie.user ? (
       <div className={classes.root}>
-      <h1>We are on the chat page currently in room {room}</h1>
+      <h1>We are on the chat page currently in room {room} as {cookie.user.first_name}</h1>
       <div className={classes.main}>
          <div className={classes.conv}>
            <Conversations userID={cookie.user.id}/>

@@ -15,6 +15,7 @@ module.exports = (db) => {
       OR contractor_id = ${req.params.user_id}`)
     .then(data => {
       console.log(data.rows);
+      res.send(data.rows);
     })
   })
 
