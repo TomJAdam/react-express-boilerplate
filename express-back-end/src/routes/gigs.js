@@ -63,5 +63,22 @@ module.exports = (db) => {
     });
   });
 
+  router.get("/search/:search", (req, res) => {
+    const searchParams = req.query.search;
+    console.log("searchParams :", searchParams);
+
+    db.query(
+      `
+    SELECT * FROM gigs WHERE title LIKE '%${searchParams[0]}%';
+    `
+    )
+      .then((data) => {
+        console.log("data: ", data.rows);
+        const searchResults = data.rows;
+        res.send({ searchResults });
+      })
+      .catch(console.log);
+  });
+
   return router;
 };

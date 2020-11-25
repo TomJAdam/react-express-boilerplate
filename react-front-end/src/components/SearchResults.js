@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 
 import GigCard from "./Gigs/Gig";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,14 +23,30 @@ const useStyles = makeStyles((theme) => ({
 
 export default function GigGrid(props) {
   const classes = useStyles();
+  let { search } = useParams();
+  const [gigs, setGigs] = useState([]);
+  console.log("gigs :", gigs);
+  console.log("search :", { search });
 
-  console.log(props.location.searchParams);
+  useEffect(() => {
+    const paramArr = { search }.search.split(" ");
+    axios
+      .get("/api/search/:search", {
+        params: {
+          search: paramArr,
+        },
+      })
+      .then((res) => {
+        console.log("res:", res.data.searchResults);
+        setGigs(res.data.searchResults);
+      });
+  }, []);
 
   return (
     <Grid container className={classes.root}>
       <Grid item xs={12}>
         <Grid container justify="center">
-          {/* {props.gigs.map((gig) => {
+          {gigs.map((gig) => {
             return (
               <GigCard
                 key={gig.id}
@@ -40,7 +59,7 @@ export default function GigGrid(props) {
                 gig={gig}
               />
             );
-          })} */}
+          })}
         </Grid>
       </Grid>
     </Grid>

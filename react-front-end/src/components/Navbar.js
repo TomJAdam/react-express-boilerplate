@@ -292,7 +292,7 @@ export default function Navbar(props) {
             <Button
               variant="contained"
               className={classes.searchButton}
-              onClick={() => history.push("/gigs/search", [searchInput])}
+              onClick={() => history.push(`/search/${searchInput}`)}
             >
               Search
             </Button>
