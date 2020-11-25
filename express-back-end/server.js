@@ -52,11 +52,10 @@ io.on('connection', (socket) => {
     db.query(
       `INSERT INTO messages (conversation_id, sender_id, text)
       VALUES (${room}, ${user.id}, '${message}')
-      RETURNING *;`);
-      // .then(data => {
-      //   console.log(data);
-      // })
-    console.log(room);
+      RETURNING *;`)
+    .then(() => {
+      
+    })
     io.to(room).emit('message', { text: message });
     callback();
   })
