@@ -45,8 +45,18 @@ io.on('connection', (socket) => {
   })
 
 
-  socket.on('sendMessage', (message, callback) => {
-    console.log('where I am now', message);
+  socket.on('sendMessage', (message, user, callback) => {
+    console.log('text', message);
+    console.log('this is the user', user.id);
+    console.log('this is the room', room);
+    db.query(
+      `INSERT INTO messages (conversation_id, sender_id, text)
+      VALUES (${room}, ${user.id}, '${message}')
+      RETURNING *;`);
+      // .then(data => {
+      //   console.log(data);
+      // })
+    console.log(room);
     io.to(room).emit('message', { text: message });
     callback();
   })

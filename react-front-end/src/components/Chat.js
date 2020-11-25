@@ -87,7 +87,7 @@ export default function Chat({ location }) {
     event.preventDefault();
 
     if(message) {
-      socket.emit('sendMessage', message, () => setMessage(''))
+      socket.emit('sendMessage', message, { id: cookie.user.id }, () => setMessage(''))
     }
   }
 
