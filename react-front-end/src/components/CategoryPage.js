@@ -37,7 +37,6 @@ export default function CategoryPage() {
 
   return (
     <div>
-      <h1>{category} Category</h1>
       <Switch>
         <Route
           path={`/gigs/${category}/:gig_id`}
