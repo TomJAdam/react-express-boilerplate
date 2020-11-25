@@ -32,7 +32,7 @@ export default function Conversations(props) {
       {conversations.map(conversation => {
         // console.log(conversation);
         return (
-          <Conversation {...conversation}/>
+          <Conversation {...conversation} userID={userID}/>
         )
       })}
     </div>

@@ -1,5 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import Message from './Message';
+import ScrollToBottom from 'react-scroll-to-bottom';
 
 const useStyles = makeStyles((theme) => ({
 
@@ -12,15 +14,19 @@ const useStyles = makeStyles((theme) => ({
 export default function Feed(props) {
 
   const { messages, userID } = props;
+  console.log(messages);
 
 
 
   return (
+    // <ScrollToBottom>
     <div>
       {messages.map(message => {
-        return <p>{message.text}</p>
+        return(
+          <Message {...message} userID={userID}/>
+        )
       })}
-      <p>current user {userID}</p>
     </div>
+    // </ScrollToBottom>
   )
 }

@@ -7,6 +7,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     border: '1px solid grey',
+    width: '100%',
     height: '70px'
   }
 }));
@@ -17,9 +18,20 @@ export default function Conversation(props) {
   const classes = useStyles();
 
   return(
-    <div className={classes.root}>
-      <p>This is a conversation</p>
-      <Link to={`/chat/?conv_id=${props.id}`}>Try this</Link>
-    </div>
+    props.userID === props.client_id ? (
+      <div className={classes.root}>
+      <Link to={`/chat/?conv_id=${props.id}`}>
+        <div className={classes.root}>
+          <p>{props.contractor_first} {props.contractor_last}</p>
+        </div>
+      </Link>
+    </div> 
+    ) : (<div className={classes.root}>
+    <Link to={`/chat/?conv_id=${props.id}`}>
+      <div className={classes.root}>
+        <p>{props.client_first} {props.client_last}</p>
+      </div>
+    </Link>
+  </div> )
   )
 }
