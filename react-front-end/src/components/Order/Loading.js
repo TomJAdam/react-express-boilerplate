@@ -19,19 +19,20 @@ font-size: 10em,
 margin: 0 5px;
 color: ${(props) => props.color};
 /* Animation */
-animation: ${BounceAnimation} 3s linear infinite;
+animation: ${BounceAnimation} 5s linear infinite;
 animation-delay: ${(props) => props.delay};
 `;
 
 export default function Loading(props) {
   const {gig, contractor} = props;
-  const str = `Booking a ${gig.title} service with ${contractor.first_name} ${contractor.last_name}`;
-  const arr = str.split("").map(char => ({char: char.toUpperCase(), color: randomColor({
+  const str = `Booking a ${gig.title} Service With ${contractor.first_name} ${contractor.last_name}`;
+  const arr = str.split("").map(char => ({char: char, color: randomColor({
     luminosity: 'bright',
-    hue: "yellow",
+    hue: "monochrome",
     format: 'rgba',
     alpha: 0.7
  })}));
+ 
   return <Wrapper>
     {arr.map((char, index) => <Char delay={`${index/2}s`} color={char.color}>{char.char}</Char>)}
   </Wrapper>;
