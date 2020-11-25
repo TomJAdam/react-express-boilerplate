@@ -34,9 +34,8 @@ CREATE TABLE gigs (
   title TEXT NOT NULL,
   price INTEGER NOT NULL DEFAULT 0,
   description TEXT NOT NULL,
-  photo_one TEXT NOT NULL,
-  photo_two TEXT NOT NULL,
-  photo_three TEXT NOT NULL
+  photo_one TEXT NOT NULL
+
 );
 
 CREATE TABLE orders (
@@ -44,11 +43,11 @@ CREATE TABLE orders (
   gig_id INTEGER REFERENCES gigs(id) ON DELETE CASCADE,
   client_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
 
-  rating INTEGER NOT NULL,
-  review TEXT NOT NULL,
+  rating INTEGER,
+  review TEXT,
   status VARCHAR(255) NOT NULL,
   order_date TIMESTAMP,
-  finished_date DATE NOT NULL,
+  finished_date DATE
 );
 
 CREATE TABLE conversations (

@@ -38,14 +38,12 @@ module.exports = (db) => {
       gig.rate,
       gig.description,
       gig.photo1,
-      gig.photo1,
-      gig.photo1,
     ];
 
     return db
       .query(
         `
-    INSERT INTO gigs (contractor_id, category_id, title, price, description, photo_one, photo_two, photo_three)
+    INSERT INTO gigs (contractor_id, category_id, title, price, description, photo_one)
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
     RETURNING *;
     `,
