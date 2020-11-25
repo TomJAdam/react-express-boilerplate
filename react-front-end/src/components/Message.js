@@ -4,15 +4,33 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
 
   root: {
-    border: '1px solid grey'
   },
 
-  sent: {
-    border: '2px solid orange'
+  message: {
+    // height: '30px',
+    borderRadius: '4px'
   },
 
-  received: {
-    border: '2px solid black'
+  text: {
+    padding: '10px'
+  },
+
+  sentContainer: {
+    backgroundColor: '#0EE290',
+    textAlign: 'right'
+  },
+  
+  sentText: {
+    color: 'white'
+  },
+
+  receivedContainer: {
+    backgroundColor: '#EFEFEF',
+    textAlign: 'left'
+  },
+
+  receivedText: {
+    color: 'black'
   }
 
 }));
@@ -27,13 +45,17 @@ export default function Message(props) {
 
   return(
     props.user === props.userID || props.sender_id === props.userID ? (
-      <div className={classes.sent}>
-        <p>{props.text}</p>
+      <div className={classes.root}>
+        <div className={`${classes.message} ${classes.sentContainer}`}>
+          <p className={`${classes.sentText} ${classes.text}`}>{props.text}</p>
+        </div>
       </div>
     ) : 
     (
-    <div className={classes.received}>
-        <p>{props.text}</p>
+    <div className={classes.root}>
+      <div className={`${classes.message} ${classes.receivedContainer}`}>
+        <p className={`${classes.receivedText} ${classes.text}`}>{props.text}</p>
+      </div>
     </div>
     )
     

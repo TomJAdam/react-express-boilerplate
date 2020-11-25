@@ -6,7 +6,7 @@ import Conversation from './Conversation';
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
   }
 }));
 
