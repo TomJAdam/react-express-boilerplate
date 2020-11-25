@@ -4,4 +4,11 @@ const getGigbyUserId = (cookie, state) => {
   return user && gigs.filter((gig) => gig.contractor_id === user.id);
 };
 
-export { getGigbyUserId };
+const check = (personA, personB, conversations) => {
+  return conversations.filter(conversation => 
+    (personA === conversation.client_id && personB === conversation.contractor_id) ||
+    (personB === conversation.client_id && personA === conversation.contractor_id)
+  )[0];
+}
+
+export { getGigbyUserId, check };

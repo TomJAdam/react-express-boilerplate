@@ -1,9 +1,10 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import GigHeader from "./GigHeader";
 import GigDetails from "./GigDetails";
 import Grid from "@material-ui/core/Grid";
+import GoogleMap from "./GoogleMap";
 import ContactCard from "./ContactCard";
 import Booking from './Order/Booking';
 import { makeStyles } from "@material-ui/core/styles";
@@ -22,17 +23,35 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "8px",
     boxShadow: "0px 2px 5px 0.5px #E3E3E3",
   },
+  map: {
+    maxWidth: 250,
+    maxHeight: 300,
+    backgroundColor: "blue",
+  },
 }));
 
 export default function GigPage() {
   const classes = useStyles();
 
   const [gig, setGig] = useState({});
-  const [user, setUser] = useState({});
+  const [contractor, setContractor] = useState({});
+  const [coords, setCoords] = useState({});
 
   const params = useParams();
 
   const {mode, transition, back} = UseBookingMode(START);
+  const getCoords = (address) => {
+    const splitAddy = address.split(" ");
+    let searchString = splitAddy.join("+");
+    axios
+      .get(
+        `https://maps.googleapis.com/maps/api/geocode/json?address=${searchString}&key=${process.env.REACT_APP_GOOGLE_API}`
+      )
+      .then((res) => {
+        return setCoords(res.data.results[0].geometry.location);
+      });
+  };
+
   useEffect(() => {
     axios
       .get(`/api/gigs/${params.gig_id}`)
@@ -42,15 +61,17 @@ export default function GigPage() {
         return axios(`/api/users/${id}`);
       })
       .then((response) => {
-        setUser(response.data[0]);
+        setContractor(response.data[0]);
+        const userAddy = `${response.data[0].address}, ${response.data[0].city}, ${response.data[0].province}`;
+        getCoords(userAddy);
       });
   }, []);
 
   return (
     <div>
       <GigHeader
-        first={user.first_name}
-        last={user.last_name}
+        first={contractor.first_name}
+        last={contractor.last_name}
         title={gig.title}
         price={gig.price}
         image={gig.photo_one}
@@ -60,23 +81,28 @@ export default function GigPage() {
         <Grid container spacing={3} justify="center" className={classes.root}>
           <Grid item sm={8}>
             <GigDetails
-              bio={user.bio}
-              education={user.education}
+              bio={contractor.bio}
+              education={contractor.education}
               description={gig.description}
             />
           </Grid>
           <Grid item sm={3}>
             <ContactCard
-              city={user.city}
-              phone={user.phone_number}
-              email={user.email}
+              city={contractor.city}
+              phone={contractor.phone_number}
+              email={contractor.email}
+              contractor_id={contractor.id}
+              gig_id={gig.id}
               onBooking={() => transition("SELECT")}
             />
+            <Grid item sm={3}>
+              <GoogleMap coords={coords} title={gig.title} />
+            </Grid>
           </Grid>
         </Grid>
       </div>}
       {mode === "SELECT" && <Booking transition={transition} back={back} gig={gig}/>}
-      {mode === "PENDING" && <PlaceHolder gig={gig} user={user} mode={mode}/>} 
+      {mode === "PENDING" && <PlaceHolder gig={gig} contractor={contractor} mode={mode}/>} 
     </div>
   );
 }

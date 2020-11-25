@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -23,6 +23,7 @@ import { green } from "@material-ui/core/colors";
 import { Link } from "react-router-dom";
 import { UserCookie } from "../hooks/UserCookie";
 import axios from "axios";
+import { Redirect, useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -75,7 +76,8 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
   },
   searchButton: {
-    backgroundColor: green[400],
+    // color: "white",
+    backgroundColor: "#0EE290",
     "&:hover": {
       backgroundColor: green[600],
     },
@@ -116,15 +118,21 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Navbar(props) {
   const { cookie, setCookie } = useContext(UserCookie);
-  const logout = () => {
-    return axios.post("/logout").then((res) => setCookie(res.data));
-  };
+
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+  const [searchInput, setSearchInput] = useState("");
+
+  let history = useHistory();
+
+  const logout = () => {
+    return axios.post("/logout").then((res) => setCookie(res.data));
+  };
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -278,9 +286,14 @@ export default function Navbar(props) {
                 root: classes.inputRoot,
                 input: classes.inputInput,
               }}
+              onInput={(e) => setSearchInput(e.target.value)}
               inputProps={{ "aria-label": "search" }}
             />
-            <Button variant="contained" className={classes.searchButton}>
+            <Button
+              variant="contained"
+              className={classes.searchButton}
+              onClick={() => history.push("/gigs/search", [searchInput])}
+            >
               Search
             </Button>
           </div>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Link } from 'react-router-dom';
+import { Route, Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -15,6 +15,10 @@ const useStyles = makeStyles({
     maxWidth: 345,
     margin: 10,
   },
+  link: {
+    textDecoration: "none",
+    color: "black",
+  },
 });
 
 export default function GigCard(props) {
@@ -22,7 +26,7 @@ export default function GigCard(props) {
 
   return (
     <Card className={classes.root}>
-      <Link to={`/gigs/${props.category}/${props.id}`}>
+      <Link className={classes.link} to={`/gigs/${props.category}/${props.id}`}>
         <CardActionArea>
           <CardMedia
             component="img"
