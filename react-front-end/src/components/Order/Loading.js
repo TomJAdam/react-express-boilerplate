@@ -24,8 +24,8 @@ animation-delay: ${(props) => props.delay};
 `;
 
 export default function Loading(props) {
-  const {gig, user} = props;
-  const str = `Booking a ${gig.title} service with ${user.first_name} ${user.last_name}`;
+  const {gig, contractor} = props;
+  const str = `Booking a ${gig.title} service with ${contractor.first_name} ${contractor.last_name}`;
   const arr = str.split("").map(char => ({char: char.toUpperCase(), color: randomColor({
     luminosity: 'bright',
     hue: "yellow",
