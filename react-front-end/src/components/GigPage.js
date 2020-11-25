@@ -50,7 +50,7 @@ export default function GigPage() {
       )
       .then((res) => {
         console.log('results', res.data.results)
-        // return setCoords(res.data.results[0].geometry.location);
+        return setCoords(res.data.results[0].geometry.location);
       });
   };
 
