@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import { Map, GoogleApiWrapper, InfoWindow, Marker } from "google-maps-react";
 
 const mapStyles = {
-  width: 300,
-  height: 300,
+  // trying to get width to change dynamically
+  maxWidth: 300,
+  maxHeight: 300,
   borderRadius: "8px",
   marginLeft: 14,
   marginBottom: 20,
@@ -11,8 +12,8 @@ const mapStyles = {
 };
 
 const containerStyles = {
-  maxWidth: 0,
-  maxHeight: 0,
+  maxWidth: 300,
+  maxHeight: 300,
 };
 
 export class GoogleMap extends Component {

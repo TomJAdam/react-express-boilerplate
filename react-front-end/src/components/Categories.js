@@ -5,15 +5,15 @@ import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
 import Typography from "@material-ui/core/Typography";
-import Grid from '@material-ui/core/Grid';
-import CategoryCard from './CategoryCard';
+import Grid from "@material-ui/core/Grid";
+import CategoryCard from "./CategoryCard";
 import PopularHeading from "./PopularHeading";
+import Carousel from "./Carousel";
 
 const useStyles = makeStyles((theme) => ({
-
   root: {
-    display: 'flex',
-    flexDirection: 'column'
+    display: "flex",
+    flexDirection: "column",
   },
 
   card: {
@@ -46,12 +46,11 @@ const useStyles = makeStyles((theme) => ({
   },
 
   title: {
-    margin: '2rem 0rem 2rem 0rem'
-  }
+    margin: "2rem 0rem 2rem 0rem",
+  },
 }));
 
 export default function Categories() {
-
   const classes = useStyles();
   const { categories } = useApplicationData();
 
@@ -59,7 +58,8 @@ export default function Categories() {
     <div>
       <PopularHeading />
       <Grid container className={classes.card}>
-        <Grid item xs={12}>
+        <Carousel categories={categories} />
+        {/* <Grid item xs={12}>
           <Grid container justify="center">
             {categories.map((category) => {
               return (
@@ -72,7 +72,7 @@ export default function Categories() {
               );
             })}
           </Grid>
-        </Grid>
+        </Grid> */}
       </Grid>
     </div>
   );

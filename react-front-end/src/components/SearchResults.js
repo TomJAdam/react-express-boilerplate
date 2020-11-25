@@ -28,8 +28,6 @@ export default function GigGrid(props) {
   const classes = useStyles();
   let { search } = useParams();
   const [gigs, setGigs] = useState([]);
-  console.log("gigs :", gigs);
-  console.log("search :", { search });
 
   useEffect(() => {
     const paramArr = { search }.search.split(" ");
