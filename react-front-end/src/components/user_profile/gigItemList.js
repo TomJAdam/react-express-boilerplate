@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Paper, Box, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import DeleteIcon from "@material-ui/icons/Delete";
+import Delete from "./Delete";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
 
@@ -82,7 +82,7 @@ export default function GigItemList(props) {
       </Grid>
       <Box className={classes.right}>
         <h3>Active</h3>
-        <DeleteIcon className={classes.delete} />
+        <Delete class={classes.delete} gigId={id}/>
       </Box>
     </Paper>
   );
