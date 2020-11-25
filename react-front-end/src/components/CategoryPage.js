@@ -32,7 +32,6 @@ export default function CategoryPage() {
 
   return (
     <div>
-      <Router>
         
         <Switch>
           <Route 
@@ -45,7 +44,6 @@ export default function CategoryPage() {
           />
         </Switch>
 
-      </Router>
     </div>
   )
 }
