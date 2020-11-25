@@ -9,6 +9,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "8px",
     boxShadow: "0px 2px 5px 0.5px #E3E3E3",
     margin: "1rem",
+    marginBottom: "6em",
     padding: "0.5rem 1.5rem 1.5rem 1.5rem",
   },
 

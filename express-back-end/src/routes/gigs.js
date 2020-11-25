@@ -44,7 +44,7 @@ module.exports = (db) => {
       .query(
         `
     INSERT INTO gigs (contractor_id, category_id, title, price, description, photo_one)
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+    VALUES ($1, $2, $3, $4, $5, $6)
     RETURNING *;
     `,
         queryParams
