@@ -41,7 +41,6 @@ class MyCarousel extends Component {
   }
 
   render() {
-    console.log("carousle:", this.Carousel);
     return (
       <div style={MyCarousel.CONTAINER_STYLE}>
         <ArrowBackIcon
