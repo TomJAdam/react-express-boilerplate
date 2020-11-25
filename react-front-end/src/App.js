@@ -16,6 +16,7 @@ import Chat from './components/Chat';
 import { UserCookie } from "./hooks/UserCookie";
 import useAppData from "./hooks/useAppData";
 import { getGigbyUserId, getAllOrdersbyId } from "./helpers/dataHelpers";
+import SearchResults from "./components/SearchResults";
 
 export default function App() {
   const { cookie, state, setCookie, setState } = useAppData();
@@ -30,7 +31,7 @@ export default function App() {
           <Navbar ordersByUser={ordersByUser}/>
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route path="/chat" component={Chat}/>
+            <Route path="/chat" component={Chat} />
             <Route path="/signin">
               {cookie.user ? <Redirect to="/" /> : <SignIn />}
             </Route>
@@ -47,6 +48,9 @@ export default function App() {
               ) : (
                 <Redirect to="/signin" />
               )}
+            </Route>
+            <Route path="/search/:search">
+              <SearchResults />
             </Route>
           </Switch>
         </Router>

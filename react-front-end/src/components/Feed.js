@@ -11,13 +11,16 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Feed(props) {
 
-  const { messages } = props;
+  const { messages, userID } = props;
+
+
 
   return (
     <div>
       {messages.map(message => {
         return <p>{message.text}</p>
       })}
+      <p>current user {userID}</p>
     </div>
   )
 }

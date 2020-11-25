@@ -64,9 +64,7 @@ export default function Chat({ location }) {
       setMessages(response.data);
       console.log('messages', messages);
     })
-  },[])
-
-
+  },[]);
 
 
   useEffect(() => {
@@ -99,21 +97,24 @@ export default function Chat({ location }) {
     }
   }
 
-  console.log('messages', messages);
-  console.log('room before render', room);
-
   return (
-    <div className={classes.root}>
-     <h1>We are on the chat page currently in room {room}</h1>
-     <div className={classes.main}>
-        <div className={classes.conv}>
-          <Conversations />
-        </div>
-        <div className={classes.chat}>
-          <Feed messages={messages}/>
-          <Input message={message} setMessage={setMessage} sendMessage={sendMessage}/>
-        </div>
+
+    cookie.user ? (
+      <div className={classes.root}>
+      <h1>We are on the chat page currently in room {room}</h1>
+      <div className={classes.main}>
+         <div className={classes.conv}>
+           <Conversations />
+         </div>
+         <div className={classes.chat}>
+           <Feed messages={messages} userID={cookie.user.id}/>
+           <Input message={message} setMessage={setMessage} sendMessage={sendMessage}/>
+         </div>
+      </div>
      </div>
-    </div>
+    ) : <h1>not loaded lol</h1>
+
+    
+
   )
 }
