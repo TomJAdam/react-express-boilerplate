@@ -14,7 +14,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    border: '1px solid red'
   },
 
   main: {
@@ -25,14 +24,15 @@ const useStyles = makeStyles((theme) => ({
   
   conv: {
     width: '40%',
-    border: '1px solid grey'
+    marginRight: '2rem'
   },
 
   chat: {
     width: '60%',
     display: 'flex',
     flexDirection: 'column',
-    border: '1px solid blue'
+    border: '1px solid #EFEFEF',
+    borderRadius: '8px'
   }
 }));
 
@@ -42,8 +42,6 @@ export default function Chat({ location }) {
 
   const classes = useStyles();
 
-  // API call to get all messages for particular conversation using conversation_id from url
-  // API call to get id's for conversation
   const { cookie, setCookie } = useContext(UserCookie);
   const [conversationID, setConversationID] = useState(null);
   const [room, setRoom] = useState(null);
@@ -52,10 +50,6 @@ export default function Chat({ location }) {
   const [messages, setMessages] = useState([]);
   const ENDPOINT = 'localhost:8080';
 
-  // console.log(cookie);
-  // console.log('current user', cookie.user.id);
-
-  // This used to be inside of useEffect() - not sure if it should be outside - is working but revise later
   const { conv_id } = queryString.parse(location.search);
 
   useEffect(() => {
@@ -64,7 +58,7 @@ export default function Chat({ location }) {
       setMessages(response.data);
       console.log('messages', messages);
     })
-  },[]);
+  },[room]);
 
 
   useEffect(() => {
@@ -84,6 +78,7 @@ export default function Chat({ location }) {
 
   useEffect(() => {
     socket.on('message', (message) => {
+      console.log('message from the socket', message);
       setMessages([...messages, message])
     })
   },[messages])
@@ -93,18 +88,20 @@ export default function Chat({ location }) {
     event.preventDefault();
 
     if(message) {
-      socket.emit('sendMessage', message, () => setMessage(''))
+      socket.emit('sendMessage', message, { id: cookie.user.id }, () => setMessage(''))
     }
   }
+
+  // console.log('cookie', cookie.user.first_name);
 
   return (
 
     cookie.user ? (
       <div className={classes.root}>
-      <h1>We are on the chat page currently in room {room}</h1>
+      <h1>Hello, {cookie.user.first_name}!</h1>
       <div className={classes.main}>
          <div className={classes.conv}>
-           <Conversations />
+           <Conversations userID={cookie.user.id}/>
          </div>
          <div className={classes.chat}>
            <Feed messages={messages} userID={cookie.user.id}/>

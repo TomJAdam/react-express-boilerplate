@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -12,25 +12,27 @@ import Rating from "@material-ui/lab/Rating";
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 300,
-    margin: '0rem 2rem 2rem 1rem',
-    height: 'auto',
-    position: 'relative'
+    maxWidth: 900,
+    // margin: '0rem 2rem 2rem 1rem',
+    height: "auto",
+    position: "relative",
   },
 
   overlay: {
-    position: 'absolute',
-    top: '20px',
-    left: '20px',
-    color: 'white',
-    fontSize: '20px',
-    borderBottom: '3px solid #0EE290'
-  }
+    position: "absolute",
+    top: "20px",
+    left: "20px",
+    color: "white",
+    fontSize: "20px",
+    borderBottom: "3px solid #0EE290",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    padding: "10px 50px",
+  },
 });
 
 export default function CategoryCard(props) {
   const classes = useStyles();
-  const link = `/gigs/${props.name}`
+  const link = `/gigs/${props.name}`;
 
   return (
     <Link to={link}>
@@ -43,9 +45,7 @@ export default function CategoryCard(props) {
             height="300"
             image={props.avatar}
           />
-          <Typography className={classes.overlay}>
-            {props.name}
-          </Typography>
+          <Typography className={classes.overlay}>{props.name}</Typography>
         </CardActionArea>
       </Card>
     </Link>

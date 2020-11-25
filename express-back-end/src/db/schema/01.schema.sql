@@ -54,7 +54,11 @@ CREATE TABLE orders (
 CREATE TABLE conversations (
   id SERIAL PRIMARY KEY NOT NULL,
   client_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-  contractor_id INTEGER REFERENCES users(id) ON DELETE CASCADE
+  client_first VARCHAR(255) NOT NULL,
+  client_last VARCHAR(255) NOT NULL,
+  contractor_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  contractor_first VARCHAR(255) NOT NULL,
+  contractor_last VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE messages (

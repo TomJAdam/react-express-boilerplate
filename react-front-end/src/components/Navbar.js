@@ -114,6 +114,13 @@ const useStyles = makeStyles((theme) => ({
   fontIcon: {
     padding: "12px",
   },
+  link: {
+    textDecoration: 'none',
+    color: 'black'
+    // '&:visited':{
+    //   color: 'green'
+    // }
+  }
 }));
 
 export default function Navbar(props) {
@@ -151,6 +158,10 @@ export default function Navbar(props) {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const resetField = () => {
+    document.getElementById("search-field").reset();
+  };
+
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
@@ -186,7 +197,9 @@ export default function Navbar(props) {
           <MenuItem>
             <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="secondary">
-                <MailIcon />
+                {/* <Link to='/chat' > */}
+                  <MailIcon />
+                {/* </Link> */}
               </Badge>
             </IconButton>
             <p>Messages</p>
@@ -286,13 +299,17 @@ export default function Navbar(props) {
                 root: classes.inputRoot,
                 input: classes.inputInput,
               }}
+              value={searchInput}
               onInput={(e) => setSearchInput(e.target.value)}
               inputProps={{ "aria-label": "search" }}
             />
             <Button
               variant="contained"
               className={classes.searchButton}
-              onClick={() => history.push(`/search/${searchInput}`)}
+              onClick={() => {
+                history.push(`/search/${searchInput}`);
+                setSearchInput("");
+              }}
             >
               Search
             </Button>
@@ -307,14 +324,16 @@ export default function Navbar(props) {
                 </Typography>
                 <IconButton aria-label="show 4 new mails" color="inherit">
                   <Badge badgeContent={4} color="secondary">
-                    <MailIcon />
+                    {/* <Link to="/chat" className={classes.link}> */}
+                      <MailIcon />
+                    {/* </Link> */}
                   </Badge>
                 </IconButton>
-                <IconButton
-                  aria-label="show new notifications"
-                  color="inherit"
-                >
-                  <Badge badgeContent={props.ordersByUser.length} color="secondary">
+                <IconButton aria-label="show new notifications" color="inherit">
+                  <Badge
+                    badgeContent={props.ordersByUser.length}
+                    color="secondary"
+                  >
                     <NotificationsIcon />
                   </Badge>
                 </IconButton>

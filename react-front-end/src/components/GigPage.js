@@ -50,7 +50,7 @@ export default function GigPage() {
       )
       .then((res) => {
         console.log('results', res.data.results)
-        return setCoords(res.data.results[0].geometry.location);
+        // return setCoords(res.data.results[0].geometry.location);
       });
   };
 
@@ -93,6 +93,8 @@ export default function GigPage() {
               city={contractor.city}
               phone={contractor.phone_number}
               email={contractor.email}
+              first_name={contractor.first_name}
+              last_name={contractor.last_name}
               contractor_id={contractor.id}
               gig_id={gig.id}
               onBooking={() => transition("SELECT")}

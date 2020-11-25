@@ -28,8 +28,6 @@ export default function GigGrid(props) {
   const classes = useStyles();
   let { search } = useParams();
   const [gigs, setGigs] = useState([]);
-  console.log("gigs :", gigs);
-  console.log("search :", { search });
 
   useEffect(() => {
     const paramArr = { search }.search.split(" ");
@@ -47,7 +45,7 @@ export default function GigGrid(props) {
   return (
     <Grid container className={classes.root}>
       <Grid item xs={12}>
-        <h1 className={classes.title}>Results</h1>
+        <h1 className={classes.title}>Results for {{ search }.search}</h1>
         <Grid container justify="center">
           {gigs.map((gig) => {
             return (

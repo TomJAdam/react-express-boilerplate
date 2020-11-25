@@ -76,10 +76,15 @@ export default function ContactCard(props) {
         setRedirect(true);
         console.log(conversation.id);
       } else {
+        console.log('cookie', cookie);
         axios
           .put("/api/conversations", {
             client_id: cookie.user.id,
+            client_first: cookie.user.first_name,
+            client_last: cookie.user.last_name,
             contractor_id,
+            contractor_first: props.first_name,
+            contractor_last: props.last_name
           })
           .then((response) => {
             console.log("after post", response.data.id);
