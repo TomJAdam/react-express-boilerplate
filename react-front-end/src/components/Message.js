@@ -4,15 +4,17 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
 
   root: {
+    display: 'flex',
   },
 
   message: {
-    // height: '30px',
-    borderRadius: '4px'
+    borderRadius: '4px',
+    maxWidth: '45%',
+    margin: '1rem 0.5rem 1rem 0.5rem'
   },
 
   text: {
-    padding: '10px'
+    padding: '10px',
   },
 
   sentContainer: {
@@ -45,7 +47,7 @@ export default function Message(props) {
 
   return(
     props.user === props.userID || props.sender_id === props.userID ? (
-      <div className={classes.root}>
+      <div className={classes.root} style={{justifyContent: 'flex-end'}}>
         <div className={`${classes.message} ${classes.sentContainer}`}>
           <p className={`${classes.sentText} ${classes.text}`}>{props.text}</p>
         </div>

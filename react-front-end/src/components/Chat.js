@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     border: '1px solid #EFEFEF',
-    borderRadius: '4px'
+    borderRadius: '8px'
   }
 }));
 
