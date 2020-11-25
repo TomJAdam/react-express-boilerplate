@@ -19,7 +19,7 @@ export default function Conversations(props) {
   useEffect(() => {
     axios.get(`/api/conversations/${userID}`)
     .then(response => {
-      console.log('ovea here', response.data);
+      // console.log('ovea here', response.data);
       setConversations(response.data);
     })
   },[])
@@ -30,8 +30,9 @@ export default function Conversations(props) {
   return (
     <div className={classes.root}>
       {conversations.map(conversation => {
+        // console.log(conversation);
         return (
-          <Conversation />
+          <Conversation {...conversation}/>
         )
       })}
     </div>

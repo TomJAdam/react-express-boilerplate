@@ -58,7 +58,7 @@ export default function Chat({ location }) {
       setMessages(response.data);
       console.log('messages', messages);
     })
-  },[]);
+  },[room]);
 
 
   useEffect(() => {
