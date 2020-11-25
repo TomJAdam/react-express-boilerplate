@@ -88,11 +88,10 @@ export default function ContactCard(props) {
           });
       }
     });
-    // console.log(redirect);
   };
 
   if (redirect) {
-    return <Redirect to={`/chat/?conv_id=${conversationID}`} />;
+    return <Redirect to={`/chat/?conv_id=${conversationID}`}/>;
   }
 
   return (
