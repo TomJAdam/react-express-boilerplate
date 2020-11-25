@@ -42,8 +42,6 @@ export default function Chat({ location }) {
 
   const classes = useStyles();
 
-  // API call to get all messages for particular conversation using conversation_id from url
-  // API call to get id's for conversation
   const { cookie, setCookie } = useContext(UserCookie);
   const [conversationID, setConversationID] = useState(null);
   const [room, setRoom] = useState(null);
@@ -52,10 +50,6 @@ export default function Chat({ location }) {
   const [messages, setMessages] = useState([]);
   const ENDPOINT = 'localhost:8080';
 
-  // console.log(cookie);
-  // console.log('current user', cookie.user.id);
-
-  // This used to be inside of useEffect() - not sure if it should be outside - is working but revise later
   const { conv_id } = queryString.parse(location.search);
 
   useEffect(() => {
@@ -97,6 +91,8 @@ export default function Chat({ location }) {
     }
   }
 
+  // console.log('cookie', cookie.user.first_name);
+
   return (
 
     cookie.user ? (
@@ -104,7 +100,7 @@ export default function Chat({ location }) {
       <h1>We are on the chat page currently in room {room}</h1>
       <div className={classes.main}>
          <div className={classes.conv}>
-           <Conversations />
+           <Conversations userID={cookie.user.id}/>
          </div>
          <div className={classes.chat}>
            <Feed messages={messages} userID={cookie.user.id}/>

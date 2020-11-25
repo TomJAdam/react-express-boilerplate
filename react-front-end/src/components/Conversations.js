@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -9,11 +10,23 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function Conversations() {
+export default function Conversations(props) {
+
+  const { userID } = props;
+
+  useEffect(() => {
+    axios.get(`/api/conversations/${userID}`)
+    .then(response => {
+      console.log(response.data);
+    })
+  },[])
+
+
+  const classes = useStyles();
 
   return (
-    <div>
-      <h3>Conversations</h3>
+    <div className={classes.root}>
+      <h3>Conversations for user {userID}</h3>
     </div>
   )
 }
