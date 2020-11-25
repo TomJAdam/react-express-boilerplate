@@ -16,6 +16,12 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
   },
 
+  header: {
+    width: '100vw',
+    background: '#E3E3E3',
+    height: '200px'
+  },
+
   main: {
     width: '70%',
     display: 'flex',
@@ -31,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     width: '60%',
     display: 'flex',
     flexDirection: 'column',
-    border: '1px solid #EFEFEF',
+    boxShadow: "0px 2px 5px 0.5px #E3E3E3",
     borderRadius: '8px'
   }
 }));
@@ -104,10 +110,12 @@ export default function Chat({ location }) {
 
     cookie.user ? (
       <div className={classes.root}>
-      <h1>Hello, {cookie.user.first_name}!</h1>
-      <div className={classes.main}>
+        <div className={classes.header}>
+          <h1>Hello, {cookie.user.first_name}!</h1>
+        </div>
+        <div className={classes.main}>
          <div className={classes.conv}>
-           <Conversations userID={cookie.user.id}/>
+           <Conversations conv_id={conv_id} userID={cookie.user.id}/>
          </div>
          {
           conv_id ? <div className={classes.chat}>

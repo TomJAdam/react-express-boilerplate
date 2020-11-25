@@ -7,7 +7,11 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center'
+    alignItems: 'center',
+    boxShadow: "0px 2px 5px 0.5px #E3E3E3",
+    height: '100%',
+    borderRadius: '10px'
+
   },
 
   title: {
@@ -22,6 +26,7 @@ export default function Conversations(props) {
   const classes = useStyles();
   const { userID } = props;
   const [conversations, setConversations] = useState([]);
+  // console.log('in conversations !!!!', props.conv_id)
 
   useEffect(() => {
     axios.get(`/api/conversations/${userID}`)
@@ -37,10 +42,9 @@ export default function Conversations(props) {
       <h3 className={classes.title}>Conversations</h3>
       {conversations.map(conversation => {
         console.log(conversation)
-          return <Conversation {...conversation} userID={userID}/>
+          return <Conversation conv_id={props.conv_id} {...conversation} userID={userID}/>
       })}
     </div>
     ) : <h1>hi</h1>
-
   )
 }
