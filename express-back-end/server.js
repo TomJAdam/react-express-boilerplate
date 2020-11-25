@@ -56,7 +56,7 @@ io.on('connection', (socket) => {
     .then(() => {
       
     })
-    io.to(room).emit('message', { text: message });
+    io.to(room).emit('message', { user: user.id, text: message });
     callback();
   })
 

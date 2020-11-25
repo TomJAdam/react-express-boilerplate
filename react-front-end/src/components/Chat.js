@@ -78,6 +78,7 @@ export default function Chat({ location }) {
 
   useEffect(() => {
     socket.on('message', (message) => {
+      console.log('message from the socket', message);
       setMessages([...messages, message])
     })
   },[messages])

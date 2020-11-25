@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Feed(props) {
 
   const { messages, userID } = props;
-  console.log(messages);
+  console.log('in the feed', messages);
 
 
 
