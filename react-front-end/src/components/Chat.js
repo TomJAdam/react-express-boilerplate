@@ -52,6 +52,7 @@ export default function Chat({ location }) {
   const [messages, setMessages] = useState([]);
   const ENDPOINT = 'localhost:8080';
 
+  // console.log(cookie);
   // console.log('current user', cookie.user.id);
 
   // This used to be inside of useEffect() - not sure if it should be outside - is working but revise later
@@ -99,6 +100,7 @@ export default function Chat({ location }) {
   }
 
   console.log('messages', messages);
+  console.log('room before render', room);
 
   return (
     <div className={classes.root}>
