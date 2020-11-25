@@ -6,12 +6,11 @@ import GigDetails from "./GigDetails";
 import Grid from "@material-ui/core/Grid";
 import GoogleMap from "./GoogleMap";
 import ContactCard from "./ContactCard";
-import Booking from './Order/Booking';
+import Booking from "./Order/Booking";
 import { makeStyles } from "@material-ui/core/styles";
-import {START, SELECT, PENDING, SUCCESS, FAILED} from "../helpers/mode";
+import { START, SELECT, PENDING, SUCCESS, FAILED } from "../helpers/mode";
 import UseBookingMode from "../hooks/UseBookingMode";
-import PlaceHolder from './Order/PlaceHolder'
-
+import PlaceHolder from "./Order/PlaceHolder";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,19 +37,19 @@ export default function GigPage() {
   const [coords, setCoords] = useState({});
 
   const params = useParams();
-  const {mode, transition, back} = UseBookingMode(START);
-  
+  const { mode, transition, back } = UseBookingMode(START);
+
   const getCoords = (address) => {
     const splitAddy = address.split(" ");
     let searchString = splitAddy.join("+");
-    console.log('api key in gigpage', process.env.REACT_APP_GOOGLE_API);
+    console.log("api key in gigpage", process.env.REACT_APP_GOOGLE_API);
     axios
       .get(
         `https://maps.googleapis.com/maps/api/geocode/json?address=${searchString}&key=${process.env.REACT_APP_GOOGLE_API}`
       )
       .then((res) => {
-        console.log('results', res.data.results)
-        // return setCoords(res.data.results[0].geometry.location);
+        console.log("results", res.data.results);
+        return setCoords(res.data.results[0].geometry.location);
       });
   };
 
@@ -78,35 +77,45 @@ export default function GigPage() {
         price={gig.price}
         image={gig.photo_one}
       />
-      {mode === "START" &&
-      <div className={classes.root}>
-        <Grid container spacing={3} justify="center" className={classes.root}>
-          <Grid item sm={8}>
-            <GigDetails
-              bio={contractor.bio}
-              education={contractor.education}
-              description={gig.description}
-            />
-          </Grid>
-          <Grid item sm={3}>
-            <ContactCard
-              city={contractor.city}
-              phone={contractor.phone_number}
-              email={contractor.email}
-              first_name={contractor.first_name}
-              last_name={contractor.last_name}
-              contractor_id={contractor.id}
-              gig_id={gig.id}
-              onBooking={() => transition("SELECT")}
-            />
+      {mode === "START" && (
+        <div className={classes.root}>
+          <Grid container spacing={3} justify="center" className={classes.root}>
+            <Grid item sm={8}>
+              <GigDetails
+                bio={contractor.bio}
+                education={contractor.education}
+                description={gig.description}
+              />
+            </Grid>
             <Grid item sm={3}>
-              <GoogleMap coords={coords} title={gig.title} />
+              <ContactCard
+                city={contractor.city}
+                phone={contractor.phone_number}
+                email={contractor.email}
+                first_name={contractor.first_name}
+                last_name={contractor.last_name}
+                contractor_id={contractor.id}
+                gig_id={gig.id}
+                onBooking={() => transition("SELECT")}
+              />
+              <Grid item sm={3}>
+                <GoogleMap coords={coords} title={gig.title} />
+              </Grid>
             </Grid>
           </Grid>
-        </Grid>
-      </div>}
-      {mode === "SELECT" && <Booking transition={transition} back={back} gig={gig} contractor={contractor}/>}
-      {(mode === "PENDING" || mode === "SUCCESS") && <PlaceHolder gig={gig} contractor={contractor} mode={mode}/>} 
+        </div>
+      )}
+      {mode === "SELECT" && (
+        <Booking
+          transition={transition}
+          back={back}
+          gig={gig}
+          contractor={contractor}
+        />
+      )}
+      {(mode === "PENDING" || mode === "SUCCESS") && (
+        <PlaceHolder gig={gig} contractor={contractor} mode={mode} />
+      )}
     </div>
   );
 }
