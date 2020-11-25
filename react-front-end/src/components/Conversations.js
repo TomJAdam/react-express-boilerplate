@@ -32,14 +32,15 @@ export default function Conversations(props) {
   },[])
 
   return (
-    <div className={classes.root}>
+    conversations.length !== 0 ? (
+      <div className={classes.root}>
       <h3 className={classes.title}>Conversations</h3>
       {conversations.map(conversation => {
-        // console.log(conversation);
-        return (
-          <Conversation {...conversation} userID={userID}/>
-        )
+        console.log(conversation)
+          return <Conversation {...conversation} userID={userID}/>
       })}
     </div>
+    ) : <h1>hi</h1>
+
   )
 }

@@ -53,11 +53,17 @@ export default function Chat({ location }) {
   const { conv_id } = queryString.parse(location.search);
 
   useEffect(() => {
-    axios.get(`/api/messages/${conv_id}`).then(response => {
-      console.log(response.data);
-      setMessages(response.data);
-      console.log('messages', messages);
-    })
+
+    console.log('THE CONVERSATION ID', conv_id);
+
+    if (conv_id) {
+      axios.get(`/api/messages/${conv_id}`).then(response => {
+        console.log(response.data);
+        setMessages(response.data);
+        console.log('messages', messages);
+      })
+    }
+    
   },[room]);
 
 
@@ -103,10 +109,13 @@ export default function Chat({ location }) {
          <div className={classes.conv}>
            <Conversations userID={cookie.user.id}/>
          </div>
-         <div className={classes.chat}>
-           <Feed messages={messages} userID={cookie.user.id}/>
-           <Input message={message} setMessage={setMessage} sendMessage={sendMessage}/>
-         </div>
+         {
+          conv_id ? <div className={classes.chat}>
+            <Feed messages={messages} userID={cookie.user.id}/>
+            <Input message={message} setMessage={setMessage} sendMessage={sendMessage}/>
+          </div> 
+          : <h1>Choose a chat</h1>
+         }
       </div>
      </div>
     ) : <h1>not loaded lol</h1>

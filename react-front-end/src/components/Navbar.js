@@ -196,10 +196,10 @@ export default function Navbar(props) {
         <>
           <MenuItem>
             <IconButton aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                {/* <Link to='/chat' > */}
+              <Badge badgeContent={0} color="secondary">
+                <Link to='/chat' >
                   <MailIcon />
-                {/* </Link> */}
+                </Link>
               </Badge>
             </IconButton>
             <p>Messages</p>
@@ -323,10 +323,10 @@ export default function Navbar(props) {
                   <p>Welcome, {cookie.user.first_name}</p>
                 </Typography>
                 <IconButton aria-label="show 4 new mails" color="inherit">
-                  <Badge badgeContent={4} color="secondary">
-                    {/* <Link to="/chat" className={classes.link}> */}
+                  <Badge badgeContent={0} color="secondary">
+                    <Link to="/chat" className={classes.link}>
                       <MailIcon />
-                    {/* </Link> */}
+                    </Link>
                   </Badge>
                 </IconButton>
                 <IconButton aria-label="show new notifications" color="inherit">
