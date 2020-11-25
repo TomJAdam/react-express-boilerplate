@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import {UserCookie} from '../../hooks/UserCookie';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -17,6 +18,7 @@ const useStyles = makeStyles(() => ({
 }))
 export default function AlertDialog(props) {
 
+  const {state, setState} = useContext(UserCookie);
   const {error, warning, info, success} = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -28,9 +30,16 @@ export default function AlertDialog(props) {
     setOpen(false);
   };
 
-  // const deleteGig = (id) => {
-  //   axios.delete('/gigs/id')
-  // }
+  const deleteGig = (id) => {
+    setOpen(false);
+    axios.delete(`/api/gigs/${id}`)
+    .then(res => {
+      const gigs = [...state.gigs];
+      const index = gigs.findIndex(gig => gig.id === id);
+      gigs.splice(index, 1);
+      setState({...state, gigs});
+    })
+  }
 
   return (
     <>
@@ -54,7 +63,7 @@ export default function AlertDialog(props) {
           <Button onClick={handleClose} className={success}>
             Cancel
           </Button>
-          <Button onClick={handleClose} className={error} autoFocus>
+          <Button onClick={() => deleteGig(props.gigId)} className={error} autoFocus>
             Confirm
           </Button>
         </DialogActions>

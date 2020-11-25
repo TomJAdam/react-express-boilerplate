@@ -56,9 +56,13 @@ module.exports = (db) => {
   });
 
   router.delete("/gigs/:id", (req, res) => {
-    res.json({
-      message: `gigs#${req.params.id} is removed`,
-    });
+    return db.query(
+      `DELETE FROM gigs WHERE id = ${req.params.id};`
+    ).then(data => res.json({
+      message: `gigs#${req.params.id} is removed`
+    })
+    ).catch(err => res.status(400).send(err));
+    
   });
 
   router.get("/search/:search", (req, res) => {

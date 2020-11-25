@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Paper, Box, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import Delete from "./Delete";
+import GigDelete from "./gigDelete";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
 
@@ -82,7 +82,7 @@ export default function GigItemList(props) {
       </Grid>
       <Box className={classes.right}>
         <h3>Active</h3>
-        <Delete class={classes.delete} gigId={id}/>
+        <GigDelete class={classes.delete} gigId={id}/>
       </Box>
     </Paper>
   );
