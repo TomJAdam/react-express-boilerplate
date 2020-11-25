@@ -29,7 +29,27 @@ const server = http.createServer(App);
 const io = socketio(server);
 
 io.on('connection', (socket) => {
+
+  let room;
   console.log('We have a new connection!');
+
+  socket.on('join', ({ conv_id }, callback) => {
+
+    console.log('at the server', conv_id);
+
+    room = conv_id;
+
+    socket.join(conv_id);
+    // console.log(socket);
+  
+  })
+
+
+  socket.on('sendMessage', (message, callback) => {
+    console.log('where I am now', message);
+    io.to(room).emit('message', { text: message });
+    callback();
+  })
 
 
   socket.on('disconnect', () => {

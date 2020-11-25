@@ -8,18 +8,20 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function Input() {
+export default function Input(props) {
+
+  const { message, setMessage, sendMessage } = props;
 
   return (
     <form>
     <input 
       type="text"
-      // value={message}
+      value={message}
       placeholder="Type a message..."
-      // onChange={(event) => setMessage(event.target.value)}
-      // onKeyPress={(event) => event.key === 'Enter' ? sendMessage(event) : null}
+      onChange={(event) => setMessage(event.target.value)}
+      onKeyPress={(event) => event.key === 'Enter' ? sendMessage(event) : null}
     />
-    <button >Send</button>
+    <button onClick={(event) => sendMessage(event)}>Send</button>
   </form>
   )
 }

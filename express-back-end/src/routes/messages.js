@@ -10,7 +10,7 @@ module.exports = (db) => {
     WHERE conversation_id = ${req.params.conversation_id}
     `;
     db.query(query).then(data => {
-      console.log('messages', data.rows);
+      // console.log('messages', data.rows);
       res.json(data.rows);
     })
   })

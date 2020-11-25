@@ -66,19 +66,37 @@ export default function Chat({ location }) {
   },[])
 
 
+
+
   useEffect(() => {
-    // const { conv_id } = queryString.parse(location.search);
+    const { conv_id } = queryString.parse(location.search);
     console.log(conv_id);
     setRoom(conv_id);
     console.log('room', room);
     socket = io(ENDPOINT);
-    console.log(socket);
-    console.log('the room we are in', room)
+    socket.emit('join', { conv_id }, () => {
+
+    });
 
     return () => {
       socket.off();
     }
   },[ENDPOINT, location.search])
+
+  useEffect(() => {
+    socket.on('message', (message) => {
+      setMessages([...messages, message])
+    })
+  },[messages])
+
+  const sendMessage = (event) => {
+
+    event.preventDefault();
+
+    if(message) {
+      socket.emit('sendMessage', message, () => setMessage(''))
+    }
+  }
 
   console.log('messages', messages);
 
@@ -91,12 +109,9 @@ export default function Chat({ location }) {
         </div>
         <div className={classes.chat}>
           <Feed messages={messages}/>
-          <Input />
+          <Input message={message} setMessage={setMessage} sendMessage={sendMessage}/>
         </div>
      </div>
-     {/* {messages.map(message => {
-       return <p>{message.text}</p>
-     })} */}
     </div>
   )
 }
