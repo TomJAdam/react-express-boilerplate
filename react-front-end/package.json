@@ -23,7 +23,6 @@
         "react-placeholder": "^4.0.3",
         "styled-components": "^5.2.1",
         "socket.io-client": "^2.3.0"
-
     },
     "scripts": {
         "start": "react-scripts start",
