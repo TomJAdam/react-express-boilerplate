@@ -15,10 +15,10 @@ export default function Booking(props) {
       gig_id: props.gig.id,
       client_id: cookie.user.id,
       rating: 0,
-      review: "",
-      status: "pending",
+      review: null,
+      status: null,
       order_date: selectedDate,
-      finished_date: "2100-01-01 04:29:00"
+      finished_date: null
     }
     props.transition("PENDING");
     axios.put('/api/orders', order)
