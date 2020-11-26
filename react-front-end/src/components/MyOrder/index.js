@@ -23,7 +23,7 @@ export default function MyOrder(props) {
   return (
     <>
       <h1 className={classes.head}>My Orders</h1>
-      <Divider style={{ width: "90%", margin: "2em auto" }} />
+      <Divider style={{ width: "50%", margin: "2em auto" }} />
       {props.orders && props.orders.map(order => {
         return <OrderItem order={order}/>;
       })}

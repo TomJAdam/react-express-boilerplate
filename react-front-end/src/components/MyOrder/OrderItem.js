@@ -1,48 +1,55 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import ButtonBase from '@material-ui/core/ButtonBase';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
+import Typography from "@material-ui/core/Typography";
+import ButtonBase from "@material-ui/core/ButtonBase";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    marginBottom: "1em",
   },
   paper: {
     padding: theme.spacing(2),
-    margin: 'auto',
+    margin: "auto",
     maxWidth: 900,
   },
   image: {
-    width: 128,
-    height: 128,
+    width: 200,
+    height: 200,
   },
   img: {
-    margin: 'auto',
-    display: 'block',
-    maxWidth: '100%',
-    maxHeight: '100%',
+    margin: "auto",
+    display: "block",
+    maxWidth: "100%",
+    maxHeight: "100%",
+    borderRadius: "5em"
   },
 }));
 
-export default function ComplexGrid() {
+export default function OrderItem(props) {
   const classes = useStyles();
-
+  const { order } = props;
+  console.log(order);
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
         <Grid container spacing={2}>
           <Grid item>
             <ButtonBase className={classes.image}>
-              <img className={classes.img} alt="complex" src="/static/images/grid/complex.jpg" />
+              <img
+                className={classes.img}
+                alt="complex"
+                src={order.gig.photo_one}
+              />
             </ButtonBase>
           </Grid>
           <Grid item xs={12} sm container>
             <Grid item xs container direction="column" spacing={2}>
               <Grid item xs>
                 <Typography gutterBottom variant="subtitle1">
-                  Standard license
+                  {order.gig.title}
                 </Typography>
                 <Typography variant="body2" gutterBottom>
                   Full resolution 1920x1080 • JPEG
@@ -52,7 +59,7 @@ export default function ComplexGrid() {
                 </Typography>
               </Grid>
               <Grid item>
-                <Typography variant="body2" style={{ cursor: 'pointer' }}>
+                <Typography variant="body2" style={{ cursor: "pointer" }}>
                   Remove
                 </Typography>
               </Grid>
