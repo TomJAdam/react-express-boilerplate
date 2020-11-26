@@ -3,19 +3,20 @@ import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((props) => ({
   root: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    width: '100%',
+    width: '60%',
     height: '70px',
-    border: '1px solid #C4C4C4',
-    borderRadius: '4px',
+    boxShadow: "0px 2px 5px 0.5px #E3E3E3",
+    borderRadius: '20px',
     margin: '0.3rem 0rem 0.3rem 0rem',
     transition: '0.3s ease-in-out',
+    background: props => props.id === parseInt(props.conv_id) ? '#0EE290' : 'white',
     '&:hover': {
-      backgroundColor: '#0EE290',
+      background: '#0EE290',
       color: 'white'
     }
   },
@@ -23,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: 'none',
     color: 'black',
     '&:hover': {
-      // color: 'white'
+      color: 'white'
     }
   }
 }));
@@ -31,7 +32,10 @@ const useStyles = makeStyles((theme) => ({
 export default function Conversation(props) {
 
 
-  const classes = useStyles();
+  const classes = useStyles(props);
+
+
+
 
   return(
     props.userID === props.client_id ? (
@@ -41,7 +45,7 @@ export default function Conversation(props) {
             <p>{props.contractor_first} {props.contractor_last}</p>
           </div>
         </Link>
-      </div> 
+      </div>
     ) : (<div className={classes.root}>
     <Link to={`/chat/?conv_id=${props.id}`}>
       <div>
