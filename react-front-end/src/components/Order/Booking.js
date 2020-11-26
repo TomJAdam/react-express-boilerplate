@@ -14,9 +14,9 @@ export default function Booking(props) {
     const order = {
       gig_id: props.gig.id,
       client_id: cookie.user.id,
-      rating: 0,
+      rating: null,
       review: null,
-      status: null,
+      status: "pending",
       order_date: selectedDate,
       finished_date: null
     }

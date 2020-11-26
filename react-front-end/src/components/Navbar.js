@@ -176,8 +176,9 @@ export default function Navbar(props) {
       <Link to="/profile" className={classes.title}>
         <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       </Link>
-
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <Link to="/myorder" className={classes.title}>
+      <MenuItem onClick={handleMenuClose}>My Orders</MenuItem>
+      </Link>
     </Menu>
   );
 
