@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Paper, Box, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import GigDelete from "./gigDelete";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
@@ -52,6 +52,8 @@ export default function GigItemList(props) {
   const [redirect, setRedirect] = useState(false);
   const [category, setCategory] = useState(0);
 
+  let history = useHistory();
+
   const {
     id,
     contractor_id,
@@ -72,7 +74,12 @@ export default function GigItemList(props) {
         </Grid>
         <Box className={classes.left}>
           <Grid item spacing={6}>
-            <div className={classes.desc}>
+            <div
+              className={classes.desc}
+              onClick={() => {
+                history.push(`/gigs/categories/${id}`);
+              }}
+            >
               <h3>{title}</h3>
             </div>
             <Box color="text.secondary">{description}</Box>
@@ -82,7 +89,7 @@ export default function GigItemList(props) {
       </Grid>
       <Box className={classes.right}>
         <h3>Active</h3>
-        <GigDelete class={classes.delete} gigId={id}/>
+        <GigDelete class={classes.delete} gigId={id} />
       </Box>
     </Paper>
   );
