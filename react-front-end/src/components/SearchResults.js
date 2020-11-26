@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
   },
   title: {
+    margin: "2rem 0rem 2rem 0rem",
     textAlign: "center",
   },
 }));
