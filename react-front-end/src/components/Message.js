@@ -5,17 +5,19 @@ const useStyles = makeStyles((theme) => ({
 
   root: {
     display: 'flex',
+    height: 'auto'
   },
 
   message: {
     borderRadius: '20px',
     boxShadow: "0px 2px 5px 0.5px #E3E3E3",
-    maxWidth: '45%',
+    maxWidth: '80%',
     margin: '0.5rem 0.5rem 0.5rem 0.5rem'
   },
 
   text: {
     padding: '10px',
+    margin: '0'
   },
 
   sentContainer: {
@@ -42,9 +44,6 @@ const useStyles = makeStyles((theme) => ({
 export default function Message(props) {
 
   const classes = useStyles();
-
-  // console.log('props', props);
-  console.log('this is the user in the message component', props.sender_id);
 
   return(
     props.user === props.userID || props.sender_id === props.userID ? (

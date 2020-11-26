@@ -6,7 +6,7 @@ import ScrollToBottom from 'react-scroll-to-bottom';
 const useStyles = makeStyles((theme) => ({
 
   scroll: {
-    maxHeight: '700px',
+    maxHeight: '500px',
   }
 
 }));
@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Feed(props) {
 
   const { messages, userID } = props;
-  console.log('in the feed', messages);
+  // console.log('in the feed', messages);
 
   const classes = useStyles();
 
