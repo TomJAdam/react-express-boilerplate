@@ -91,11 +91,13 @@ export default function Chat({ location }) {
 
   const classes = useStyles();
 
+  // console.log('is the chat being rendered')
+
   const { cookie, setCookie } = useContext(UserCookie);
   const [conversationID, setConversationID] = useState(null);
   const [room, setRoom] = useState(null);
   const [userID, setUserID] = useState(null);
-  const [message, setMessage] = useState('');
+  // const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
   const ENDPOINT = 'localhost:8080';
 
@@ -103,13 +105,9 @@ export default function Chat({ location }) {
 
   useEffect(() => {
 
-    // console.log('THE CONVERSATION ID', conv_id);
-
     if (conv_id) {
       axios.get(`/api/messages/${conv_id}`).then(response => {
-        // console.log('AFTER THE MESSAGES API CALL', response.data);
         setMessages(response.data);
-        // console.log('messages', messages);
       })
     }
     
@@ -134,17 +132,24 @@ export default function Chat({ location }) {
 
   useEffect(() => {
     socket.on('message', (message) => {
-      // console.log('message from the socket', message);
+      // if (conv_id) {
+      //   axios.get(`/api/messages/${conv_id}`).then(response => {
+      //     console.log('is this being called - this seems to be the source of increased delays');
+      //     setMessages(response.data);
+      //   })
+      // }
+      console.log('message from the socket', message);
+      console.log(messages);
       setMessages([...messages, message])
     })
   },[messages])
 
-  const sendMessage = (event) => {
+  const sendMessage = (message, event) => {
 
     event.preventDefault();
 
     if(message) {
-      socket.emit('sendMessage', message, { id: cookie.user.id }, () => setMessage(''))
+      socket.emit('sendMessage', message, { id: cookie.user.id })
     }
   }
 
@@ -164,7 +169,7 @@ export default function Chat({ location }) {
          {
           conv_id ? <div className={classes.chat}>
             <Feed messages={messages} userID={cookie.user.id}/>
-            <Input message={message} setMessage={setMessage} sendMessage={sendMessage}/>
+            <Input sendMessage={sendMessage}/>
           </div> 
           : <div className={classes.emptyChat}>
             <h3>Select an existing conversation or browse the gigs to find a contractor and start chatting!</h3>

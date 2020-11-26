@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
@@ -40,7 +40,9 @@ const useStyles = makeStyles((theme) => ({
 export default function Input(props) {
 
   const classes = useStyles();
-  const { message, setMessage, sendMessage } = props;
+  // const { message, setMessage, sendMessage } = props;
+  const { sendMessage } = props;
+  const [message, setMessage] = useState('');
 
   return (
     <form className={classes.form}>
@@ -49,10 +51,19 @@ export default function Input(props) {
       type="text"
       value={message}
       placeholder="Type a message..."
+      onClick={event => {
+        
+      }}
       onChange={(event) => setMessage(event.target.value)}
-      onKeyPress={(event) => event.key === 'Enter' ? sendMessage(event) : null}
+      // onKeyPress={(event) => event.key === 'Enter' ? sendMessage(message, event) : null}
+      onKeyPress={event => {
+        if (event.key === 'Enter') {
+          sendMessage(message, event)
+          setMessage('');
+        }
+      }}
     />
-    <button className={classes.button} onClick={(event) => sendMessage(event)}>Send</button>
+    <button className={classes.button} onClick={(event) => sendMessage(message, event)}>Send</button>
   </form>
   )
 }
