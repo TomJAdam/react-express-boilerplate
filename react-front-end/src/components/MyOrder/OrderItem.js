@@ -3,11 +3,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import CardHeader from "@material-ui/core/CardHeader";
-import Typography from "@material-ui/core/Typography";
-import ButtonBase from "@material-ui/core/ButtonBase";
 import TimePicker from "./TimePicker";
 import UserCard from "./UserCard";
-import OrderButton from "./Button";
+import ClientButton from "./Button/ClientButton";
+import ContractorButton from "./Button/ContractorButton";
 import Status from "./Status";
 
 const useStyles = makeStyles((theme) => ({
@@ -63,7 +62,8 @@ export default function OrderItem(props) {
           </Grid>
           <Grid item xs={2} container direction="column" justify="center">
             <Status order={order}/>
-            {order.status === "pending" && <OrderButton />}
+            {props.role !== "Client" && <ClientButton />}
+            {props.role !== "Contractor" && <ContractorButton />}
           </Grid>
         </Grid>
       </Paper>
