@@ -7,6 +7,7 @@ import Input from './Input';
 import Conversations from './Conversations';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
+import IndexBottom from './IndexBottom';
 
 const useStyles = makeStyles((theme) => ({
 
@@ -17,6 +18,9 @@ const useStyles = makeStyles((theme) => ({
   },
 
   header: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
     width: '100vw',
     background: '#E3E3E3',
     height: '200px'
@@ -25,18 +29,26 @@ const useStyles = makeStyles((theme) => ({
   main: {
     width: '70%',
     display: 'flex',
-
+    // position: 'absolute',
+    height: '800px',
+    // top: '220px'
   },
   
   conv: {
     width: '40%',
-    marginRight: '2rem'
+    marginRight: '2rem',
+    background: 'white',
+    borderRadius: '10px'
   },
 
   chat: {
-    width: '60%',
     display: 'flex',
     flexDirection: 'column',
+    position: 'relative',
+    justifyContent: 'flex-end',
+    background: 'white',
+    width: '60%',
+    padding: '1rem',
     boxShadow: "0px 2px 5px 0.5px #E3E3E3",
     borderRadius: '8px'
   }
@@ -111,7 +123,7 @@ export default function Chat({ location }) {
     cookie.user ? (
       <div className={classes.root}>
         <div className={classes.header}>
-          <h1>Hello, {cookie.user.first_name}!</h1>
+          <h1>Not sure what to put here</h1>
         </div>
         <div className={classes.main}>
          <div className={classes.conv}>

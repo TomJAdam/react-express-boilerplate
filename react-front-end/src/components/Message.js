@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '20px',
     boxShadow: "0px 2px 5px 0.5px #E3E3E3",
     maxWidth: '45%',
-    margin: '1rem 0.5rem 1rem 0.5rem'
+    margin: '0.5rem 0.5rem 0.5rem 0.5rem'
   },
 
   text: {

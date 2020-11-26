@@ -24,7 +24,7 @@ const useStyles = makeStyles((props) => ({
     textDecoration: 'none',
     color: 'black',
     '&:hover': {
-      // color: 'white'
+      color: 'white'
     }
   }
 }));
@@ -45,7 +45,7 @@ export default function Conversation(props) {
             <p>{props.contractor_first} {props.contractor_last}</p>
           </div>
         </Link>
-      </div> 
+      </div>
     ) : (<div className={classes.root}>
     <Link to={`/chat/?conv_id=${props.id}`}>
       <div>
