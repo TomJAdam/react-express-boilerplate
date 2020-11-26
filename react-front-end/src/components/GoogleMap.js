@@ -3,17 +3,17 @@ import { Map, GoogleApiWrapper, InfoWindow, Marker } from "google-maps-react";
 
 const mapStyles = {
   // trying to get width to change dynamically
-  maxWidth: 300,
-  maxHeight: 300,
+  maxWidth: "100%",
+  maxHeight: "100%",
   borderRadius: "8px",
   marginLeft: 14,
-  marginBottom: 20,
+  marginBottom: 50,
   boxShadow: "0px 2px 5px 0.5px #E3E3E3",
 };
 
-const containerStyles = {
-  maxWidth: 300,
-  maxHeight: 300,
+const containerStyle = {
+  maxWidth: "23%",
+  maxHeight: "30%",
 };
 
 export class GoogleMap extends Component {
@@ -49,7 +49,7 @@ export class GoogleMap extends Component {
         zoom={12}
         style={mapStyles}
         initialCenter={this.props.coords}
-        containerStyle={containerStyles}
+        containerStyle={containerStyle}
       >
         <Marker onClick={this.onMarkerClick} name={this.props.title} />
         <InfoWindow

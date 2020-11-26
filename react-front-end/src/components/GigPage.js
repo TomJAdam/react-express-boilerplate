@@ -87,18 +87,20 @@ export default function GigPage() {
                 description={gig.description}
               />
             </Grid>
-            <Grid item sm={3}>
-              <ContactCard
-                city={contractor.city}
-                phone={contractor.phone_number}
-                email={contractor.email}
-                first_name={contractor.first_name}
-                last_name={contractor.last_name}
-                contractor_id={contractor.id}
-                gig_id={gig.id}
-                onBooking={() => transition("SELECT")}
-              />
-              <Grid item sm={3}>
+            <Grid container item sm={3} direction={"column"}>
+              <Grid item>
+                <ContactCard
+                  city={contractor.city}
+                  phone={contractor.phone_number}
+                  email={contractor.email}
+                  first_name={contractor.first_name}
+                  last_name={contractor.last_name}
+                  contractor_id={contractor.id}
+                  gig_id={gig.id}
+                  onBooking={() => transition("SELECT")}
+                />
+              </Grid>
+              <Grid item>
                 <GoogleMap coords={coords} title={gig.title} />
               </Grid>
             </Grid>

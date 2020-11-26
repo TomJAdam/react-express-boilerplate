@@ -25,32 +25,36 @@ export default function App() {
   const gigsByUser = getGigbyUserId(cookie, state);
   const ordersByUser = getAllOrdersbyId(cookie, state);
 
+  const style = {
+    marginTop: 65,
+  };
   return (
     <div className="App">
       <UserCookie.Provider value={{ cookie, setCookie, state, setState }}>
         <Router>
           <Navbar ordersByUser={ordersByUser} />
           <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/chat" component={Chat} />
-            <Route path="/signin">
-              {cookie.user ? <Redirect to="/" /> : <SignIn />}
-            </Route>
-            <Route path="/signup">
-              {cookie.user ? <Redirect to="/" /> : <SignUp />}
-            </Route>
-            <Route path="/logout">
-              <Redirect to="/" />
-            </Route>
-            <Route path="/gigs" component={Gigs} />
-            <Route path="/profile">
-              {cookie.user ? (
-                <UserProfile user={cookie.user} gigs={gigsByUser} />
-              ) : (
-                <Redirect to="/signin" />
-              )}
-            </Route>
-            <Route path="/myorder">
+            <div style={style}>
+              <Route exact path="/" component={Home} />
+              <Route path="/chat" component={Chat} />
+              <Route path="/signin">
+                {cookie.user ? <Redirect to="/" /> : <SignIn />}
+              </Route>
+              <Route path="/signup">
+                {cookie.user ? <Redirect to="/" /> : <SignUp />}
+              </Route>
+              <Route path="/logout">
+                <Redirect to="/" />
+              </Route>
+              <Route path="/gigs" component={Gigs} />
+              <Route path="/profile">
+                {cookie.user ? (
+                  <UserProfile user={cookie.user} gigs={gigsByUser} />
+                ) : (
+                  <Redirect to="/signin" />
+                )}
+              </Route>
+              <Route path="/myorder">
               {/* {cookie.user ? (
                 <MyOrder user={cookie.user} gigs={gigsByUser} />
               ) : (
@@ -58,9 +62,10 @@ export default function App() {
               )} */}
               <MyOrder user={cookie.user} orders={ordersByUser} />
             </Route>
-            <Route path="/search/:search">
-              <SearchResults />
-            </Route>
+              <Route path="/search/:search">
+                <SearchResults />
+              </Route>
+            </div>
           </Switch>
           <IndexBottom />
         </Router>

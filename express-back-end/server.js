@@ -54,10 +54,11 @@ io.on('connection', (socket) => {
       VALUES (${room}, ${user.id}, '${message}')
       RETURNING *;`)
     .then(() => {
+      io.to(room).emit('message', { user: user.id, text: message });
+      callback();
       
     })
-    io.to(room).emit('message', { user: user.id, text: message });
-    callback();
+    .catch(error => console.log(error));
   })
 
 

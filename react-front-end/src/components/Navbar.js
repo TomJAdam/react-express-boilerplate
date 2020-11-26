@@ -32,6 +32,8 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: "0 3px 5px 2px grey",
     color: "black",
     padding: "0 30px",
+    position: "fixed",
+    top: 0,
   },
   grow: {
     flexGrow: 1,
@@ -115,12 +117,12 @@ const useStyles = makeStyles((theme) => ({
     padding: "12px",
   },
   link: {
-    textDecoration: 'none',
-    color: 'black'
+    textDecoration: "none",
+    color: "black",
     // '&:visited':{
     //   color: 'green'
     // }
-  }
+  },
 }));
 
 export default function Navbar(props) {
@@ -197,10 +199,10 @@ export default function Navbar(props) {
         <>
           <MenuItem>
             <IconButton aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                {/* <Link to='/chat' > */}
+              <Badge badgeContent={0} color="secondary">
+                <Link to='/chat' >
                   <MailIcon />
-                {/* </Link> */}
+                </Link>
               </Badge>
             </IconButton>
             <p>Messages</p>
@@ -324,10 +326,10 @@ export default function Navbar(props) {
                   <p>Welcome, {cookie.user.first_name}</p>
                 </Typography>
                 <IconButton aria-label="show 4 new mails" color="inherit">
-                  <Badge badgeContent={4} color="secondary">
-                    {/* <Link to="/chat" className={classes.link}> */}
+                  <Badge badgeContent={0} color="secondary">
+                    <Link to="/chat" className={classes.link}>
                       <MailIcon />
-                    {/* </Link> */}
+                    </Link>
                   </Badge>
                 </IconButton>
                 <IconButton aria-label="show new notifications" color="inherit">

@@ -16,6 +16,9 @@ const useStyles = makeStyles((theme) => ({
   control: {
     padding: theme.spacing(2),
   },
+  title: {
+    textAlign: "center",
+  },
 }));
 
 export default function GigGrid(props) {
@@ -24,6 +27,7 @@ export default function GigGrid(props) {
   return (
     <Grid container className={classes.root}>
       <Grid item xs={12}>
+        <h1 className={classes.title}>{props.category}</h1>
         <Grid container justify="center">
           {props.gigs.map((gig) => {
             return (
