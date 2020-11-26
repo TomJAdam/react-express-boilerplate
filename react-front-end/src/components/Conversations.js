@@ -10,7 +10,8 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     boxShadow: "0px 2px 5px 0.5px #E3E3E3",
     height: '100%',
-    borderRadius: '10px'
+    borderRadius: '10px',
+    padding: '10px'
 
   },
 
@@ -39,7 +40,7 @@ export default function Conversations(props) {
   return (
     conversations.length !== 0 ? (
       <div className={classes.root}>
-      <h3 className={classes.title}>Conversations</h3>
+      <h2 className={classes.title}>Conversations</h2>
       {conversations.map(conversation => {
         console.log(conversation)
           return <Conversation conv_id={props.conv_id} {...conversation} userID={userID}/>

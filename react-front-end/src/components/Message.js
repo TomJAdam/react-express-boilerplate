@@ -5,17 +5,19 @@ const useStyles = makeStyles((theme) => ({
 
   root: {
     display: 'flex',
+    height: 'auto'
   },
 
   message: {
     borderRadius: '20px',
     boxShadow: "0px 2px 5px 0.5px #E3E3E3",
-    maxWidth: '45%',
+    maxWidth: '80%',
     margin: '0.5rem 0.5rem 0.5rem 0.5rem'
   },
 
   text: {
     padding: '10px',
+    margin: '0'
   },
 
   sentContainer: {
