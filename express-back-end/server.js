@@ -49,10 +49,16 @@ io.on('connection', (socket) => {
     console.log('text', message);
     // console.log('this is the user', user.id);
     // console.log('this is the room', room);
+    const queryParams = [
+      room,
+      user.id,
+      message
+    ];
+
     db.query(
       `INSERT INTO messages (conversation_id, sender_id, text)
-      VALUES (${room}, ${user.id}, '${message}')
-      RETURNING *;`)
+      VALUES ($1, $2, $3)
+      RETURNING *;`, queryParams)
     .then(() => {
       console.log('is this printing');
       io.to(room).emit('message', { user: user.id, text: message });
