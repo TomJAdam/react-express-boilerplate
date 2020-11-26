@@ -10,6 +10,7 @@ import {
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 import UserProfile from "./components/user_profile";
+import MyOrder from "./components/MyOrder";
 import Home from "./components/Home";
 import Gigs from "./components/Gigs";
 import Chat from "./components/Chat";
@@ -48,6 +49,14 @@ export default function App() {
               ) : (
                 <Redirect to="/signin" />
               )}
+            </Route>
+            <Route path="/myorder">
+              {/* {cookie.user ? (
+                <MyOrder user={cookie.user} gigs={gigsByUser} />
+              ) : (
+                <Redirect to="/signin" />
+              )} */}
+              <MyOrder user={cookie.user} orders={ordersByUser} />
             </Route>
             <Route path="/search/:search">
               <SearchResults />
