@@ -47,6 +47,9 @@ const getAllOrdersbyClientId = (cookie, state) => {
   return user && ordersWithGigs.filter((order) => order.client_id === user.id);
 };
 
+const getUserById = (id, users) => {
+  return users && users.find(user => user.id === id);
+}
 const getDateFormat = (date) => {
   const options = {
     weekday: "long",
@@ -75,6 +78,7 @@ export {
   check,
   getAllOrdersbyContractorId,
   getAllOrdersbyClientId,
+  getUserById,
   getDateFormat,
   getDayFormat,
   dateBooked,

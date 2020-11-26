@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignUp() {
-  const { setCookie } = useContext(UserCookie);
+  const { setCookie, state, setState } = useContext(UserCookie);
   const [user, setUser] = useState({
     first_name: "",
     last_name: "",
@@ -66,6 +66,8 @@ export default function SignUp() {
 
   const createUser = (user) => {
     return axios.put(`/api/users`, user).then((res) => {
+      const users = [...state.users, user];
+      setState({...state, users});
       setCookie((prev) => ({ ...prev, ...res.data }));
     });
   };

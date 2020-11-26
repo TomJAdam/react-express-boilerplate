@@ -6,6 +6,9 @@ import CardHeader from "@material-ui/core/CardHeader";
 import Typography from "@material-ui/core/Typography";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import TimePicker from "./TimePicker";
+import UserCard from "./UserCard";
+import OrderButton from "./Button";
+import Status from "./Status";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,11 +33,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function OrderItem(props) {
+  
   const classes = useStyles();
   const { order, otherOrders } = props;
   const orderDate = order.order_date;
   const disabledDate = otherOrders.map(order => new Date(order.order_date));
- 
+  
+
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
@@ -42,7 +47,7 @@ export default function OrderItem(props) {
           container
           direction="row"
           justify="space-between"
-          alignItems="stretching"
+          alignItems="center"
         >
           <Grid item xs={3} justify="center">
             <img
@@ -54,9 +59,11 @@ export default function OrderItem(props) {
           <Grid item container direction="column" xs={7} alignItems="center">
             <CardHeader title={order.gig.title} />
             <TimePicker orderDate={orderDate} disabledDate={disabledDate}/>
+            <UserCard user={props.user} role={props.role}/>
           </Grid>
           <Grid item xs={2} container direction="column" justify="center">
-            <ButtonBase>This is button</ButtonBase>
+            <Status order={order}/>
+            {order.status === "pending" && <OrderButton />}
           </Grid>
         </Grid>
       </Paper>

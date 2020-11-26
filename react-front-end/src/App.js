@@ -25,7 +25,6 @@ export default function App() {
   const gigsByUser = getGigbyUserId(cookie, state);
   const ordersByUserAsContractor = getAllOrdersbyContractorId(cookie, state);
   const ordersByUserAsClient = getAllOrdersbyClientId(cookie, state);
-  
   const style = {
     marginTop: 65,
   };
