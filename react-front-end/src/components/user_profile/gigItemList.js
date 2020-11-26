@@ -45,6 +45,10 @@ const useStyles = makeStyles((theme) => ({
   delete: {
     marginLeft: 17,
     color: "black",
+    cursor: "pointer",
+    "&:hover": {
+      transform: "scale(1.2)",
+    },
   },
 }));
 
