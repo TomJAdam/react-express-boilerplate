@@ -160,22 +160,27 @@ export default function Chat({ location }) {
 
   return cookie.user ? (
     <div className={classes.root}>
-      <div className={classes.header}>
-        <div
-          style={{
-            backgroundImage:
-              "url(https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2689&q=80)",
-            width: "100vw",
-            height: "13rem",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            backgroundSize: "cover",
-            backgroundRepeat: "no-repeat",
-          }}
-        >
-          <h1 className={classes.headerTitle}>Messenging</h1>
-        </div>
+
+
+        <div className={classes.header}>
+          <div
+            style={{
+              backgroundImage:
+                "url(https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2689&q=80)",
+              width: "100vw",
+              height: "13rem",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              backgroundSize: "cover",
+              backgroundRepeat: "no-repeat",
+            }}
+          >
+            <h1 className={classes.headerTitle}>Messenging</h1>
+          </div>
+          </div>
+
+
         <div className={classes.main}>
          <div className={classes.conv}>
            <Conversations conv_id={conv_id} userID={cookie.user.id}/>
@@ -205,7 +210,5 @@ export default function Chat({ location }) {
      </div>
     ) : <h1>Whoops! There seems to have been an error.</h1>
 
-    
-
-  )
+  
 }
