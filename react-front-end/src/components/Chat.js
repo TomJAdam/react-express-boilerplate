@@ -189,7 +189,7 @@ export default function Chat({ location }) {
          }
       </div>
      </div>
-    ) : <h1>not loaded lol</h1>
+    ) : <h1>Whoops! There seems to have been an error.</h1>
 
     
 

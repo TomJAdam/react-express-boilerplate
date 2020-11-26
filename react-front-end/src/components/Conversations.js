@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 import Conversation from './Conversation';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((props) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
@@ -12,19 +12,22 @@ const useStyles = makeStyles((theme) => ({
     minHeight: '400px',
     borderRadius: '10px',
     padding: '10px'
-
+  },
+  
+  empty: {
+    minHeight: '100px',
   },
 
   title: {
     borderBottom: '2px solid #0EE290',
-    width: '60%'
+    padding: '5px'
   }
 }));
 
 
 export default function Conversations(props) {
 
-  const classes = useStyles();
+  const classes = useStyles(props);
   const { userID } = props;
   const [conversations, setConversations] = useState([]);
   // console.log('in conversations !!!!', props.conv_id)
@@ -39,11 +42,15 @@ export default function Conversations(props) {
   return (
     conversations.length !== 0 ? (
       <div className={classes.root}>
-      <h2 className={classes.title}>Conversations</h2>
+      <h3 className={classes.title}>Conversations</h3>
       {conversations.map(conversation => {
           return <Conversation conv_id={props.conv_id} {...conversation} userID={userID}/>
       })}
     </div>
-    ) : <h1>hi</h1>
+    ) 
+    : 
+      <div className={`${classes.root} ${classes.empty}`}>
+        <h3 className={classes.title}>No Conversations</h3>
+      </div>
   )
 }
