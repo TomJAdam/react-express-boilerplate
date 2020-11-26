@@ -121,31 +121,19 @@ export default function Chat({ location }) {
 
   useEffect(() => {
     const { conv_id } = queryString.parse(location.search);
-    // console.log(conv_id);
     setRoom(conv_id);
-    // console.log('room', room);
     socket = io(ENDPOINT);
     socket.emit("join", { conv_id }, () => {});
+
+    socket.on('message', (message) => {
+      setMessages(prev =>[...prev, message])
+    })
 
     return () => {
       socket.emit('disconnect');
       socket.off();
     };
   }, [ENDPOINT, location.search]);
-
-  useEffect(() => {
-    socket.on('message', (message) => {
-      // if (conv_id) {
-      //   axios.get(`/api/messages/${conv_id}`).then(response => {
-      //     console.log('is this being called - this seems to be the source of increased delays');
-      //     setMessages(response.data);
-      //   })
-      // }
-      console.log('message from the socket', message);
-      console.log(messages);
-      setMessages([...messages, message])
-    })
-  },[messages])
 
   const sendMessage = (message, event) => {
 
@@ -156,7 +144,6 @@ export default function Chat({ location }) {
     }
   };
 
-  // console.log('cookie', cookie.user.first_name);
 
   return cookie.user ? (
     <div className={classes.root}>
