@@ -59,20 +59,6 @@ export default function Categories() {
       <PopularHeading />
       <Grid container className={classes.card}>
         <Carousel categories={categories} />
-        {/* <Grid item xs={12}>
-          <Grid container justify="center">
-            {categories.map((category) => {
-              return (
-                <CategoryCard
-                  key={category.id}
-                  id={category.id}
-                  name={category.name}
-                  avatar={category.img}
-                />
-              );
-            })}
-          </Grid>
-        </Grid> */}
       </Grid>
     </div>
   );
