@@ -32,6 +32,8 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: "0 3px 5px 2px grey",
     color: "black",
     padding: "0 30px",
+    position: "fixed",
+    top: 0,
   },
   grow: {
     flexGrow: 1,
@@ -115,12 +117,12 @@ const useStyles = makeStyles((theme) => ({
     padding: "12px",
   },
   link: {
-    textDecoration: 'none',
-    color: 'black'
+    textDecoration: "none",
+    color: "black",
     // '&:visited':{
     //   color: 'green'
     // }
-  }
+  },
 }));
 
 export default function Navbar(props) {
@@ -199,7 +201,7 @@ export default function Navbar(props) {
             <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="secondary">
                 {/* <Link to='/chat' > */}
-                  <MailIcon />
+                <MailIcon />
                 {/* </Link> */}
               </Badge>
             </IconButton>
@@ -326,7 +328,7 @@ export default function Navbar(props) {
                 <IconButton aria-label="show 4 new mails" color="inherit">
                   <Badge badgeContent={4} color="secondary">
                     {/* <Link to="/chat" className={classes.link}> */}
-                      <MailIcon />
+                    <MailIcon />
                     {/* </Link> */}
                   </Badge>
                 </IconButton>
