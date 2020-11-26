@@ -20,7 +20,7 @@ export default function Home() {
       <PageHeader />
       <Categories />
       <TopGigs />
-      <Stripe />
+      {/* <Stripe /> */}
     </div>
   );
 }

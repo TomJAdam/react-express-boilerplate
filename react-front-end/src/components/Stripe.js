@@ -45,6 +45,11 @@ export default function Stripe() {
     const stripe = await stripePromise;
     const response = await fetch("/create-session", {
       method: "POST",
+      headers: new Headers({
+        "Content-type": "application/json; charset=UTF-8",
+      }),
+      // PASS ORDER DATA HERE
+      body: JSON.stringify({ transaction: { order_id: 1, price: 420 } }),
     });
     const session = await response.json();
     // When the customer clicks on the button, redirect them to Checkout.

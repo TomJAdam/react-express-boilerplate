@@ -79,6 +79,7 @@ const conversations = require("./src/routes/conversations");
 const messages = require("./src/routes/messages");
 const validation = require("./src/routes/validation")(helpers);
 const orders = require("./src/routes/orders")(helpers);
+const transactions = require("./src/routes/transactions");
 
 // API Router
 App.use("/api", gigs(db));
@@ -89,6 +90,7 @@ App.use("/api", messages(db));
 // App.use("/api", messages(db));
 App.use("/", validation);
 App.use("/api", orders);
+App.use("/api", transactions(db));
 
 // Port Listening
 server.listen(PORT, () => {
@@ -105,7 +107,7 @@ const stripe = require("stripe")(
 const YOUR_DOMAIN = "http://localhost:3000/checkout";
 
 App.post("/create-session", async (req, res) => {
-  console.log("req :", req);
+  console.log("req :", req.body);
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
     line_items: [
