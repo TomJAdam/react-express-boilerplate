@@ -103,13 +103,13 @@ export default function Chat({ location }) {
 
   useEffect(() => {
 
-    console.log('THE CONVERSATION ID', conv_id);
+    // console.log('THE CONVERSATION ID', conv_id);
 
     if (conv_id) {
       axios.get(`/api/messages/${conv_id}`).then(response => {
-        console.log(response.data);
+        // console.log('AFTER THE MESSAGES API CALL', response.data);
         setMessages(response.data);
-        console.log('messages', messages);
+        // console.log('messages', messages);
       })
     }
     
@@ -118,22 +118,23 @@ export default function Chat({ location }) {
 
   useEffect(() => {
     const { conv_id } = queryString.parse(location.search);
-    console.log(conv_id);
+    // console.log(conv_id);
     setRoom(conv_id);
-    console.log('room', room);
+    // console.log('room', room);
     socket = io(ENDPOINT);
     socket.emit('join', { conv_id }, () => {
 
     });
 
     return () => {
+      socket.emit('disconnect');
       socket.off();
     }
   },[ENDPOINT, location.search])
 
   useEffect(() => {
     socket.on('message', (message) => {
-      console.log('message from the socket', message);
+      // console.log('message from the socket', message);
       setMessages([...messages, message])
     })
   },[messages])

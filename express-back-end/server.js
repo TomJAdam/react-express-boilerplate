@@ -26,7 +26,7 @@ App.use(cookieSession({
 
 // Socket IO
 const server = http.createServer(App);
-const io = socketio(server);
+const io = socketio(server, { wsEngine: 'ws' });
 
 io.on('connection', (socket) => {
 
@@ -35,7 +35,7 @@ io.on('connection', (socket) => {
 
   socket.on('join', ({ conv_id }, callback) => {
 
-    console.log('at the server', conv_id);
+    // console.log('at the server', conv_id);
 
     room = conv_id;
 
@@ -47,8 +47,8 @@ io.on('connection', (socket) => {
 
   socket.on('sendMessage', (message, user, callback) => {
     console.log('text', message);
-    console.log('this is the user', user.id);
-    console.log('this is the room', room);
+    // console.log('this is the user', user.id);
+    // console.log('this is the room', room);
     db.query(
       `INSERT INTO messages (conversation_id, sender_id, text)
       VALUES (${room}, ${user.id}, '${message}')

@@ -26,7 +26,7 @@ const useStyles = makeStyles((props) => ({
     color: props => props.id === parseInt(props.conv_id) ? 'white' : 'black',
     '&:hover': {
       color: 'white'
-    }
+    },
   }
 }));
 
@@ -47,12 +47,13 @@ export default function Conversation(props) {
           </div>
         </div>
       </Link>
-    ) : (<div className={classes.root}>
-    <Link to={`/chat/?conv_id=${props.id}`}>
-      <div>
+    ) : (
+    <Link to={`/chat/?conv_id=${props.id}`} className={classes.root}>
+    <div className={classes.root}>
+      <div className={classes.link}>
         <p className={classes.link}>{props.client_first} {props.client_last}</p>
       </div>
-    </Link>
-  </div> )
+    </div> 
+  </Link>)
   )
 }

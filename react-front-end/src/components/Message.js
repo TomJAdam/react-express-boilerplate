@@ -45,9 +45,6 @@ export default function Message(props) {
 
   const classes = useStyles();
 
-  // console.log('props', props);
-  console.log('this is the user in the message component', props.sender_id);
-
   return(
     props.user === props.userID || props.sender_id === props.userID ? (
       <div className={classes.root} style={{justifyContent: 'flex-end'}}>

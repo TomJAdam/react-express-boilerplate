@@ -14,7 +14,7 @@ module.exports = (db) => {
       WHERE client_id = ${req.params.user_id}
       OR contractor_id = ${req.params.user_id}`)
     .then(data => {
-      console.log(data.rows);
+      // console.log('we are at the conversations endpoint');
       res.send(data.rows);
     })
   })
