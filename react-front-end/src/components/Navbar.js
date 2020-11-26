@@ -179,7 +179,7 @@ export default function Navbar(props) {
         <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       </Link>
       <Link to="/myorder" className={classes.title}>
-      <MenuItem onClick={handleMenuClose}>My Orders</MenuItem>
+        <MenuItem onClick={handleMenuClose}>My Orders</MenuItem>
       </Link>
     </Menu>
   );
@@ -200,7 +200,7 @@ export default function Navbar(props) {
           <MenuItem>
             <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={0} color="secondary">
-                <Link to='/chat' >
+                <Link to="/chat">
                   <MailIcon />
                 </Link>
               </Badge>
@@ -289,7 +289,7 @@ export default function Navbar(props) {
           </IconButton>
           <Link to="/" className={classes.title}>
             <Typography className={classes.title} variant="h4" noWrap>
-              SimpliFix
+              <b>SimpliFix</b>
             </Typography>
           </Link>
           <div className={classes.search}>

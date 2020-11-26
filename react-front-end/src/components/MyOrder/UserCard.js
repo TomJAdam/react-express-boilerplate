@@ -8,8 +8,8 @@ import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import { red } from "@material-ui/core/colors";
 import EmailIcon from "@material-ui/icons/Email";
-import PhoneIcon from '@material-ui/icons/Phone';
-import HomeIcon from '@material-ui/icons/Home';
+import PhoneIcon from "@material-ui/icons/Phone";
+import HomeIcon from "@material-ui/icons/Home";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,8 +31,9 @@ const useStyles = makeStyles((theme) => ({
   expandOpen: {
     transform: "rotate(180deg)",
   },
-  avatar: {
-    backgroundColor: red[500],
+  header: {
+    alignSelf: "center",
+    width: "80%",
   },
 }));
 
@@ -48,12 +49,14 @@ export default function RecipeReviewCard(props) {
   return (
     <Card className={classes.root}>
       <CardHeader
+        className={classes.header}
         avatar={
           <Avatar alt={role} src={user.avatar_img} className={classes.large} />
         }
         title={`${user.first_name} ${user.last_name}`}
         subheader={role}
       />
+
       <CardContent>
         <Grid
           container
@@ -64,22 +67,22 @@ export default function RecipeReviewCard(props) {
           wrap="wrap"
         >
           <Grid item>
-          <EmailIcon />
-          <Typography variant="body2" color="textSecondary" component="p" >
-            {user.email}
-          </Typography>
+            <EmailIcon />
+            <Typography variant="body2" color="textSecondary" component="p">
+              {user.email}
+            </Typography>
           </Grid>
           <Grid item>
             <PhoneIcon />
-            <Typography variant="body2" color="textSecondary" component="p" >
-            {user.phone_number}
-          </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+              {user.phone_number}
+            </Typography>
           </Grid>
           <Grid item>
             <HomeIcon />
-            <Typography variant="body2" color="textSecondary" component="p" >
-            {user.city}, {user.province}
-          </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+              {user.city}, {user.province}
+            </Typography>
           </Grid>
         </Grid>
       </CardContent>
