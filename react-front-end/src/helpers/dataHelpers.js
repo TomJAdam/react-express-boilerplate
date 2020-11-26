@@ -5,25 +5,81 @@ const getGigbyUserId = (cookie, state) => {
 };
 
 const check = (personA, personB, conversations) => {
-  return conversations.filter(conversation => 
-    (personA === conversation.client_id && personB === conversation.contractor_id) ||
-    (personB === conversation.client_id && personA === conversation.contractor_id)
+  return conversations.filter(
+    (conversation) =>
+      (personA === conversation.client_id &&
+        personB === conversation.contractor_id) ||
+      (personB === conversation.client_id &&
+        personA === conversation.contractor_id)
   )[0];
-}
+};
 
-const getAllOrdersbyId = (cookie, state) => {
+const getAllOrdersbyContractorId = (cookie, state) => {
   const user = cookie.user;
-  const {orders, gigs} = state;
+  const { orders, gigs } = state;
   const ordersWithGigs = [];
-  orders.forEach(order => {
+  orders.forEach((order) => {
     for (let gig of gigs) {
-      if (gig.id === order.gig_id){
-       ordersWithGigs.push({...order, gig});
+      if (gig.id === order.gig_id) {
+        ordersWithGigs.push({ ...order, gig });
       }
     }
   });
 
-  return user && ordersWithGigs.filter(order => order.gig.contractor_id === user.id);
-}
+  return (
+    user &&
+    ordersWithGigs.filter((order) => order.gig.contractor_id === user.id)
+  );
+};
 
-export { getGigbyUserId, check, getAllOrdersbyId };
+const getAllOrdersbyClientId = (cookie, state) => {
+  const user = cookie.user;
+  const { orders, gigs } = state;
+  const ordersWithGigs = [];
+  orders.forEach((order) => {
+    for (let gig of gigs) {
+      if (gig.id === order.gig_id) {
+        ordersWithGigs.push({ ...order, gig });
+      }
+    }
+  });
+
+  return user && ordersWithGigs.filter((order) => order.client_id === user.id);
+};
+
+const getUserById = (id, users) => {
+  return users && users.find(user => user.id === id);
+}
+const getDateFormat = (date) => {
+  const options = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+  return date && date.toLocaleDateString(undefined, options);
+};
+const getDayFormat = (date) => {
+  date && date.setSeconds(0);
+  return date && date.toLocaleTimeString("en-US");
+};
+
+const dateBooked = (date, disabledDate) => {
+  return disabledDate.some(
+    (occupied) =>
+      occupied.getFullYear() === date.getFullYear() &&
+      occupied.getMonth() === date.getMonth() &&
+      occupied.getDate() === date.getDate()
+  );
+};
+
+export {
+  getGigbyUserId,
+  check,
+  getAllOrdersbyContractorId,
+  getAllOrdersbyClientId,
+  getUserById,
+  getDateFormat,
+  getDayFormat,
+  dateBooked,
+};

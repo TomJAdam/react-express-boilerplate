@@ -21,6 +21,7 @@
         "react-router-dom": "^5.2.0",
         "react-scripts": "2.1.8",
         "react-scroll-to-bottom": "^4.0.0",
+        "react-swipeable-views": "^0.13.9",
         "read-env": "^2.0.0",
         "socket.io-client": "^2.3.0",
         "styled-components": "^5.2.1"
