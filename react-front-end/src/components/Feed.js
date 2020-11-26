@@ -6,7 +6,7 @@ import ScrollToBottom from 'react-scroll-to-bottom';
 const useStyles = makeStyles((theme) => ({
 
   scroll: {
-    maxHeight: '700px',
+    maxHeight: '500px',
   }
 
 }));

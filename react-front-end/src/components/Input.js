@@ -11,8 +11,8 @@ const useStyles = makeStyles((theme) => ({
   },
 
   input: {
-    height: '2rem',
-    width: '80%',
+    height: '1.3rem',
+    width: '100%',
     border: '1px solid #E3E3E3',
     borderRadius: '20px 0px 0px 20px',
     padding: '10px',

@@ -1,4 +1,5 @@
 import React, { useEffect, useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
 import queryString from 'query-string';
 import { UserCookie } from "../hooks/UserCookie";
 import io from 'socket.io-client';
@@ -7,7 +8,9 @@ import Input from './Input';
 import Conversations from './Conversations';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
-import IndexBottom from './IndexBottom';
+import SendIcon from '@material-ui/icons/Send';
+import ChatIcon from '@material-ui/icons/Chat';
+import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
 
@@ -27,10 +30,11 @@ const useStyles = makeStyles((theme) => ({
   },
 
   main: {
+    padding: '2rem',
     width: '70%',
     display: 'flex',
     // position: 'absolute',
-    height: '800px',
+    height: '600px',
     // top: '220px'
   },
   
@@ -51,7 +55,34 @@ const useStyles = makeStyles((theme) => ({
     padding: '1rem',
     boxShadow: "0px 2px 5px 0.5px #E3E3E3",
     borderRadius: '8px'
-  }
+  },
+
+  emptyChat: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    position: 'relative',
+    background: 'white',
+    width: '60%',
+    // height: '400px',
+    padding: '1rem',
+    boxShadow: "0px 2px 5px 0.5px #E3E3E3",
+    borderRadius: '8px'
+  },
+  
+  iconContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+    height: '100%',
+  },
+
+  gigsBtn: {
+    backgroundColor: "#0EE290",
+    color: "white",
+    marginTop: "2rem",
+  },
 }));
 
 let socket;
@@ -134,7 +165,21 @@ export default function Chat({ location }) {
             <Feed messages={messages} userID={cookie.user.id}/>
             <Input message={message} setMessage={setMessage} sendMessage={sendMessage}/>
           </div> 
-          : <h1>Choose a chat</h1>
+          : <div className={classes.emptyChat}>
+            <h3>Select an existing conversation or browse the gigs to find a contractor and start chatting!</h3>
+            <Button
+              component={Link} to='/gigs'
+              type="submit"
+              size="medium"
+              variant="contained" 
+              className={classes.gigsBtn}
+            >
+              Browse Gigs
+            </Button>
+            <div className={classes.iconContainer}>
+              <ChatIcon style={{fontSize: '20rem', color: '#E3E3E3'}}/>
+            </div>
+          </div>
          }
       </div>
      </div>

@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
     boxShadow: "0px 2px 5px 0.5px #E3E3E3",
-    height: '100%',
+    minHeight: '400px',
     borderRadius: '10px',
     padding: '10px'
 
