@@ -1,146 +1,163 @@
-import React, { useEffect, useContext, useState } from 'react';
-import queryString from 'query-string';
+import React, { useEffect, useContext, useState } from "react";
+import queryString from "query-string";
 import { UserCookie } from "../hooks/UserCookie";
-import io from 'socket.io-client';
-import Feed from './Feed';
-import Input from './Input';
-import Conversations from './Conversations';
-import { makeStyles } from '@material-ui/core/styles';
-import axios from 'axios';
-import IndexBottom from './IndexBottom';
+import io from "socket.io-client";
+import Feed from "./Feed";
+import Input from "./Input";
+import Conversations from "./Conversations";
+import { makeStyles } from "@material-ui/core/styles";
+import axios from "axios";
+import IndexBottom from "./IndexBottom";
 
 const useStyles = makeStyles((theme) => ({
-
   root: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
 
   header: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '100vw',
-    background: '#E3E3E3',
-    height: '200px'
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100vw",
+    background: "#E3E3E3",
+    height: "200px",
+    marginBottom: "3em",
   },
 
   main: {
-    width: '70%',
-    display: 'flex',
+    width: "70%",
+    display: "flex",
     // position: 'absolute',
-    height: '800px',
+    height: "800px",
     // top: '220px'
   },
-  
+
   conv: {
-    width: '40%',
-    marginRight: '2rem',
-    background: 'white',
-    borderRadius: '10px'
+    width: "40%",
+    marginRight: "2rem",
+    background: "white",
+    borderRadius: "10px",
   },
 
   chat: {
-    display: 'flex',
-    flexDirection: 'column',
-    position: 'relative',
-    justifyContent: 'flex-end',
-    background: 'white',
-    width: '60%',
-    padding: '1rem',
+    display: "flex",
+    flexDirection: "column",
+    position: "relative",
+    justifyContent: "flex-end",
+    background: "white",
+    width: "60%",
+    padding: "1rem",
     boxShadow: "0px 2px 5px 0.5px #E3E3E3",
-    borderRadius: '8px'
-  }
+    borderRadius: "8px",
+  },
+  headerTitle: {
+    color: "white",
+    padding: "1em 5em",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    width: "50%",
+    alignSelf: "center",
+  },
 }));
 
 let socket;
 
 export default function Chat({ location }) {
-
   const classes = useStyles();
 
   const { cookie, setCookie } = useContext(UserCookie);
   const [conversationID, setConversationID] = useState(null);
   const [room, setRoom] = useState(null);
   const [userID, setUserID] = useState(null);
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
-  const ENDPOINT = 'localhost:8080';
+  const ENDPOINT = "localhost:8080";
 
   const { conv_id } = queryString.parse(location.search);
 
   useEffect(() => {
-
-    console.log('THE CONVERSATION ID', conv_id);
+    console.log("THE CONVERSATION ID", conv_id);
 
     if (conv_id) {
-      axios.get(`/api/messages/${conv_id}`).then(response => {
+      axios.get(`/api/messages/${conv_id}`).then((response) => {
         console.log(response.data);
         setMessages(response.data);
-        console.log('messages', messages);
-      })
+        console.log("messages", messages);
+      });
     }
-    
-  },[room]);
-
+  }, [room]);
 
   useEffect(() => {
     const { conv_id } = queryString.parse(location.search);
     console.log(conv_id);
     setRoom(conv_id);
-    console.log('room', room);
+    console.log("room", room);
     socket = io(ENDPOINT);
-    socket.emit('join', { conv_id }, () => {
-
-    });
+    socket.emit("join", { conv_id }, () => {});
 
     return () => {
       socket.off();
-    }
-  },[ENDPOINT, location.search])
+    };
+  }, [ENDPOINT, location.search]);
 
   useEffect(() => {
-    socket.on('message', (message) => {
-      console.log('message from the socket', message);
-      setMessages([...messages, message])
-    })
-  },[messages])
+    socket.on("message", (message) => {
+      console.log("message from the socket", message);
+      setMessages([...messages, message]);
+    });
+  }, [messages]);
 
   const sendMessage = (event) => {
-
     event.preventDefault();
 
-    if(message) {
-      socket.emit('sendMessage', message, { id: cookie.user.id }, () => setMessage(''))
+    if (message) {
+      socket.emit("sendMessage", message, { id: cookie.user.id }, () =>
+        setMessage("")
+      );
     }
-  }
+  };
 
   // console.log('cookie', cookie.user.first_name);
 
-  return (
-
-    cookie.user ? (
-      <div className={classes.root}>
-        <div className={classes.header}>
-          <h1>Not sure what to put here</h1>
+  return cookie.user ? (
+    <div className={classes.root}>
+      <div className={classes.header}>
+        <div
+          style={{
+            backgroundImage:
+              "url(https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2689&q=80)",
+            width: "100vw",
+            height: "13rem",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+          }}
+        >
+          <h1 className={classes.headerTitle}>Messenging</h1>
         </div>
-        <div className={classes.main}>
-         <div className={classes.conv}>
-           <Conversations conv_id={conv_id} userID={cookie.user.id}/>
-         </div>
-         {
-          conv_id ? <div className={classes.chat}>
-            <Feed messages={messages} userID={cookie.user.id}/>
-            <Input message={message} setMessage={setMessage} sendMessage={sendMessage}/>
-          </div> 
-          : <h1>Choose a chat</h1>
-         }
       </div>
-     </div>
-    ) : <h1>not loaded lol</h1>
-
-    
-
-  )
+      <div className={classes.main}>
+        <div className={classes.conv}>
+          <Conversations conv_id={conv_id} userID={cookie.user.id} />
+        </div>
+        {conv_id ? (
+          <div className={classes.chat}>
+            <Feed messages={messages} userID={cookie.user.id} />
+            <Input
+              message={message}
+              setMessage={setMessage}
+              sendMessage={sendMessage}
+            />
+          </div>
+        ) : (
+          <h1>Choose a chat</h1>
+        )}
+      </div>
+    </div>
+  ) : (
+    <h1>not loaded lol</h1>
+  );
 }

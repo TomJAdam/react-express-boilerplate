@@ -25,6 +25,12 @@ module.exports = (db) => {
     })
   );
 
+  router.get("/top", (req, res) =>
+    db.query(`SELECT * FROM gigs LIMIT 6;`).then((data) => {
+      res.send(data.rows);
+    })
+  );
+
   // router.get('/gigs/:category/:id', (req, res) => {
   //   db.query(`SELECT * FROM gigs WHERE id = ${req.params.id}`)
   // });
@@ -56,13 +62,14 @@ module.exports = (db) => {
   });
 
   router.delete("/gigs/:id", (req, res) => {
-    return db.query(
-      `DELETE FROM gigs WHERE id = ${req.params.id};`
-    ).then(data => res.json({
-      message: `gigs#${req.params.id} is removed`
-    })
-    ).catch(err => res.status(400).send(err));
-    
+    return db
+      .query(`DELETE FROM gigs WHERE id = ${req.params.id};`)
+      .then((data) =>
+        res.json({
+          message: `gigs#${req.params.id} is removed`,
+        })
+      )
+      .catch((err) => res.status(400).send(err));
   });
 
   router.get("/search/:search", (req, res) => {
