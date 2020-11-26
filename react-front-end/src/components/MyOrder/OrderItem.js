@@ -62,8 +62,8 @@ export default function OrderItem(props) {
           </Grid>
           <Grid item xs={2} container direction="column" justify="center">
             <Status order={order}/>
-            {props.role !== "Client" && <ClientButton />}
-            {props.role !== "Contractor" && <ContractorButton />}
+            {props.role !== "Client" && <ClientButton order={order}/>}
+            {props.role !== "Contractor" && <ContractorButton order={order}/>}
           </Grid>
         </Grid>
       </Paper>
