@@ -8,7 +8,6 @@ import Input from './Input';
 import Conversations from './Conversations';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
-import SendIcon from '@material-ui/icons/Send';
 import ChatIcon from '@material-ui/icons/Chat';
 import Button from "@material-ui/core/Button";
 
@@ -33,9 +32,7 @@ const useStyles = makeStyles((theme) => ({
     padding: '2rem',
     width: '70%',
     display: 'flex',
-    // position: 'absolute',
     height: '600px',
-    // top: '220px'
   },
 
   conv: {
@@ -64,7 +61,6 @@ const useStyles = makeStyles((theme) => ({
     position: 'relative',
     background: 'white',
     width: '60%',
-    // height: '400px',
     padding: '1rem',
     boxShadow: "0px 2px 5px 0.5px #E3E3E3",
     borderRadius: '8px'
@@ -96,15 +92,12 @@ const useStyles = makeStyles((theme) => ({
 let socket;
 
 export default function Chat({ location }) {
+
   const classes = useStyles();
-
-  // console.log('is the chat being rendered')
-
   const { cookie, setCookie } = useContext(UserCookie);
   const [conversationID, setConversationID] = useState(null);
   const [room, setRoom] = useState(null);
   const [userID, setUserID] = useState(null);
-  // const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
   const ENDPOINT = "localhost:8080";
 
@@ -163,11 +156,9 @@ export default function Chat({ location }) {
               backgroundRepeat: "no-repeat",
             }}
           >
-            <h1 className={classes.headerTitle}>Messenging</h1>
+            <h1 className={classes.headerTitle}>Messaging</h1>
           </div>
           </div>
-
-
         <div className={classes.main}>
          <div className={classes.conv}>
            <Conversations conv_id={conv_id} userID={cookie.user.id}/>
@@ -196,6 +187,4 @@ export default function Chat({ location }) {
       </div>
      </div>
     ) : <h1>Whoops! There seems to have been an error.</h1>
-
-  
 }
