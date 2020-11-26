@@ -10,6 +10,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Chip from "@material-ui/core/Chip";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
+import {getDateFormat,getDayFormat} from "../../helpers/dataHelpers";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -50,19 +51,7 @@ const useStyles = makeStyles((theme) => ({
 export default function BookingDetails(props) {
   
   const classes = useStyles();
-  const getDateFormat = (date) => {
-    const options = {
-      weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    };
-    return date && date.toLocaleDateString(undefined, options);
-  };
-  const getDayFormat = (date) => {
-    date && date.setSeconds(0);
-    return date && date.toLocaleTimeString("en-US");
-  };
+  
 
   return (
     <div className={classes.root}>

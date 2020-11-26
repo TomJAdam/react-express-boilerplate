@@ -16,15 +16,16 @@ import Gigs from "./components/Gigs";
 import Chat from "./components/Chat";
 import { UserCookie } from "./hooks/UserCookie";
 import useAppData from "./hooks/useAppData";
-import { getGigbyUserId, getAllOrdersbyId } from "./helpers/dataHelpers";
+import { getGigbyUserId, getAllOrdersbyContractorId, getAllOrdersbyClientId } from "./helpers/dataHelpers";
 import SearchResults from "./components/SearchResults";
 import IndexBottom from "./components/IndexBottom";
 
 export default function App() {
   const { cookie, state, setCookie, setState } = useAppData();
   const gigsByUser = getGigbyUserId(cookie, state);
-  const ordersByUser = getAllOrdersbyId(cookie, state);
-
+  const ordersByUserAsContractor = getAllOrdersbyContractorId(cookie, state);
+  const ordersByUserAsClient = getAllOrdersbyClientId(cookie, state);
+  
   const style = {
     marginTop: 65,
   };
@@ -32,7 +33,7 @@ export default function App() {
     <div className="App">
       <UserCookie.Provider value={{ cookie, setCookie, state, setState }}>
         <Router>
-          <Navbar ordersByUser={ordersByUser} />
+          <Navbar ordersByUser={ordersByUserAsContractor} />
           <Switch>
             <div style={style}>
               <Route exact path="/" component={Home} />
@@ -60,7 +61,9 @@ export default function App() {
               ) : (
                 <Redirect to="/signin" />
               )} */}
-              <MyOrder user={cookie.user} orders={ordersByUser} />
+              <MyOrder user={cookie.user}
+              ordersReceived={ordersByUserAsContractor} 
+              ordersRequest={ordersByUserAsClient}/>
             </Route>
               <Route path="/search/:search">
                 <SearchResults />
