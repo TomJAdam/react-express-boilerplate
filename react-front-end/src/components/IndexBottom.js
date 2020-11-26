@@ -6,6 +6,7 @@ import EventIcon from "@material-ui/icons/Event";
 const useStyles = makeStyles((theme) => ({
   text: {
     color: "#212121",
+    fontFamily: "'Days One', sans-serif",
   },
 
   icon: {
@@ -30,16 +31,14 @@ export default function IndexBottom() {
 
   return (
     <div className={classes.styles}>
-      <h1 className={classes.text}>Why SimpliFix</h1>
+      <h2 className={classes.text}>Why SimpliFix</h2>
       <AccessAlarmIcon className={classes.icon} />
-      <h4 className={classes.text}>
+      <h4>
         Right at your fingertips, you can find trusted service providers in
         minutes
       </h4>
       <EventIcon className={classes.icon} />
-      <h4 className={classes.text}>
-        A single platform to streamline communication and scheduling
-      </h4>
+      <h4>A single platform to streamline communication and scheduling</h4>
     </div>
   );
 }

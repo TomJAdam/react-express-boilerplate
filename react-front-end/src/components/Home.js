@@ -1,6 +1,7 @@
 import React from "react";
 import Categories from "./Categories";
 import { makeStyles } from "@material-ui/core/styles";
+import PageHeader from "./PageHeader";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -14,6 +15,7 @@ export default function Home() {
 
   return (
     <div className={classes.root}>
+      <PageHeader />
       <Categories />
     </div>
   );
