@@ -49,10 +49,10 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "2rem",
   },
   bookBtn: {
-    backgroundColor: '#ffa400a6',
+    backgroundColor: "#ffa400a6",
     color: "white",
     marginTop: "2rem",
-  }
+  },
 }));
 
 export default function ContactCard(props) {
@@ -76,7 +76,7 @@ export default function ContactCard(props) {
         setRedirect(true);
         console.log(conversation.id);
       } else {
-        console.log('cookie', cookie);
+        console.log("cookie", cookie);
         axios
           .put("/api/conversations", {
             client_id: cookie.user.id,
@@ -84,7 +84,7 @@ export default function ContactCard(props) {
             client_last: cookie.user.last_name,
             contractor_id,
             contractor_first: props.first_name,
-            contractor_last: props.last_name
+            contractor_last: props.last_name,
           })
           .then((response) => {
             console.log("after post", response.data.id);
@@ -96,7 +96,7 @@ export default function ContactCard(props) {
   };
 
   if (redirect) {
-    return <Redirect to={`/chat/?conv_id=${conversationID}`}/>;
+    return <Redirect to={`/chat/?conv_id=${conversationID}`} />;
   }
 
   return (
@@ -130,15 +130,15 @@ export default function ContactCard(props) {
             <p classeName={classes.infoItem}>{props.email}</p>
           </div>
         </div>
-     </div>
-     <Button
+      </div>
+      <Button
         type="submit"
         className={classes.bookBtn}
         size="large"
         variant="contained"
         onClick={props.onBooking}
-        >
-        Reservation
+      >
+        Book
       </Button>
       <Button
         type="submit"
