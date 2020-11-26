@@ -1,15 +1,15 @@
-import React, { useEffect, useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
-import queryString from 'query-string';
+import React, { useEffect, useContext, useState } from "react";
+import { Link } from "react-router-dom";
+import queryString from "query-string";
 import { UserCookie } from "../hooks/UserCookie";
-import io from 'socket.io-client';
-import Feed from './Feed';
-import Input from './Input';
-import Conversations from './Conversations';
-import { makeStyles } from '@material-ui/core/styles';
-import axios from 'axios';
-import SendIcon from '@material-ui/icons/Send';
-import ChatIcon from '@material-ui/icons/Chat';
+import io from "socket.io-client";
+import Feed from "./Feed";
+import Input from "./Input";
+import Conversations from "./Conversations";
+import { makeStyles } from "@material-ui/core/styles";
+import axios from "axios";
+import SendIcon from "@material-ui/icons/Send";
+import ChatIcon from "@material-ui/icons/Chat";
 import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
@@ -30,11 +30,11 @@ const useStyles = makeStyles((theme) => ({
   },
 
   main: {
-    padding: '2rem',
-    width: '70%',
-    display: 'flex',
+    padding: "2rem",
+    width: "70%",
+    display: "flex",
     // position: 'absolute',
-    height: '600px',
+    height: "600px",
     // top: '220px'
   },
 
@@ -54,28 +54,28 @@ const useStyles = makeStyles((theme) => ({
     width: "60%",
     padding: "1rem",
     boxShadow: "0px 2px 5px 0.5px #E3E3E3",
-    borderRadius: '8px'
+    borderRadius: "8px",
   },
 
   emptyChat: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    position: 'relative',
-    background: 'white',
-    width: '60%',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    position: "relative",
+    background: "white",
+    width: "60%",
     // height: '400px',
-    padding: '1rem',
+    padding: "1rem",
     boxShadow: "0px 2px 5px 0.5px #E3E3E3",
-    borderRadius: '8px'
+    borderRadius: "8px",
   },
-  
+
   iconContainer: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '100%',
-    height: '100%',
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+    height: "100%",
   },
 
   gigsBtn: {
@@ -111,11 +111,10 @@ export default function Chat({ location }) {
   const { conv_id } = queryString.parse(location.search);
 
   useEffect(() => {
-
     if (conv_id) {
-      axios.get(`/api/messages/${conv_id}`).then(response => {
+      axios.get(`/api/messages/${conv_id}`).then((response) => {
         setMessages(response.data);
-      })
+      });
     }
   }, [room]);
 
@@ -125,77 +124,77 @@ export default function Chat({ location }) {
     socket = io(ENDPOINT);
     socket.emit("join", { conv_id }, () => {});
 
-    socket.on('message', (message) => {
-      setMessages(prev =>[...prev, message])
-    })
+    socket.on("message", (message) => {
+      setMessages((prev) => [...prev, message]);
+    });
 
     return () => {
-      socket.emit('disconnect');
+      socket.emit("disconnect");
       socket.off();
     };
   }, [ENDPOINT, location.search]);
 
   const sendMessage = (message, event) => {
-
     event.preventDefault();
 
-    if(message) {
-      socket.emit('sendMessage', message, { id: cookie.user.id })
+    if (message) {
+      socket.emit("sendMessage", message, { id: cookie.user.id });
     }
   };
 
-
   return cookie.user ? (
     <div className={classes.root}>
+      <div className={classes.header}>
+        <div
+          style={{
+            backgroundImage:
+              "url(https://images.unsplash.com/photo-1503387837-b154d5074bd2?ixlib=rb-1.2.1&auto=format&fit=crop&w=2689&q=80)",
+            width: "100vw",
+            height: "15rem",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+          }}
+        >
+          <h1 className={classes.headerTitle}>Messenging</h1>
+        </div>
+      </div>
 
-
-        <div className={classes.header}>
-          <div
-            style={{
-              backgroundImage:
-                "url(https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2689&q=80)",
-              width: "100vw",
-              height: "13rem",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              backgroundSize: "cover",
-              backgroundRepeat: "no-repeat",
-            }}
-          >
-            <h1 className={classes.headerTitle}>Messenging</h1>
+      <div className={classes.main}>
+        <div className={classes.conv}>
+          <Conversations conv_id={conv_id} userID={cookie.user.id} />
+        </div>
+        {conv_id ? (
+          <div className={classes.chat}>
+            <Feed messages={messages} userID={cookie.user.id} />
+            <Input sendMessage={sendMessage} />
           </div>
-          </div>
-
-
-        <div className={classes.main}>
-         <div className={classes.conv}>
-           <Conversations conv_id={conv_id} userID={cookie.user.id}/>
-         </div>
-         {
-          conv_id ? <div className={classes.chat}>
-            <Feed messages={messages} userID={cookie.user.id}/>
-            <Input sendMessage={sendMessage}/>
-          </div> 
-          : <div className={classes.emptyChat}>
-            <h3>Select an existing conversation or browse the gigs to find a contractor and start chatting!</h3>
+        ) : (
+          <div className={classes.emptyChat}>
+            <h3>
+              Select an existing conversation or browse the gigs to find a
+              contractor and start chatting!
+            </h3>
             <Button
-              component={Link} to='/gigs'
+              component={Link}
+              to="/gigs"
               type="submit"
               size="medium"
-              variant="contained" 
+              variant="contained"
               className={classes.gigsBtn}
             >
               Browse Gigs
             </Button>
             <div className={classes.iconContainer}>
-              <ChatIcon style={{fontSize: '20rem', color: '#E3E3E3'}}/>
+              <ChatIcon style={{ fontSize: "20rem", color: "#E3E3E3" }} />
             </div>
           </div>
-         }
+        )}
       </div>
-     </div>
-    ) : <h1>Whoops! There seems to have been an error.</h1>
-
-  
+    </div>
+  ) : (
+    <h1>Whoops! There seems to have been an error.</h1>
+  );
 }
